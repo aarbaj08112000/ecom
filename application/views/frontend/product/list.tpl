@@ -1,0 +1,350 @@
+<%include file="layout/header.tpl"%>
+
+<!-- Products Listing Page - Enhanced -->
+<div class="bg-light" style="background-image: radial-gradient(#e5989b 0.5px, transparent 0.5px), radial-gradient(#e5989b 0.5px, #fdfbf7 0.5px); background-size: 20px 20px; background-position: 0 0, 10px 10px;">
+    
+    <!-- Hero Banner -->
+    <div class="py-5 bg-gradient" style="background: linear-gradient(135deg, rgba(132, 169, 140, 0.1), rgba(229, 152, 155, 0.1));">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="<%base_url('shop')%>" class="text-primary">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                    </nav>
+                    <h1 class="fw-bold mb-3" style="font-family: var(--font-heading); font-size: 3rem;">Discover Handcrafted Treasures</h1>
+                    <p class="text-muted fs-5 mb-0">Explore our curated collection of unique artisan creations</p>
+                </div>
+                <div class="col-lg-4 text-end d-none d-lg-block" data-aos="fade-left">
+                    <div class="d-inline-flex align-items-center gap-3 bg-white rounded-pill shadow-sm px-4 py-3">
+                        <i class="ti ti-package fs-3 text-primary"></i>
+                        <div class="text-start">
+                            <div class="fw-bold">150+ Products</div>
+                            <small class="text-muted">Handmade with love</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+            <div class="text-muted">
+                Showing <strong>1-12</strong> of <strong>150</strong> products
+            </div>
+            
+            <div class="d-flex gap-3">
+                <select class="form-select border-0 shadow-sm rounded-pill" style="width: auto;">
+                    <option selected>Sort by: Popularity</option>
+                    <option value="1">Price: Low to High</option>
+                    <option value="2">Price: High to Low</option>
+                    <option value="3">Newest First</option>
+                    <option value="4">Best Rating</option>
+                </select>
+                <button class="btn btn-outline-primary rounded-pill d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+                    <i class="ti ti-filter me-2"></i> Filters
+                </button>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            
+            <!-- Enhanced Filters Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="card border-0 shadow-sm rounded-4 sticky-top" style="top: 100px; z-index: 900;" data-aos="fade-right">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Filters</h5>
+                            <button class="btn btn-link text-primary p-0 text-decoration-none small">Clear All</button>
+                        </div>
+                        
+                        <!-- Categories -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3 small text-uppercase text-muted d-flex align-items-center gap-2">
+                                <i class="ti ti-category"></i> Categories
+                            </h6>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cat1">
+                                    <label class="form-check-label" for="cat1">Resin Art <span class="text-muted">(42)</span></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cat2">
+                                    <label class="form-check-label" for="cat2">Crochet <span class="text-muted">(38)</span></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cat3">
+                                    <label class="form-check-label" for="cat3">Custom Gifts <span class="text-muted">(56)</span></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cat4">
+                                    <label class="form-check-label" for="cat4">Home Décor <span class="text-muted">(34)</span></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="cat5">
+                                    <label class="form-check-label" for="cat5">Jewellery <span class="text-muted">(28)</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Price Range -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3 small text-uppercase text-muted d-flex align-items-center gap-2">
+                                <i class="ti ti-currency-dollar"></i> Price Range
+                            </h6>
+                            <input type="range" class="form-range price-range-slider" id="priceRange" min="0" max="500" value="250">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="price-badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold">
+                                    <small>$</small><span id="minPrice">0</span>
+                                </div>
+                                <div class="text-muted small">to</div>
+                                <div class="price-badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold">
+                                    <small>$</small><span id="maxPrice">500</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Rating Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3 small text-uppercase text-muted d-flex align-items-center gap-2">
+                                <i class="ti ti-star"></i> Rating
+                            </h6>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating5">
+                                    <label class="form-check-label d-flex align-items-center gap-1" for="rating5">
+                                        <span class="text-warning">★★★★★</span> <span class="text-muted small">(24)</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating4">
+                                    <label class="form-check-label d-flex align-items-center gap-1" for="rating4">
+                                        <span class="text-warning">★★★★</span>☆ <span class="text-muted small">(18)</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating3">
+                                    <label class="form-check-label d-flex align-items-center gap-1" for="rating3">
+                                        <span class="text-warning">★★★</span>☆☆ <span class="text-muted small">(12)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary w-100 rounded-pill shadow-sm">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Product Grid -->
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    <%if !empty($products)%>
+                        <%foreach $products as $index => $p%>
+                        <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="<%($index % 3) * 100%>">
+                            <div class="product-card card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                                <!-- Product Badge -->
+                                <%if $p->old_price > $p->price%>
+                                <div class="position-absolute top-0 start-0 m-3 z-3">
+                                    <span class="badge bg-danger rounded-pill px-3 py-2 shadow-sm">
+                                        -<%((($p->old_price - $p->price) / $p->old_price) * 100)|round%>%
+                                    </span>
+                                </div>
+                                <%/if%>
+                                
+                                <!-- Image Container -->
+                                <div class="position-relative overflow-hidden bg-white" style="height: 280px;">
+                                    <!-- Hover Actions -->
+                                    <div class="product-actions position-absolute top-50 start-50 translate-middle d-flex gap-2 z-2" style="opacity: 0; transition: opacity 0.3s ease;">
+                                        <button class="btn btn-white rounded-circle shadow icon-btn" title="Add to Cart" style="width: 45px; height: 45px;">
+                                            <i class="ti ti-shopping-cart"></i>
+                                        </button>
+                                        <a href="<%base_url('shop/product/'|cat:$p->id)%>" class="btn btn-white rounded-circle shadow icon-btn" title="Quick View" style="width: 45px; height: 45px;">
+                                            <i class="ti ti-eye"></i>
+                                        </a>
+                                        <button class="btn btn-white rounded-circle shadow icon-btn" title="Wishlist" style="width: 45px; height: 45px;">
+                                            <i class="ti ti-heart"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Product Image -->
+                                    <img src="<%$p->image%>" 
+                                         class="w-100 h-100 p-3" 
+                                         style="object-fit: cover; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);" 
+                                         alt="<%$p->name%>" 
+                                         onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Craft';">
+                                </div>
+                                
+                                <!-- Card Body -->
+                                <div class="card-body p-4">
+                                    <div class="small text-primary mb-2 fw-semibold"><%$p->category%></div>
+                                    <h5 class="card-title fw-bold mb-2" style="font-size: 1.1rem; line-height: 1.4;">
+                                        <a href="<%base_url('shop/product/'|cat:$p->id)%>" class="text-dark text-decoration-none hover-primary">
+                                            <%$p->name%>
+                                        </a>
+                                    </h5>
+                                    
+                                    <!-- Rating -->
+                                    <div class="d-flex align-items-center gap-2 mb-3">
+                                        <div class="text-warning">
+                                            <%for $i=0 to 4%>
+                                                <i class="ti ti-star<%if $i < $p->rating|floor%>-filled<%/if%>" style="font-size: 0.9rem;"></i>
+                                            <%/for%>
+                                        </div>
+                                        <span class="small text-muted">(<%$p->rating%>)</span>
+                                    </div>
+                                    
+                                    <!-- Price -->
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-baseline gap-2">
+                                            <span class="fw-bold text-primary" style="font-size: 1.4rem;">$<%$p->price%></span>
+                                            <%if $p->old_price > $p->price%>
+                                                <span class="small text-decoration-line-through text-muted">$<%$p->old_price%></span>
+                                            <%/if%>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm" style="transition: all 0.3s ease;">
+                                            <i class="ti ti-shopping-cart me-1"></i> Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%/foreach%>
+                    <%/if%>
+                </div>
+                
+                <!-- Enhanced Pagination -->
+                <div class="mt-5 d-flex justify-content-center" data-aos="fade-up">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link rounded-pill me-2" href="#" aria-label="Previous">
+                                    <i class="ti ti-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link rounded-pill mx-1" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link rounded-pill mx-1" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link rounded-pill mx-1" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link rounded-pill mx-1" href="#">4</a></li>
+                            <li class="page-item">
+                                <a class="page-link rounded-pill ms-2" href="#" aria-label="Next">
+                                    <i class="ti ti-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+/* Product Card Hover Effects */
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-card:hover .product-actions {
+    opacity: 1 !important;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.hover-primary:hover {
+    color: var(--primary) !important;
+}
+
+/* Icon Button Hover */
+.icon-btn:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+    transform: scale(1.1);
+}
+
+/* Form Check Custom Styling */
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Pagination Styling */
+.pagination .page-link {
+    border: none;
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary);
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(132, 169, 140, 0.1);
+    transform: scale(1.1);
+}
+
+/* Price Range Slider Custom Styling */
+.price-range-slider {
+    height: 6px;
+    background: linear-gradient(to right, var(--primary) 0%, var(--primary) 50%, #e9ecef 50%, #e9ecef 100%);
+    border-radius: 10px;
+    outline: none;
+}
+
+.price-range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(132, 169, 140, 0.4);
+    transition: all 0.3s ease;
+}
+
+.price-range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(132, 169, 140, 0.6);
+}
+
+.price-range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(132, 169, 140, 0.4);
+    transition: all 0.3s ease;
+}
+
+.price-range-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(132, 169, 140, 0.6);
+}
+
+.price-badge {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(132, 169, 140, 0.15);
+}
+</style>
+
+<%include file="layout/footer.tpl"%>

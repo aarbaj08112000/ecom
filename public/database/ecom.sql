@@ -1,0 +1,1670 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jan 13, 2026 at 04:30 PM
+-- Server version: 8.0.44-0ubuntu0.22.04.2
+-- PHP Version: 8.1.2-1ubuntu2.22
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ecom`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute`
+--
+
+CREATE TABLE `attribute` (
+  `attribute_id` int NOT NULL,
+  `attribute_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `attribute_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attribute`
+--
+
+INSERT INTO `attribute` (`attribute_id`, `attribute_code`, `attribute_name`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'ATTR-MAT', 'Material', NULL, NULL, NULL, NULL, 'Active', '0'),
+(2, 'ATTR-COL', 'Color', NULL, NULL, '2026-01-09 14:04:31', 1, 'Active', '0'),
+(3, 'ATTR-SIZ', 'Size', NULL, NULL, NULL, NULL, 'Active', '0'),
+(4, 'ATTR-WGT', 'Weight', NULL, NULL, NULL, NULL, 'Active', '0'),
+(5, 'ATTR-STY', 'Style', NULL, NULL, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banners`
+--
+
+CREATE TABLE `banners` (
+  `banners_id` int NOT NULL,
+  `banner_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `banners`
+--
+
+INSERT INTO `banners` (`banners_id`, `banner_image`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'b3e4ab1077c385b60392b5054f3e505d.png', '2025-03-23 16:01:58', 1, '2025-03-23 16:06:21', 1, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `blog_id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `author` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`blog_id`, `title`, `content`, `author`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'test', '<p><strong>test Data</strong></p>\r\n\r\n<h2 data-selectable-paragraph=\"\" id=\"686b\">How to Write the Perfect Blog Post: My 10,000 Word Journey</h2>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"9748\">Starting a blog was one of the most rewarding things I&rsquo;ve done in my career. As someone who loves writing and connecting with readers, having an outlet to share my thoughts while potentially helping others has been an incredible experience.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"24e3\">When I first began blogging a few years ago, I really had no idea what I was doing. I would just sit down at my computer whenever inspiration struck and write whatever came to mind. Sometimes I would publish posts without even proofreading them because I was so eager to get my ideas out there.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"6e93\">Looking back now, those early posts were pretty rough. It&rsquo;s almost cringe-worthy to read some of my early writing. But we all have to start somewhere, right? Even though I made plenty of mistakes (which I&rsquo;ll detail later in this post), blogging has enabled me to find my voice, create helpful content, and connect with readers from all walks of life.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"7f31\">If you&rsquo;re thinking about starting a blog but feel intimidated or don&rsquo;t know where to begin, I want this post to encourage you. You don&rsquo;t have to have everything figured out on day one. I certainly didn&rsquo;t! Consider this your kick in the pants to just take that first step and start writing.</p>\r\n', 'test', '2026-01-06 00:22:56', 1, NULL, NULL, 'Active', '0'),
+(2, 'Word Journey', '<p><strong>test Data</strong></p>\r\n\r\n<h2 data-selectable-paragraph=\"\" id=\"686b\">How to Write the Perfect Blog Post: My 10,000 Word Journey</h2>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"9748\">Starting a blog was one of the most rewarding things I&rsquo;ve done in my career. As someone who loves writing and connecting with readers, having an outlet to share my thoughts while potentially helping others has been an incredible experience.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"24e3\">When I first began blogging a few years ago, I really had no idea what I was doing. I would just sit down at my computer whenever inspiration struck and write whatever came to mind. Sometimes I would publish posts without even proofreading them because I was so eager to get my ideas out there.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"6e93\">Looking back now, those early posts were pretty rough. It&rsquo;s almost cringe-worthy to read some of my early writing. But we all have to start somewhere, right? Even though I made plenty of mistakes (which I&rsquo;ll detail later in this post), blogging has enabled me to find my voice, create helpful content, and connect with readers from all walks of life.</p>\r\n\r\n<p data-selectable-paragraph=\"\" id=\"7f31\">If you&rsquo;re thinking about starting a blog but feel intimidated or don&rsquo;t know where to begin, I want this post to encourage you. You don&rsquo;t have to have everything figured out on day one. I certainly didn&rsquo;t! Consider this your kick in the pants to just take that first step and start writing.</p>\r\n', 'Gayu', '2026-01-06 18:18:48', 1, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `brand_id` int NOT NULL,
+  `brand_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `brand_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_image`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'Resinify', 'b74d5a66a74bed24abbc1d0a0cc71748.jpg', NULL, NULL, '2026-01-09 14:14:10', 1, 'Active', '0'),
+(2, 'Stitch & Soul', '2db4bc600538ad490ebf1cd5e40d64fa.jpg', NULL, NULL, '2026-01-09 14:15:21', 1, 'Active', '0'),
+(3, 'Giftify', 'fe87c6f1a7353dc99c150544de8d658d.png', NULL, NULL, '2026-01-09 14:16:46', 1, 'Active', '0'),
+(4, 'DecorVibe', 'aa983fdfa923ebce8d80a7696a48ac7d.jpg', NULL, NULL, '2026-01-09 14:17:44', 1, 'Active', '0'),
+(5, 'Craftopia', NULL, NULL, NULL, '2026-01-09 14:15:28', 1, 'Active', '1'),
+(6, 'Craftopia', 'e7432be7b810c507ce568fb12c639814.jpg', '2026-01-09 14:15:40', 1, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `category_id` int NOT NULL,
+  `category_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `parent_category_id` int DEFAULT NULL,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `added_by` int DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`, `parent_category_id`, `added_date`, `added_by`, `updated_date`, `updated_by`, `status`, `is_delete`) VALUES
+(1, 'Resin Art', NULL, '2026-01-09 08:23:37', NULL, '2026-01-09 08:23:37', NULL, 'Active', '0'),
+(2, 'Crochets', NULL, '2026-01-09 08:23:37', NULL, '2026-01-09 08:37:08', 1, 'Active', '0'),
+(3, 'Custom Gifts', NULL, '2026-01-09 08:23:37', NULL, '2026-01-09 08:23:37', NULL, 'Active', '0'),
+(4, 'Home Décor', NULL, '2026-01-09 08:23:37', NULL, '2026-01-09 08:23:37', NULL, 'Active', '0'),
+(5, 'Jewellery', NULL, '2026-01-09 08:23:37', NULL, '2026-01-09 08:23:37', NULL, 'Active', '0'),
+(6, 'Festive', NULL, '2026-01-09 08:35:08', 1, '2026-01-09 08:36:56', 1, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `client`
+--
+
+CREATE TABLE `client` (
+  `id` int NOT NULL,
+  `client_unit` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `client_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contact_person` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `pan_no` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `billing_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shifting_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `gst_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_id` int DEFAULT NULL,
+  `date` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `time` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` int DEFAULT '0',
+  `state` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `state_no` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `bank_details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `location` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `pin` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `client`
+--
+
+INSERT INTO `client` (`id`, `client_unit`, `client_name`, `contact_person`, `pan_no`, `billing_address`, `shifting_address`, `phone_no`, `gst_number`, `created_id`, `date`, `time`, `timestamp`, `deleted`, `state`, `state_no`, `bank_details`, `address1`, `location`, `pin`) VALUES
+(1, 'Talegaon Unit', 'TEST TECHNOPLAST', 'MR. Suresh Kamat', 'BIZPB5715', 'S.no. 123/4, Near PCMC water tank, Whalekarwadi Road, Pimple Goan, Pune-411111  Email: xxxxaaa@yahoo.com   PH: 1234567890', 'Gat no.5648, House no 133, near Hotel, Pimple Road, Pune-411111', '1111111110', '11ABCDE2222FGHI', 3, '03-04-2024', '10:58:33', '2024-02-09 08:27:30', 0, 'MAHARASHTRA', '27', 'ICICI BANK - Ac.No. 1111', 'xxxxx, xxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxxx', 'Chinchwad', '411111'),
+(2, 'Akurdi Unit', 'TEST TECHNOPLAST', 'MR. Suresh Kamat', 'BIZPB5715', 'S.no. 123/4, Near PCMC water tank, Whalekarwadi Road, Pimple Goan, Pune-411111  Email: xxxxaaa@yahoo.com   PH: 1234567890', 'Gat no.5648, House no 133, near Hotel, Pimple Road, Pune-411111', '1111111110', '11ABCDE2222FGHI', 3, '21-04-2024', '06:53:03', '2024-02-09 10:29:41', 0, 'Maharashtra', '27', 'ICICI BANK 1111', 'xxxxx, xxxxxxxxxxx, xxxxxxxxxxxxxxxxxxxxxxx', 'Chinchwad', '411111');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commmet`
+--
+
+CREATE TABLE `commmet` (
+  `id` int UNSIGNED NOT NULL,
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config_setting`
+--
+
+CREATE TABLE `config_setting` (
+  `id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` enum('check_box','input','date','file') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `company_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `config_setting`
+--
+
+INSERT INTO `config_setting` (`id`, `name`, `title`, `value`, `description`, `type`, `company_id`) VALUES
+(9, 'company_logo', 'Company Logo', 'public/assets/images/ecom_logo.png', 'Company logo', 'file', 0),
+(10, 'company_name', 'Company name', 'E-commerce', 'Company name', 'input', 0),
+(11, 'company_fav_icon', 'Company fav icon', 'public/assets/img/favicon/favicon.png', 'Company fav icon', 'file', 0),
+(12, 'login_attempt', 'Login attempt', '5', 'Login attempt', 'input', 0),
+(13, 'menu_type', 'Menu Type', 'horizontal', 'horizontal|vertical', 'input', 0),
+(14, 'default_page_view_type', 'Default Page View Type for listing', '{\"User\":\"Grid\"}', 'Table/Grid', 'input', 0),
+(15, 'smtp_user_name', 'SMTP User Name', 'mullaaarbaj10@gmail.com', 'SMTP User Name', 'input', 0),
+(16, 'smtp_user_password', 'SMTP User Password', 'csoh fxfg hvfk egju', 'SMTP User Password', 'input', 0),
+(17, 'company_email', 'Company Email', 'erp.system@gmail.com', 'Company Email', 'input', 0),
+(18, 'password_link_expiry', 'Password Link Expiry', '10', 'Password Link Expiry In Minutes', 'input', 0),
+(19, 'email_notification_enable', 'Email Notification Enable', 'Yes', 'Email Notification Enable', 'input', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `coupons_id` int NOT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `discount` decimal(10,2) NOT NULL,
+  `discount_type` enum('Percentage','Fixed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `min_order_value` decimal(10,2) DEFAULT '0.00',
+  `expires_at` date DEFAULT NULL,
+  `coupons_status` enum('Active','Expired','Disabled') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`coupons_id`, `code`, `discount`, `discount_type`, `min_order_value`, `expires_at`, `coupons_status`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'WELCOME10', '10.00', 'Percentage', '0.00', '2026-12-31', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(2, 'SAVE500', '500.00', 'Fixed', '2000.00', '2026-06-30', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(3, 'FESTIVE20', '20.00', 'Percentage', '1000.00', '2026-01-20', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(4, 'FREESHIP', '100.00', 'Fixed', '500.00', '2026-03-15', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(5, 'EXPIRED5', '5.00', 'Percentage', '0.00', '2025-12-31', 'Expired', '2025-01-01 10:00:00', 1, NULL, NULL, 'Inactive', '0'),
+(6, 'FLASH30', '30.00', 'Percentage', '1500.00', '2026-02-01', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(7, 'NEWUSER', '200.00', 'Fixed', '1000.00', '2026-12-31', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(8, 'WINTER25', '25.00', 'Percentage', '800.00', '2026-02-28', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(9, 'OFFER15', '15.00', 'Percentage', '500.00', '2026-05-10', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0'),
+(10, 'BULK1000', '1000.00', 'Fixed', '5000.00', '2026-08-15', 'Active', '2026-01-09 23:44:51', 1, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_address`
+--
+
+CREATE TABLE `customer_address` (
+  `address_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `mobile_number` varchar(255) DEFAULT NULL,
+  `address` text,
+  `city` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `pincode` varchar(20) DEFAULT NULL,
+  `address_type` enum('Billing','Shipping') DEFAULT 'Shipping',
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `is_delete` enum('0','1') NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `customer_address`
+--
+
+INSERT INTO `customer_address` (`address_id`, `customer_id`, `address`, `city`, `state`, `pincode`, `address_type`, `status`) VALUES
+(1, 1, 'A-101, Shanti Nagar, Near Jain Temple', 'Ahmedabad', 'Gujarat', '380001', 'Billing', 'Active'),
+(2, 1, 'Plot 25, Gandhi Marg, Behind Bus Depot', 'Ahmedabad', 'Gujarat', '380002', 'Shipping', 'Active'),
+(3, 2, 'Flat 402, Crystal Heights, MG Road', 'Pune', 'Maharashtra', '411001', 'Billing', 'Active'),
+(4, 2, 'Warehouse 7, Industrial Area Phase 2', 'Pune', 'Maharashtra', '411026', 'Shipping', 'Active'),
+(5, 3, 'Sector 15, Vashi, Navi Mumbai', 'Mumbai', 'Maharashtra', '400703', 'Billing', 'Active'),
+(6, 4, 'Baner Road, Near Balewadi High Street', 'Pune', 'Maharashtra', '411045', 'Shipping', 'Active'),
+(7, 5, 'Indira Nagar, Near Metro Station', 'Bangalore', 'Karnataka', '560038', 'Billing', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_bank`
+--
+
+CREATE TABLE `customer_bank` (
+  `bank_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `account_holder_name` varchar(255) DEFAULT NULL,
+  `bank_name` varchar(255) DEFAULT NULL,
+  `account_no` varchar(50) DEFAULT NULL,
+  `ifsc_code` varchar(20) DEFAULT NULL,
+  `branch_name` varchar(255) DEFAULT NULL,
+  `status` enum('Active','Inactive') DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `customer_bank`
+--
+
+INSERT INTO `customer_bank` (`bank_id`, `customer_id`, `account_holder_name`, `bank_name`, `account_no`, `ifsc_code`, `branch_name`, `status`) VALUES
+(1, 1, '', 'State Bank of India', '123456789012', 'SBIN0000456', 'Ellis Bridge', 'Active'),
+(2, 1, NULL, 'HDFC Bank', '987654321098', 'HDFC0001234', 'Aundh', 'Inactive'),
+(3, 2, NULL, 'ICICI Bank', '555566667777', 'ICIC0000111', 'Kothrud', 'Active'),
+(4, 3, NULL, 'Axis Bank', '112233445566', 'UTIB0000123', 'Vashi', 'Active'),
+(5, 4, NULL, 'Kotak Mahindra Bank', '998877665544', 'KKBK0000456', 'Baner', 'Active'),
+(6, 5, NULL, 'Canara Bank', '776655443322', 'CNRB0000789', 'Indira Nagar', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_master`
+--
+
+CREATE TABLE `customer_master` (
+  `id` int NOT NULL,
+  `customer_code` varchar(50) DEFAULT NULL,
+  `customer_name` varchar(200) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  `mobile_no` varchar(20) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `gst_no` varchar(20) DEFAULT NULL,
+  `pan_no` varchar(20) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` enum('Male','Female','Other') DEFAULT NULL,
+  `identity_details` text,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Approved','Rejected','Pending','Blocked','Active','Inactive') DEFAULT 'Pending',
+  `is_delete` enum('0','1') NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `customer_master`
+--
+
+INSERT INTO `customer_master` (`id`, `customer_code`, `customer_name`, `profile_image`, `mobile_no`, `email`, `gst_no`, `pan_no`, `dob`, `gender`, `identity_details`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'CUST001', 'Aarav Patel', NULL, '9876543210', 'aarav.patel@example.com', '27ABCDE1234F1Z5', 'ABCDE1234F', '2026-01-16', 'Male', '', '2025-12-08 00:11:43', 1, '2026-01-09 18:11:08', 1, 'Rejected', '0'),
+(2, 'CUST002', 'Riya Sharma', NULL, '9865321470', 'riya.sharma@example.com', '27ASDFG5678H2Z6', 'ASDFG5678H', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0'),
+(3, 'CUST003', 'Mohit Verma', NULL, '9123456780', 'mohit.verma@example.com', '27QWERT1234P3Z7', 'QWERT1234P', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Inactive', '0'),
+(4, 'CUST004', 'Sneha Desai', NULL, '9988776655', 'sneha.desai@example.com', '27ZXCVB6789L4Z8', 'ZXCVB6789L', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0'),
+(5, 'CUST005', 'Nikhil Singh', NULL, '9090909090', 'nikhil.singh@example.com', '27LMNOP3456K5Z9', 'LMNOP3456K', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0'),
+(6, 'CUST006', 'Priya Nair', NULL, '9877701234', 'priya.nair@example.com', '27GHJKL7890M6Z1', 'GHJKL7890M', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Inactive', '0'),
+(7, 'CUST007', 'Rahul Yadav', NULL, '9822334455', 'rahul.yadav@example.com', '27BNMAS1234R7Z2', 'BNMAS1234R', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0'),
+(8, 'CUST008', 'Kavya Joshi', NULL, '9753108642', 'kavya.joshi@example.com', '27POIUY0987T8Z3', 'POIUY0987T', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0'),
+(9, 'CUST009', 'Vikram Mehta', NULL, '9012345678', 'vikram.mehta@example.com', '27HJKKL5566U9Z4', 'HJKKL5566U', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Inactive', '0'),
+(10, 'CUST010', 'Simran Kaur', NULL, '9998887776', 'simran.kaur@example.com', '27TYUIO1122V1Z5', 'TYUIO1122V', NULL, NULL, NULL, '2025-12-08 00:11:43', 1, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_reviews`
+--
+
+CREATE TABLE `customer_reviews` (
+  `id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `reviewer_type` enum('admin','staff','system') NOT NULL DEFAULT 'admin',
+  `rating` tinyint(1) NOT NULL,
+  `comment` text NOT NULL,
+  `status` enum('Active','Inactive') NOT NULL DEFAULT 'Active',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` enum('0','1') NOT NULL DEFAULT '0'
+) ;
+
+--
+-- Dumping data for table `customer_reviews`
+--
+
+INSERT INTO `customer_reviews` (`id`, `customer_id`, `reviewer_type`, `rating`, `comment`, `status`, `created_at`, `updated_at`, `is_delete`) VALUES
+(1, 1, 'admin', 5, 'Excellent buyer, quick payment and great communication.', 'Inactive', '2026-01-09 23:29:46', '2026-01-09 23:37:45', '0'),
+(2, 1, 'staff', 4, 'Very polite and always provides clear requirements.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(3, 1, 'system', 5, 'Automatic high rating based on 10 consecutive successful orders.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(4, 2, 'admin', 3, 'Average buyer, sometimes slow to respond to queries.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(5, 2, 'staff', 2, 'Multiple payment delays reported by accountancy.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:38:46', '1'),
+(6, 2, 'admin', 4, 'Condition improved, recent orders were smoother.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(7, 3, 'admin', 1, 'Frequent cancellations. Caution advised for high-value orders.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(8, 3, 'staff', 2, 'Difficult to reach on mobile for delivery confirmations.', 'Active', '2026-01-09 23:29:46', '2026-01-09 23:29:46', '0'),
+(9, 3, 'staff', 4, 'Good ', 'Active', '2026-01-09 23:34:11', '2026-01-09 23:34:11', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_partners`
+--
+
+CREATE TABLE `delivery_partners` (
+  `id` int NOT NULL,
+  `partner_name` varchar(255) NOT NULL,
+  `contact_person` varchar(100) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `tracking_url_format` text,
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `is_delete` tinyint(1) DEFAULT '0',
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  `updated_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `delivery_partners`
+--
+
+INSERT INTO `delivery_partners` (`id`, `partner_name`, `contact_person`, `email`, `phone`, `tracking_url_format`, `status`, `is_delete`, `added_date`, `added_by`, `updated_date`, `updated_by`) VALUES
+(1, 'FedEx Express', 'John Doe', 'john.doe@fedex.com', '+1 555-0123', 'https://www.fedex.com/fedextrack/?trknbr={tracking_number}', 'Active', 0, '2026-01-08 00:08:20', NULL, NULL, NULL),
+(2, 'DHL Global', 'Jane Smith', 'jane.smith@dhl.com', '+1 555-4567', 'https://www.dhl.com/en/express/tracking.html?AWB={tracking_number}', 'Active', 0, '2026-01-08 00:08:20', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_marketing`
+--
+
+CREATE TABLE `email_marketing` (
+  `id` int NOT NULL,
+  `campaign_name` varchar(255) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `content` text,
+  `target_audience` varchar(100) DEFAULT 'all',
+  `scheduled_date` date DEFAULT NULL,
+  `status` enum('Draft','Scheduled','Sent','Active','Inactive','Completed') DEFAULT 'Draft',
+  `sent_count` int DEFAULT '0',
+  `open_count` int DEFAULT '0',
+  `click_count` int DEFAULT '0',
+  `is_delete` tinyint(1) DEFAULT '0',
+  `added_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `added_by` int DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `email_marketing`
+--
+
+INSERT INTO `email_marketing` (`id`, `campaign_name`, `subject`, `content`, `target_audience`, `scheduled_date`, `status`, `sent_count`, `open_count`, `click_count`, `is_delete`, `added_date`, `added_by`, `updated_date`, `updated_by`) VALUES
+(1, 'Welcome Series', 'Welcome to our store!', '<p>Thank you for joining us...</p>', 'all', '2026-01-23', 'Sent', 1200, 450, 120, 0, '2026-01-07 23:32:08', 1, '2026-01-07 23:33:15', 1),
+(2, 'Summer Sale 2025', 'Huge discounts inside!', '<p>Don\'t miss our summer special...</p>', 'customers', '2025-06-15', 'Scheduled', 0, 0, 0, 0, '2026-01-07 23:32:08', 1, NULL, NULL),
+(3, 'Abandoned Cart', 'You left something behind', '<p>Complete your purchase now!</p>', 'inactive', NULL, 'Active', 85, 40, 15, 0, '2026-01-07 23:32:08', 1, NULL, NULL),
+(4, 'Monthly Newsletter - June', 'What\'s new this month', '<p>Check out our latest products...</p>', 'all', NULL, 'Draft', 0, 0, 0, 0, '2026-01-07 23:32:08', 1, NULL, NULL),
+(5, 'Feedback Request', 'We value your opinion', '<p>Tell us how we are doing...</p>', 'customers', NULL, 'Completed', 500, 200, 50, 0, '2026-01-07 23:32:08', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE `faq` (
+  `faq_id` int NOT NULL,
+  `question` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `answer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`faq_id`, `question`, `answer`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'How can I track my order?', 'You can track your order by logging into your account and visiting the \"My Orders\" section. Once your order is shipped, you\'ll receive a tracking link via email or SMS.', '2025-03-23 16:22:46', 1, NULL, NULL, 'Active', '0'),
+(2, 'What payment methods do you accept?', 'We accept various payment methods, including Credit/Debit Cards, UPI, Net Banking, PayPal, and Cash on Delivery (COD) (where available).', '2025-03-23 16:23:59', 1, '2025-03-23 16:24:08', 1, 'Inactive', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_master`
+--
+
+CREATE TABLE `group_master` (
+  `group_master_id` int NOT NULL,
+  `group_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `group_master`
+--
+
+INSERT INTO `group_master` (`group_master_id`, `group_name`, `group_code`, `status`) VALUES
+(1, 'Admin', 'Admin', 'Active'),
+(2, 'AROM', 'AROM', 'Active'),
+(5, 'Purchase', 'purchase', 'Active'),
+(6, 'Sales', 'sales', 'Active'),
+(7, 'Quality', 'quality', 'Active'),
+(13, 'Super Admin', 'super_admin', 'Active'),
+(14, 'Super Admin2', 'super_adminw', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_rights`
+--
+
+CREATE TABLE `group_rights` (
+  `group_rights_id` int NOT NULL,
+  `group_master_id` int NOT NULL,
+  `menu_master_id` int NOT NULL,
+  `list` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'No',
+  `add` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'No',
+  `update` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'No',
+  `delete` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'No',
+  `export` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'No',
+  `import` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'No'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `group_rights`
+--
+
+INSERT INTO `group_rights` (`group_rights_id`, `group_master_id`, `menu_master_id`, `list`, `add`, `update`, `delete`, `export`, `import`) VALUES
+(26, 1, 1, 'No', 'No', 'No', 'Yes', 'No', 'No'),
+(27, 1, 2, 'Yes', 'No', 'Yes', 'No', 'No', 'No'),
+(28, 1, 3, 'Yes', 'No', 'Yes', 'No', 'No', 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_category`
+--
+
+CREATE TABLE `menu_category` (
+  `menu_category_id` int NOT NULL,
+  `menu_category_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `menu_category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu_category`
+--
+
+INSERT INTO `menu_category` (`menu_category_id`, `menu_category_code`, `menu_category_name`) VALUES
+(1, 'user_managemnet', 'User Management'),
+(2, 'purchase', 'Purchase');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_master`
+--
+
+CREATE TABLE `menu_master` (
+  `menu_master_id` int NOT NULL,
+  `menu_category_id` int NOT NULL,
+  `diaplay_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu_master`
+--
+
+INSERT INTO `menu_master` (`menu_master_id`, `menu_category_id`, `diaplay_name`, `url`, `status`) VALUES
+(1, 1, 'User', 'user_list', 'Inactive'),
+(2, 1, 'Group Master', 'group_master', 'Inactive'),
+(3, 2, 'Sitemap', 'sitemap', 'Inactive');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `shipping_address_json` text COLLATE utf8mb4_general_ci,
+  `billing_address_json` text COLLATE utf8mb4_general_ci,
+  `coupon_id` int DEFAULT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `discount_amount` decimal(10,2) DEFAULT '0.00',
+  `shipping_charge` decimal(10,2) DEFAULT '0.00',
+  `tax_amount` decimal(10,2) DEFAULT '0.00',
+  `net_amount` decimal(10,2) DEFAULT '0.00',
+  `order_status` enum('pending','processing','shipped','delivered','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `payment_status` enum('Unpaid','Paid','Partially Paid','Partially Refunded','Refunded','Failed') COLLATE utf8mb4_general_ci DEFAULT 'Unpaid',
+  `payment_method` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `shipping_address_json`, `billing_address_json`, `coupon_id`, `total_amount`, `discount_amount`, `shipping_charge`, `tax_amount`, `net_amount`, `order_status`, `payment_status`, `payment_method`, `added_date`, `updated_date`) VALUES
+(1, 1, '{\"name\":\"Aarav Patel\",\"address\":\"123 Silk St\",\"city\":\"Mumbai\",\"state\":\"Maharashtra\",\"zip\":\"400001\"}', NULL, NULL, '1200.00', '120.00', '50.00', '194.40', '1324.40', 'delivered', 'Paid', 'Credit Card', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
+(2, 2, '{\"name\":\"Riya Sharma\",\"address\":\"456 Knit Rd\",\"city\":\"Pune\",\"state\":\"Maharashtra\",\"zip\":\"411001\"}', NULL, NULL, '2500.00', '125.00', '0.00', '427.50', '2802.50', 'shipped', 'Paid', 'PayPal', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
+(3, 4, '{\"name\":\"Sneha Desai\",\"address\":\"789 Resin Ave\",\"city\":\"Surat\",\"state\":\"Gujarat\",\"zip\":\"395001\"}', NULL, NULL, '1800.00', '0.00', '100.00', '324.00', '2224.00', 'processing', 'Unpaid', 'COD', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
+(4, 5, '{\"name\":\"Nikhil Singh\",\"address\":\"321 Craft Blvd\",\"city\":\"Jaipur\",\"state\":\"Rajasthan\",\"zip\":\"302001\"}', NULL, NULL, '850.00', '0.00', '50.00', '0.00', '900.00', 'pending', 'Failed', 'Razorpay', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
+(5, 7, '{\"name\":\"Rahul Yadav\",\"address\":\"222 Jewel Ln\",\"city\":\"Indore\",\"state\":\"MP\",\"zip\":\"452001\"}', NULL, NULL, '1100.00', '110.00', '0.00', '0.00', '990.00', 'cancelled', 'Refunded', 'Credit Card', '2026-01-09 18:45:53', '2026-01-09 18:45:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_history`
+--
+
+CREATE TABLE `order_history` (
+  `history_id` int NOT NULL,
+  `order_id` int NOT NULL,
+  `status_from` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status_to` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `remarks` text COLLATE utf8mb4_general_ci,
+  `added_by` int DEFAULT NULL,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_history`
+--
+
+INSERT INTO `order_history` (`history_id`, `order_id`, `status_from`, `status_to`, `remarks`, `added_by`, `added_date`) VALUES
+(1, 1, 'pending', 'delivered', 'Order completed successfully', NULL, '2026-01-09 18:45:53'),
+(2, 2, 'pending', 'shipped', 'Package handed over to carrier', NULL, '2026-01-09 18:45:53'),
+(3, 3, 'pending', 'processing', 'Order under review', NULL, '2026-01-09 18:45:53'),
+(4, 5, 'pending', 'cancelled', 'Customer requested cancellation', NULL, '2026-01-09 18:45:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `order_item_id` int NOT NULL,
+  `order_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `product_name_at_order` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `sku_at_order` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `discount_amount` decimal(10,2) DEFAULT '0.00',
+  `tax_amount` decimal(10,2) DEFAULT '0.00',
+  `final_price` decimal(10,2) DEFAULT '0.00',
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `product_name_at_order`, `sku_at_order`, `quantity`, `price`, `discount_amount`, `tax_amount`, `final_price`, `added_date`) VALUES
+(1, 1, 1, 'Ocean Wave Resin Coasters', NULL, 1, '1200.00', '120.00', '194.40', '1274.40', '2026-01-09 18:45:53'),
+(2, 2, 2, 'Pressed Flower Resin Tray', NULL, 1, '2500.00', '125.00', '427.50', '2802.50', '2026-01-09 18:45:53'),
+(3, 3, 3, 'Glow-in-the-Dark Resin Pyramid', NULL, 1, '1800.00', '0.00', '324.00', '2124.00', '2026-01-09 18:45:53'),
+(4, 4, 7, 'Amigurumi Crochet Bunny', NULL, 1, '850.00', '0.00', '0.00', '850.00', '2026-01-09 18:45:53'),
+(5, 5, 23, 'Silk Thread Bangle Set', NULL, 1, '1100.00', '110.00', '0.00', '990.00', '2026-01-09 18:45:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_tracking`
+--
+
+CREATE TABLE `order_tracking` (
+  `id` int NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `tracking_number` varchar(100) NOT NULL,
+  `carrier_name` varchar(100) DEFAULT NULL,
+  `current_status` enum('Dispatched','In Transit','Out for Delivery','Delivered','Returned') DEFAULT 'Dispatched',
+  `last_location` varchar(255) DEFAULT NULL,
+  `estimated_delivery` date DEFAULT NULL,
+  `is_delete` tinyint(1) DEFAULT '0',
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  `updated_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `order_tracking`
+--
+
+INSERT INTO `order_tracking` (`id`, `order_id`, `tracking_number`, `carrier_name`, `current_status`, `last_location`, `estimated_delivery`, `is_delete`, `added_date`, `added_by`, `updated_date`, `updated_by`) VALUES
+(1, 'ORD-2024-0001', 'FEDEX123456', 'FedEx', 'In Transit', 'Los Angeles, CA', '2024-01-15', 0, '2026-01-08 00:11:09', NULL, NULL, NULL),
+(2, 'ORD-2024-0002', 'DHL789012', 'DHL', 'Out for Delivery', 'New York, NY', '2024-01-10', 0, '2026-01-08 00:11:09', NULL, NULL, NULL),
+(3, 'ORD-2024-0003', 'UPS345678', 'UPS', 'Delivered', 'Chicago, IL', '2024-01-08', 0, '2026-01-08 00:11:09', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int NOT NULL,
+  `order_id` int DEFAULT NULL,
+  `payment_method` enum('credit_card','paypal','bank_transfer','cash_on_delivery') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `payment_gateway` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gateway_order_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gateway_transaction_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gateway_response` text COLLATE utf8mb4_general_ci,
+  `error_message` text COLLATE utf8mb4_general_ci,
+  `paid_date` datetime DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `payment_status` enum('pending','completed','failed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `order_id`, `payment_method`, `payment_gateway`, `gateway_order_id`, `gateway_transaction_id`, `gateway_response`, `error_message`, `paid_date`, `amount`, `payment_status`, `transaction_id`, `added_date`) VALUES
+(1, 1, 'credit_card', 'Stripe', NULL, 'st_9988776655', NULL, NULL, '2026-01-10 00:15:53', '1324.40', 'completed', 'TXN_RD_998877', '2026-01-09 18:45:53'),
+(2, 2, 'paypal', 'PayPal', NULL, 'pp_5544332211', NULL, NULL, '2026-01-10 00:15:53', '2802.50', 'completed', 'PAY-PP-554433', '2026-01-09 18:45:53'),
+(3, 3, 'cash_on_delivery', NULL, NULL, NULL, NULL, NULL, NULL, '2224.00', 'pending', NULL, '2026-01-09 18:45:53'),
+(4, 4, 'credit_card', 'Razorpay', NULL, 'rzp_111222333', NULL, NULL, NULL, '900.00', 'failed', 'TXN_FL_111222', '2026-01-09 18:45:53'),
+(5, 5, 'credit_card', 'Stripe', NULL, 'st_444555666', NULL, NULL, '2026-01-10 00:15:53', '990.00', 'completed', 'TXN_RF_444555', '2026-01-09 18:45:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `discount_percentage` decimal(5,2) DEFAULT '0.00',
+  `is_gst_applicable` enum('Yes','No') COLLATE utf8mb4_unicode_ci DEFAULT 'No',
+  `gst_percentage` decimal(5,2) DEFAULT '0.00',
+  `added_date` timestamp NULL DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT NULL,
+  `category_id` int NOT NULL,
+  `brand_id` int DEFAULT NULL,
+  `stock_quantity` int NOT NULL DEFAULT '0',
+  `added_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `image`, `detail`, `price`, `discount_percentage`, `is_gst_applicable`, `gst_percentage`, `added_date`, `updated_date`, `category_id`, `brand_id`, `stock_quantity`, `added_by`, `updated_by`, `status`, `is_delete`) VALUES
+(1, 'Ocean Resin Coaster', 'cover.png', 'Handcrafted ocean-themed resin coaster with real sand.', '120.00', '0.00', 'No', '0.00', NULL, NULL, 1, 1, 1, NULL, NULL, 'Active', '0'),
+(2, 'Crochet Dino Toy', '5ba39f8dcef881124e5de3e451fa913f.jpg', 'Cute green amigurumi crochet dinosaur toy.', '45.00', '45.00', 'Yes', '10.00', NULL, '2026-01-09 18:29:36', 2, 2, 100, NULL, NULL, 'Active', '0'),
+(3, 'Personalized Wood Frame', 'cover.png', 'Custom laser-engraved wooden photo frame.', '85.00', '0.00', 'No', '0.00', NULL, NULL, 3, 3, 100, NULL, NULL, 'Active', '0'),
+(4, 'Macrame Wall Hanging', 'cover.png', 'Bohemian style cotton rope wall hanging.', '150.00', '0.00', 'No', '0.00', NULL, NULL, 4, 4, 100, NULL, NULL, 'Active', '0'),
+(5, 'Crystal Amethyst Bracelet', 'cover.png', 'Elegant silver bracelet with amethyst beads.', '60.00', '0.00', 'No', '0.00', NULL, NULL, 5, 5, 100, NULL, NULL, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_attributes`
+--
+
+CREATE TABLE `product_attributes` (
+  `product_attribute_id` int NOT NULL,
+  `product_id` bigint UNSIGNED DEFAULT NULL,
+  `attribute_id` int DEFAULT NULL,
+  `attribute_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_attributes`
+--
+
+INSERT INTO `product_attributes` (`product_attribute_id`, `product_id`, `attribute_id`, `attribute_value`, `added_date`, `added_by`, `status`, `is_delete`) VALUES
+(1, 1, 1, 'Resin', NULL, NULL, 'Active', '0'),
+(2, 1, 2, 'Ocean Blue', NULL, NULL, 'Active', '0'),
+(5, 3, 1, 'Oak Wood', NULL, NULL, 'Active', '0'),
+(6, 4, 1, 'Cotton Rope', NULL, NULL, 'Active', '0'),
+(7, 5, 5, 'Minimalist', NULL, NULL, 'Active', '0'),
+(11, 2, 4, '500', '2026-01-09 23:59:36', 1, 'Active', '0'),
+(12, 2, 2, 'Red', '2026-01-09 23:59:36', 1, 'Active', '0'),
+(13, 2, 1, 'Cotton Yarn', '2026-01-09 23:59:36', 1, 'Active', '0'),
+(14, 2, 3, 'Small', '2026-01-09 23:59:36', 1, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `image_id` int NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `is_cover` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `display_order` int DEFAULT '0',
+  `added_date` datetime DEFAULT NULL,
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`image_id`, `product_id`, `image_path`, `is_cover`, `display_order`, `added_date`, `is_delete`) VALUES
+(1, 1, 'cover.png', '1', 0, NULL, '0'),
+(2, 2, 'cover.png', '0', 0, NULL, '0'),
+(3, 3, 'cover.png', '1', 0, NULL, '0'),
+(4, 4, 'cover.png', '1', 0, NULL, '0'),
+(5, 5, 'cover.png', '1', 0, NULL, '0'),
+(6, 2, '2324d453f0435ce6a9349cb82161d09f.jpg', '0', 0, '2026-01-09 14:30:18', '0'),
+(7, 2, '5ba39f8dcef881124e5de3e451fa913f.jpg', '1', 1, '2026-01-09 14:30:18', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews`
+--
+
+CREATE TABLE `product_reviews` (
+  `review_id` int NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `reviewer_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `rating` int NOT NULL,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('Pending','Approved','Rejected') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Pending',
+  `added_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_reviews`
+--
+
+INSERT INTO `product_reviews` (`review_id`, `product_id`, `reviewer_name`, `email`, `rating`, `comment`, `status`, `added_date`, `is_delete`) VALUES
+(1, 1, 'Charlie Brown', 'charlie@example.com', 1, 'Average experience. The product is okay but could be better.', 'Approved', '2026-01-01 14:43:39', '0'),
+(2, 1, 'Diana Prince', 'diana@example.com', 5, 'A bit smaller than expected, but the quality makes up for it.', 'Pending', '2025-12-23 14:43:39', '0'),
+(3, 1, 'Alice Johnson', 'alice@example.com', 4, 'Sturdy and well-made. Will definitely buy again.', 'Rejected', '2025-12-14 14:43:39', '0'),
+(4, 1, 'Fiona Gallagher', 'fiona@example.com', 3, 'A bit smaller than expected, but the quality makes up for it.', 'Approved', '2026-01-04 14:43:39', '0'),
+(5, 1, 'Alice Johnson', 'alice@example.com', 3, 'Sturdy and well-made. Will definitely buy again.', 'Approved', '2025-12-29 14:43:39', '0'),
+(6, 2, 'Julia Roberts', 'julia@example.com', 3, 'A bit smaller than expected, but the quality makes up for it.', 'Approved', '2026-01-07 14:43:39', '0'),
+(7, 2, 'Ethan Hunt', 'ethan@example.com', 5, 'Highly recommended! The finish is superb.', 'Pending', '2025-12-12 14:43:39', '0'),
+(8, 2, 'Fiona Gallagher', 'fiona@example.com', 5, 'Highly recommended! The finish is superb.', 'Rejected', '2026-01-07 14:43:39', '0'),
+(9, 2, 'Ian McKellen', 'ian@example.com', 4, 'Sturdy and well-made. Will definitely buy again.', 'Approved', '2025-12-28 14:43:40', '0'),
+(10, 2, 'Hannah Montana', 'hannah@example.com', 4, 'Beautifully crafted. Perfect for gifting.', 'Approved', '2025-12-11 14:43:40', '0'),
+(11, 3, 'Julia Roberts', 'julia@example.com', 3, 'Average experience. The product is okay but could be better.', 'Approved', '2026-01-02 14:43:40', '0'),
+(12, 3, 'George Costanza', 'george@example.com', 2, 'Not worth the price. Expected more based on the description.', 'Pending', '2025-12-10 14:43:40', '0'),
+(13, 3, 'George Costanza', 'george@example.com', 4, 'One of the best purchases I\'ve made recently!', 'Rejected', '2025-12-17 14:43:40', '0'),
+(14, 3, 'Charlie Brown', 'charlie@example.com', 3, 'Absolutely love this product! The quality is amazing.', 'Rejected', '2026-01-07 14:43:40', '0'),
+(15, 3, 'Ethan Hunt', 'ethan@example.com', 5, 'Sturdy and well-made. Will definitely buy again.', 'Approved', '2025-12-14 14:43:40', '0'),
+(16, 4, 'George Costanza', 'george@example.com', 4, 'A bit smaller than expected, but the quality makes up for it.', 'Approved', '2025-12-20 14:43:40', '0'),
+(17, 4, 'Charlie Brown', 'charlie@example.com', 3, 'Good value for money. Handled with care.', 'Pending', '2025-12-23 14:43:40', '0'),
+(18, 4, 'Alice Johnson', 'alice@example.com', 4, 'Beautifully crafted. Perfect for gifting.', 'Approved', '2026-01-08 14:43:40', '0'),
+(19, 4, 'Julia Roberts', 'julia@example.com', 3, 'Sturdy and well-made. Will definitely buy again.', 'Approved', '2025-12-16 14:43:40', '0'),
+(20, 4, 'Alice Johnson', 'alice@example.com', 3, 'Not worth the price. Expected more based on the description.', 'Approved', '2026-01-04 14:43:40', '0'),
+(21, 5, 'Diana Prince', 'diana@example.com', 3, 'Absolutely love this product! The quality is amazing.', 'Approved', '2025-12-15 14:43:40', '0'),
+(22, 5, 'Alice Johnson', 'alice@example.com', 5, 'A bit smaller than expected, but the quality makes up for it.', 'Pending', '2025-12-29 14:43:40', '0'),
+(23, 5, 'Ian McKellen', 'ian@example.com', 4, 'Highly recommended! The finish is superb.', 'Rejected', '2025-12-13 14:43:40', '0'),
+(24, 5, 'George Costanza', 'george@example.com', 3, 'Not worth the price. Expected more based on the description.', 'Approved', '2026-01-07 14:43:40', '0'),
+(25, 5, 'Ethan Hunt', 'ethan@example.com', 4, 'Highly recommended! The finish is superb.', 'Approved', '2025-12-31 14:43:40', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refunds`
+--
+
+CREATE TABLE `refunds` (
+  `refund_id` int NOT NULL,
+  `order_id` int NOT NULL,
+  `payment_id` int NOT NULL,
+  `refund_amount` decimal(10,2) NOT NULL,
+  `refund_status` enum('Requested','Processing','Completed','Failed') COLLATE utf8mb4_general_ci DEFAULT 'Requested',
+  `gateway_refund_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `reason` text COLLATE utf8mb4_general_ci,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `refunds`
+--
+
+INSERT INTO `refunds` (`refund_id`, `order_id`, `payment_id`, `refund_amount`, `refund_status`, `gateway_refund_id`, `reason`, `added_date`) VALUES
+(1, 5, 5, '990.00', 'Completed', NULL, 'Order Cancelled', '2026-01-09 18:45:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `review_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `rating` int DEFAULT NULL,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_methods`
+--
+
+CREATE TABLE `shipping_methods` (
+  `id` int NOT NULL,
+  `method_name` varchar(255) NOT NULL,
+  `carrier` varchar(100) DEFAULT NULL,
+  `shipping_fee` decimal(10,2) DEFAULT '0.00',
+  `min_delivery_days` int DEFAULT '0',
+  `max_delivery_days` int DEFAULT '0',
+  `status` enum('Active','Inactive') DEFAULT 'Active',
+  `is_delete` tinyint(1) DEFAULT '0',
+  `added_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `added_by` int DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `shipping_methods`
+--
+
+INSERT INTO `shipping_methods` (`id`, `method_name`, `carrier`, `shipping_fee`, `min_delivery_days`, `max_delivery_days`, `status`, `is_delete`, `added_date`, `added_by`, `updated_date`, `updated_by`) VALUES
+(1, 'Standard Shipping', 'FedEx', '5.00', 3, 5, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL),
+(2, 'Express Shipping', 'DHL', '15.00', 1, 2, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL),
+(3, 'Free Shipping', 'Local Post', '0.00', 7, 10, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `testimonials_id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `designation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `rating` int DEFAULT NULL,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `update_by` int DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`testimonials_id`, `name`, `designation`, `message`, `image`, `rating`, `added_date`, `added_by`, `update_date`, `update_by`, `status`, `is_delete`) VALUES
+(1, 'GAYATRI HEDAU', 'Head Of Department', 'testing', 'dc54e9179c4d0c97e90e3920dfcf21ef.jpg', 3, '2025-03-25 13:51:21', 1, '2025-03-25 16:33:54', 1, 'Inactive', '0'),
+(2, 'Gayatri Narayan Hedau', 'Head Of Department', 'Working with Code Crafter has been an amazing experience! Their team is highly skilled, responsive, and delivered our website beyond expectations. Highly recommended!', 'ec676d5f83427b2b98685ecb05ad9b29.png', 5, '2025-03-25 16:32:57', 1, '2025-03-25 18:22:54', 1, 'Active', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `traffic_logs`
+--
+
+CREATE TABLE `traffic_logs` (
+  `id` int NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text,
+  `request_uri` varchar(255) DEFAULT NULL,
+  `referrer` text,
+  `device_type` enum('Mobile','Desktop','Tablet') DEFAULT 'Desktop',
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `traffic_logs`
+--
+
+INSERT INTO `traffic_logs` (`id`, `ip_address`, `user_agent`, `request_uri`, `referrer`, `device_type`, `timestamp`) VALUES
+(1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:41:04'),
+(2, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:41:04'),
+(3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:41:05'),
+(4, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/login', '', 'Desktop', '2026-01-10 17:41:08'),
+(5, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/login', '', 'Desktop', '2026-01-10 17:41:14'),
+(6, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:43:36'),
+(7, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:43:37'),
+(8, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:43:37'),
+(9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:44:47'),
+(10, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:44:47'),
+(11, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:44:47'),
+(12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:45:46'),
+(13, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:45:46'),
+(14, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-10 17:45:46'),
+(15, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/traffic_analytics', 'http://localhost/ecom/dashboard', 'Desktop', '2026-01-10 17:45:57'),
+(16, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/traffic_analytics', 'http://localhost/ecom/traffic_analytics', 'Desktop', '2026-01-10 17:46:18'),
+(17, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/login', '', 'Desktop', '2026-01-11 11:32:34'),
+(18, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-11 11:33:11'),
+(19, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', '', 'Desktop', '2026-01-11 11:35:27'),
+(20, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/traffic_analytics', 'http://localhost/ecom/dashboard', 'Desktop', '2026-01-11 11:35:40'),
+(21, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/traffic_analytics', '', 'Desktop', '2026-01-11 11:51:20'),
+(22, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/product_dashboard', 'http://localhost/ecom/traffic_analytics', 'Desktop', '2026-01-11 11:51:25'),
+(23, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/categories', 'http://localhost/ecom/product_dashboard', 'Desktop', '2026-01-11 11:51:30'),
+(24, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/user_list', 'http://localhost/ecom/categories', 'Desktop', '2026-01-11 11:52:13'),
+(25, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/login', '', 'Desktop', '2026-01-12 09:42:36'),
+(26, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/login', '', 'Desktop', '2026-01-13 10:53:16'),
+(27, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', 'http://localhost/ecom/login', 'Desktop', '2026-01-13 10:53:31'),
+(28, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/dashboard', '', 'Desktop', '2026-01-13 10:55:15'),
+(29, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/traffic_analytics', 'http://localhost/ecom/dashboard', 'Desktop', '2026-01-13 10:56:12'),
+(30, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/product_dashboard', 'http://localhost/ecom/traffic_analytics', 'Desktop', '2026-01-13 10:56:29'),
+(31, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/product_list', 'http://localhost/ecom/product_dashboard', 'Desktop', '2026-01-13 10:56:31'),
+(32, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/add_product', 'http://localhost/ecom/product_list', 'Desktop', '2026-01-13 10:56:35'),
+(33, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/product_list', 'http://localhost/ecom/add_product', 'Desktop', '2026-01-13 10:56:41'),
+(34, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecom/product_list', 'http://localhost/ecom/add_product', 'Desktop', '2026-01-13 10:56:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userinfo`
+--
+
+CREATE TABLE `userinfo` (
+  `id` int NOT NULL,
+  `user_email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `user_role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `added_date` datetime DEFAULT NULL,
+  `added_by` int NOT NULL,
+  `deleted` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `unit_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `groups` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `login_attempt` int NOT NULL DEFAULT '0',
+  `status` enum('Active','Inactive','Block') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `userinfo`
+--
+
+INSERT INTO `userinfo` (`id`, `user_email`, `user_role`, `user_name`, `user_password`, `added_date`, `added_by`, `deleted`, `unit_ids`, `groups`, `login_attempt`, `status`) VALUES
+(1, 'mullaaarbaj10@gmail.com', 'Admin', 'Aarbaj Mulla', '$2y$10$tfZyKpLEje.gpj9qt3DsN.B6uakFSUKMWvGYCy37XZPMFUuF9t4jG', '2024-11-19 12:41:29', 3, NULL, '1,2', '1', 0, 'Active'),
+(2, 'mullajuned0@gmail.com', 'Admin', 'Juned Mulla', '123456', '2024-11-19 12:42:40', 3, '0', '1,2', '1', 1, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `wishlist_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `product_id` bigint UNSIGNED DEFAULT NULL,
+  `status` enum('Active','Inactive') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Active',
+  `is_delete` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `added_date` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`wishlist_id`, `user_id`, `product_id`, `status`, `is_delete`, `added_date`) VALUES
+(1, 1, 1, 'Active', '0', '2026-01-10 16:30:52'),
+(2, 1, 2, 'Active', '0', '2026-01-10 16:30:52'),
+(3, 2, 3, 'Active', '0', '2026-01-10 16:30:52'),
+(4, 2, 1, 'Inactive', '0', '2026-01-10 16:30:52'),
+(5, 3, 4, 'Active', '0', '2026-01-10 16:30:52'),
+(6, 3, 2, 'Active', '0', '2026-01-10 16:30:52'),
+(7, 4, 5, 'Active', '0', '2026-01-10 16:30:52'),
+(8, 4, 1, 'Active', '0', '2026-01-10 16:30:52'),
+(9, 5, 3, 'Inactive', '0', '2026-01-10 16:30:52'),
+(10, 5, 4, 'Active', '0', '2026-01-10 16:30:52'),
+(11, 6, 1, 'Active', '0', '2026-01-10 16:30:52'),
+(12, 6, 5, 'Active', '0', '2026-01-10 16:30:52'),
+(13, 7, 2, 'Active', '0', '2026-01-10 16:30:52'),
+(14, 7, 3, 'Active', '0', '2026-01-10 16:30:52'),
+(15, 8, 4, 'Inactive', '0', '2026-01-10 16:30:52'),
+(16, 8, 1, 'Active', '0', '2026-01-10 16:30:52'),
+(17, 9, 5, 'Active', '0', '2026-01-10 16:30:52'),
+(18, 9, 2, 'Active', '0', '2026-01-10 16:30:52'),
+(19, 10, 3, 'Active', '0', '2026-01-10 16:30:52'),
+(20, 10, 1, 'Active', '0', '2026-01-10 16:30:52');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `attribute`
+--
+ALTER TABLE `attribute`
+  ADD PRIMARY KEY (`attribute_id`);
+
+--
+-- Indexes for table `banners`
+--
+ALTER TABLE `banners`
+  ADD PRIMARY KEY (`banners_id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`blog_id`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`brand_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `commmet`
+--
+ALTER TABLE `commmet`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `config_setting`
+--
+ALTER TABLE `config_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`coupons_id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
+-- Indexes for table `customer_address`
+--
+ALTER TABLE `customer_address`
+  ADD PRIMARY KEY (`address_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `customer_bank`
+--
+ALTER TABLE `customer_bank`
+  ADD PRIMARY KEY (`bank_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `customer_master`
+--
+ALTER TABLE `customer_master`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_customer_name` (`customer_name`),
+  ADD KEY `idx_customer_code` (`customer_code`);
+
+--
+-- Indexes for table `customer_reviews`
+--
+ALTER TABLE `customer_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_customer` (`customer_id`);
+
+--
+-- Indexes for table `delivery_partners`
+--
+ALTER TABLE `delivery_partners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_marketing`
+--
+ALTER TABLE `email_marketing`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faq`
+--
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`faq_id`);
+
+--
+-- Indexes for table `group_master`
+--
+ALTER TABLE `group_master`
+  ADD PRIMARY KEY (`group_master_id`);
+
+--
+-- Indexes for table `group_rights`
+--
+ALTER TABLE `group_rights`
+  ADD PRIMARY KEY (`group_rights_id`);
+
+--
+-- Indexes for table `menu_category`
+--
+ALTER TABLE `menu_category`
+  ADD PRIMARY KEY (`menu_category_id`);
+
+--
+-- Indexes for table `menu_master`
+--
+ALTER TABLE `menu_master`
+  ADD PRIMARY KEY (`menu_master_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `idx_user_id` (`user_id`),
+  ADD KEY `idx_order_status` (`order_status`),
+  ADD KEY `idx_payment_status` (`payment_status`),
+  ADD KEY `idx_added_date` (`added_date`);
+
+--
+-- Indexes for table `order_history`
+--
+ALTER TABLE `order_history`
+  ADD PRIMARY KEY (`history_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`order_item_id`),
+  ADD KEY `idx_order_id` (`order_id`),
+  ADD KEY `idx_product_id` (`product_id`),
+  ADD KEY `idx_product_name` (`product_name_at_order`);
+
+--
+-- Indexes for table `order_tracking`
+--
+ALTER TABLE `order_tracking`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_products_brand` (`brand_id`),
+  ADD KEY `idx_category_id` (`category_id`),
+  ADD KEY `idx_status` (`status`),
+  ADD KEY `idx_is_delete` (`is_delete`);
+
+--
+-- Indexes for table `product_attributes`
+--
+ALTER TABLE `product_attributes`
+  ADD PRIMARY KEY (`product_attribute_id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `attribute_id` (`attribute_id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`image_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `refunds`
+--
+ALTER TABLE `refunds`
+  ADD PRIMARY KEY (`refund_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `payment_id` (`payment_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`review_id`);
+
+--
+-- Indexes for table `shipping_methods`
+--
+ALTER TABLE `shipping_methods`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`testimonials_id`);
+
+--
+-- Indexes for table `traffic_logs`
+--
+ALTER TABLE `traffic_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_timestamp` (`timestamp`),
+  ADD KEY `idx_request_uri` (`request_uri`);
+
+--
+-- Indexes for table `userinfo`
+--
+ALTER TABLE `userinfo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `attribute`
+--
+ALTER TABLE `attribute`
+  MODIFY `attribute_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `banners`
+--
+ALTER TABLE `banners`
+  MODIFY `banners_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `blog_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `brand_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `commmet`
+--
+ALTER TABLE `commmet`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `config_setting`
+--
+ALTER TABLE `config_setting`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `coupons_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `customer_address`
+--
+ALTER TABLE `customer_address`
+  MODIFY `address_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `customer_bank`
+--
+ALTER TABLE `customer_bank`
+  MODIFY `bank_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `customer_master`
+--
+ALTER TABLE `customer_master`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `customer_reviews`
+--
+ALTER TABLE `customer_reviews`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `delivery_partners`
+--
+ALTER TABLE `delivery_partners`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `email_marketing`
+--
+ALTER TABLE `email_marketing`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `faq`
+--
+ALTER TABLE `faq`
+  MODIFY `faq_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `group_master`
+--
+ALTER TABLE `group_master`
+  MODIFY `group_master_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `group_rights`
+--
+ALTER TABLE `group_rights`
+  MODIFY `group_rights_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `menu_category`
+--
+ALTER TABLE `menu_category`
+  MODIFY `menu_category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `menu_master`
+--
+ALTER TABLE `menu_master`
+  MODIFY `menu_master_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_history`
+--
+ALTER TABLE `order_history`
+  MODIFY `history_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `order_item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_tracking`
+--
+ALTER TABLE `order_tracking`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `product_attributes`
+--
+ALTER TABLE `product_attributes`
+  MODIFY `product_attribute_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  MODIFY `review_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `refunds`
+--
+ALTER TABLE `refunds`
+  MODIFY `refund_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `review_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `shipping_methods`
+--
+ALTER TABLE `shipping_methods`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `testimonials_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `traffic_logs`
+--
+ALTER TABLE `traffic_logs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `userinfo`
+--
+ALTER TABLE `userinfo`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `wishlist_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `customer_address`
+--
+ALTER TABLE `customer_address`
+  ADD CONSTRAINT `customer_address_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `customer_bank`
+--
+ALTER TABLE `customer_bank`
+  ADD CONSTRAINT `customer_bank_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `customer_reviews`
+--
+ALTER TABLE `customer_reviews`
+  ADD CONSTRAINT `fk_review_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer_master` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_products_brand` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`brand_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD CONSTRAINT `fk_product_images_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD CONSTRAINT `fk_product_reviews_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

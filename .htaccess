@@ -1,0 +1,13 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# If the request is not for index.php, resources folder, or robots.txt
+RewriteCond %{REQUEST_URI} !^(index\.php|resources|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# Redirect all HTTP requests to HTTPS for softechsolutions.in
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?softechsolutions\.in$ [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

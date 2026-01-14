@@ -1,0 +1,84 @@
+<%include file="layout/header.tpl"%>
+
+<div class="bg-light py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Shopping Cart</h2>
+        
+        <div class="row g-4">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+                 <div class="card border-0 shadow-sm rounded-4 mb-3">
+                    <div class="card-body p-4">
+                        <%if !empty($cart_items)%>
+                            <%foreach $cart_items as $item%>
+                            <div class="d-flex align-items-center justify-content-between mb-4 pb-4 border-bottom last-border-0">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="bg-light p-2 rounded-3">
+                                        <img src="<%$item->image%>" alt="Product" width="80" class="img-fluid rounded-2 object-fit-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x150?text=Product';">
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1"><%$item->name%></h5>
+                                        <div class="text-muted small">Color: Black</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex align-items-center gap-5">
+                                    <div class="quantity-selector input-group w-auto">
+                                        <button class="btn btn-sm btn-outline-light text-dark border">-</button>
+                                        <input type="text" class="form-control form-control-sm text-center border-0 bg-light" value="<%$item->qty%>" style="width: 40px;" readonly>
+                                        <button class="btn btn-sm btn-outline-light text-dark border">+</button>
+                                    </div>
+                                    <div class="fw-bold fs-5">$<%$item->price%></div>
+                                    <button class="btn btn-link text-danger p-0"><i class="ti ti-trash"></i></button>
+                                </div>
+                            </div>
+                            <%/foreach%>
+                        <%else%>
+                            <p>Your cart is empty.</p>
+                        <%/if%>
+                        
+                         <div class="d-flex justify-content-between align-items-center pt-2">
+                            <a href="<%base_url('shop/products')%>" class="text-decoration-none fw-bold"><i class="ti ti-arrow-left me-2"></i> Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4">Order Summary</h5>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal</span>
+                            <span class="fw-bold">$218.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                             <span class="text-muted">Shipping</span>
+                            <span class="text-success">Free</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                             <span class="text-muted">Tax</span>
+                            <span class="fw-bold">$10.00</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-4 pt-3 border-top">
+                             <span class="fw-bold fs-5">Total</span>
+                            <span class="fw-bold fs-4 text-primary">$228.00</span>
+                        </div>
+                        
+                        <a href="<%base_url('shop/checkout')%>" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold btn-animate">Proceed to Checkout</a>
+                        
+                        <div class="mt-4 text-center small text-muted">
+                            <i class="ti ti-lock me-1"></i> Secure Checkout
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<%include file="layout/footer.tpl"%>
