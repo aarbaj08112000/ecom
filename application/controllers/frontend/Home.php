@@ -50,4 +50,65 @@ class Home extends MY_Controller {
         
         $this->smarty->view('about.tpl', $data);
     }
+
+    /**
+     * AJAX endpoint to handle contact form submission
+     */
+    public function submit_contact() {
+        // Verify AJAX request
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        // Load model
+        $this->load->model('Contact_model');
+
+        // Get POST data
+        $name = $this->input->post('contact_name');
+        $email = $this->input->post('contact_email');
+        $subject = $this->input->post('contact_subject');
+        $message = $this->input->post('contact_message');
+
+        // Server-side validation
+        if (empty($name) || strlen($name) < 2) {
+            echo json_encode(['success' => 0, 'message' => 'Please enter a valid name (minimum 2 characters).']);
+            return;
+        }
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => 0, 'message' => 'Please enter a valid email address.']);
+            return;
+        }
+
+        if (empty($subject)) {
+            echo json_encode(['success' => 0, 'message' => 'Please select a subject.']);
+            return;
+        }
+
+        if (empty($message) || strlen($message) < 10) {
+            echo json_encode(['success' => 0, 'message' => 'Please enter a message (minimum 10 characters).']);
+            return;
+        }
+
+        // Prepare data
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'subject' => $subject,
+            'message' => $message
+        ];
+
+        // Save to database
+        if ($this->Contact_model->save_contact($data)) {
+            echo json_encode([
+                'success' => 1, 
+                'message' => 'Thank you for contacting us! We will get back to you soon.'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => 0, 
+                'message' => 'Failed to send your message. Please try again later.'
+            ]);
+        }
+    }
 }

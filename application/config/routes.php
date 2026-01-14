@@ -15,10 +15,13 @@ $route['shop/logout'] = 'frontend/Auth/logout';
 $route['shop/save-address'] = 'frontend/Account/save_address';
 $route['shop/delete-address'] = 'frontend/Account/delete_address';
 $route['shop/get-address/(:num)'] = 'frontend/Account/get_address/$1';
+$route['shop/update-settings'] = 'frontend/Account/update_settings';
+$route['shop/get-order-details/(:num)'] = 'frontend/Account/get_order_details/$1';
 $route['shop/forgot-password'] = 'frontend/Auth/forgot_password';
 $route['shop/forgot-password-action'] = 'frontend/Auth/forgot_password_action';
 $route['shop/dashboard'] = 'frontend/Account/index';
 $route['shop/contact'] = 'frontend/Home/contact';
+$route['shop/submit-contact'] = 'frontend/Home/submit_contact';
 
 // Support Routes
 $route['shop/track-order'] = 'frontend/Support/track_order';

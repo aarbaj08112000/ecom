@@ -9,7 +9,16 @@
                     <div class="card-body p-4 text-center bg-white position-relative">
                         <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10"></div>
                         <div class="position-relative z-1">
-                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=300&auto=format&fit=crop" class="rounded-circle shadow-lg mb-3 border border-4 border-white" style="width: 100px; height: 100px; object-fit: cover;">
+                            <%if isset($customer->profile_image) && $customer->profile_image%>
+                                <img src="<%base_url('public/frontend/img/profiles/')%><%$customer->profile_image%>" class="rounded-circle shadow-lg mb-3 border border-4 border-white mx-auto" style="width: 100px; height: 100px; object-fit: cover; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="rounded-circle shadow-lg mb-3 border border-4 border-white mx-auto d-none align-items-center justify-content-center bg-primary text-white" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: bold;">
+                                    <%if isset($customer_name)%><%$customer_name|substr:0:1|upper%><%else%>U<%/if%>
+                                </div>
+                            <%else%>
+                                <div class="rounded-circle shadow-lg mb-3 border border-4 border-white mx-auto d-flex align-items-center justify-content-center bg-primary text-white" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: bold;">
+                                    <%if isset($customer_name)%><%$customer_name|substr:0:1|upper%><%else%>U<%/if%>
+                                </div>
+                            <%/if%>
                             <h5 class="fw-bold mb-1" style="font-family: var(--font-heading);"><%if isset($customer_name)%><%$customer_name%><%else%>User<%/if%></h5>
                             <p class="small text-muted mb-0"><i class="ti ti-star-filled text-warning"></i> Welcome back!</p>
                         </div>
@@ -49,7 +58,7 @@
                                 <h2 class="fw-bold mb-0 text-capitalize" style="font-family: var(--font-heading);">Hello, <%if isset($customer_name)%><%$customer_name%><%else%>User<%/if%>! 👋</h2>
                                 <p class="text-muted mb-0">Here's what's happening with your creative journey today.</p>
                             </div>
-                            <button class="btn btn-primary rounded-pill px-4 shadow-sm btn-animate">
+                            <button class="btn btn-primary rounded-pill px-4 shadow-sm btn-animate" onclick="window.location.href='<%base_url('shop/products')%>'">
                                 <i class="ti ti-shopping-cart-plus me-2"></i> Continue Shopping
                             </button>
                         </div>
@@ -145,9 +154,9 @@
                                                         <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2 py-1 small"><i class="ti ti-loader me-1"></i> <%$order->order_status%></span>
                                                      <%/if%>
                                                  </td>
-                                                 <td class="pe-4 text-end">
-                                                     <button class="btn btn-white btn-sm shadow-sm rounded-circle icon-btn-sm" title="View"><i class="ti ti-eye"></i></button>
-                                                 </td>
+                                                  <td class="pe-4 text-end">
+                                                      <button class="btn btn-white btn-sm shadow-sm rounded-circle icon-btn-sm" onclick="viewOrderDetails(<%$order->order_id%>)" title="View Details"><i class="ti ti-eye"></i></button>
+                                                  </td>
                                              </tr>
                                              <%/foreach%>
                                          <%else%>
@@ -205,9 +214,10 @@
                                                         <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2"><%$order->order_status%></span>
                                                      <%/if%>
                                                  </td>
-                                                 <td class="pe-4 text-end">
-                                                     <button class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="window.location.href='<%base_url('shop/track-order')%>'">Track Order</button>
-                                                 </td>
+                                                  <td class="pe-4 text-end">
+                                                      <button class="btn btn-white btn-sm shadow-sm rounded-circle icon-btn-sm me-2" onclick="viewOrderDetails(<%$order->order_id%>)" title="View Details"><i class="ti ti-eye"></i></button>
+                                                      <button class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="window.location.href='<%base_url('shop/track-order')%>'">Track Order</button>
+                                                  </td>
                                              </tr>
                                              <%/foreach%>
                                          <%else%>
@@ -320,41 +330,129 @@
                          <h4 class="fw-bold mb-4" style="font-family: var(--font-heading);">Account Settings</h4>
                          <div class="card border-0 shadow-sm rounded-4">
                              <div class="card-body p-4">
-                                 <form>
+                                 <form id="settingsForm" method="POST" action="javascript:void(0);" enctype="multipart/form-data">
                                      <div class="row g-3">
+                                         <!-- Customer Code (readonly) -->
                                          <div class="col-md-6">
-                                             <label class="form-label small fw-bold text-uppercase text-muted">First Name</label>
-                                             <input type="text" class="form-control bg-light border-0 py-3 rounded-3" value="Aarbaj">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Customer Code</label>
+                                             <input type="text" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->customer_code)%><%$customer->customer_code%><%/if%>" readonly>
                                          </div>
+                                         
+                                         <!-- Email (readonly) -->
                                          <div class="col-md-6">
-                                             <label class="form-label small fw-bold text-uppercase text-muted">Last Name</label>
-                                             <input type="text" class="form-control bg-light border-0 py-3 rounded-3" value="Mulla">
-                                         </div>
-                                         <div class="col-12">
                                              <label class="form-label small fw-bold text-uppercase text-muted">Email Address</label>
-                                             <input type="email" class="form-control bg-light border-0 py-3 rounded-3" value="aarbaj@example.com">
+                                             <input type="email" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->email)%><%$customer->email%><%/if%>" readonly>
                                          </div>
+                                         
+                                         <!-- Customer Name -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Full Name <span class="text-danger">*</span></label>
+                                             <input type="text" name="customer_name" id="customer_name" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->customer_name)%><%$customer->customer_name%><%/if%>">
+                                         </div>
+                                         
+                                         <!-- Mobile Number -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Mobile Number</label>
+                                             <input type="text" name="mobile_no" id="mobile_no" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->mobile_no)%><%$customer->mobile_no%><%/if%>">
+                                         </div>
+                                         
+                                         <!-- Profile Image -->
+                                         <div class="col-12">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Profile Image</label>
+                                             <input type="file" name="profile_image" id="profile_image" class="form-control bg-light border-0 py-2 rounded-3" accept="image/*">
+                                             <small class="text-muted">Max file size: 2MB. Allowed types: JPG, JPEG, PNG, GIF</small>
+                                             <%if isset($customer->profile_image) && $customer->profile_image%>
+                                                 <div class="mt-2">
+                                                     <img src="<%base_url('public/frontend/img/profiles/')%><%$customer->profile_image%>" alt="Current Profile" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+                                                 </div>
+                                             <%/if%>
+                                         </div>
+                                         
+                                         <!-- GST Number -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">GST Number</label>
+                                             <input type="text" name="gst_no" id="gst_no" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->gst_no)%><%$customer->gst_no%><%/if%>">
+                                         </div>
+                                         
+                                         <!-- PAN Number -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">PAN Number</label>
+                                             <input type="text" name="pan_no" id="pan_no" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->pan_no)%><%$customer->pan_no%><%/if%>" autocomplete="off">
+                                         </div>
+                                         
+                                         <!-- Date of Birth -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Date of Birth</label>
+                                             <input type="date" name="dob" id="dob" class="form-control bg-light border-0 py-3 rounded-3" value="<%if isset($customer->dob)%><%$customer->dob%><%/if%>">
+                                         </div>
+                                         
+                                         <!-- Gender -->
+                                         <div class="col-md-6">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Gender</label>
+                                             <select name="gender" id="gender" class="form-select bg-light border-0 py-3 rounded-3">
+                                                 <option value="">Select Gender</option>
+                                                 <option value="Male" <%if isset($customer->gender) && $customer->gender == 'Male'%>selected<%/if%>>Male</option>
+                                                 <option value="Female" <%if isset($customer->gender) && $customer->gender == 'Female'%>selected<%/if%>>Female</option>
+                                                 <option value="Other" <%if isset($customer->gender) && $customer->gender == 'Other'%>selected<%/if%>>Other</option>
+                                             </select>
+                                         </div>
+                                         
+                                         <!-- Identity Details -->
+                                         <div class="col-12">
+                                             <label class="form-label small fw-bold text-uppercase text-muted">Identity Details</label>
+                                             <textarea name="identity_details" id="identity_details" class="form-control bg-light border-0 py-3 rounded-3" rows="3"><%if isset($customer->identity_details)%><%$customer->identity_details%><%/if%></textarea>
+                                         </div>
+                                         
+                                         <div class="col-12 mt-3">
+                                             <hr>
+                                             <h6 class="fw-bold text-muted mb-3">Change Password (Optional)</h6>
+                                         </div>
+                                         
+                                         <!-- Current Password -->
                                          <div class="col-12">
                                              <label class="form-label small fw-bold text-uppercase text-muted">Current Password</label>
-                                             <input type="password" class="form-control bg-light border-0 py-3 rounded-3" placeholder="********">
+                                             <input type="password" name="current_password" id="current_password" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Enter current password" autocomplete="current-password">
                                          </div>
+                                         
+                                         <!-- New Password -->
                                          <div class="col-md-6">
                                              <label class="form-label small fw-bold text-uppercase text-muted">New Password</label>
-                                             <input type="password" class="form-control bg-light border-0 py-3 rounded-3">
+                                             <input type="password" name="new_password" id="new_password" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Enter new password" autocomplete="new-password">
                                          </div>
+                                         
+                                         <!-- Confirm Password -->
                                          <div class="col-md-6">
                                              <label class="form-label small fw-bold text-uppercase text-muted">Confirm Password</label>
-                                             <input type="password" class="form-control bg-light border-0 py-3 rounded-3">
+                                             <input type="password" name="confirm_password" id="confirm_password" class="form-control bg-light border-0 py-3 rounded-3" placeholder="Confirm new password" autocomplete="new-password">
                                          </div>
+                                         
                                          <div class="col-12 mt-4">
-                                             <button class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm">Save Changes</button>
+                                             <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold shadow-sm">Save Changes</button>
                                          </div>
                                      </div>
                                  </form>
+                              </div>
+                          </div>
+                     </div>
+                     
+                     <!-- Order Details Tab (Hidden from menu) -->
+                     <div class="tab-pane fade" id="order-details-tab" role="tabpanel">
+                         <div class="mb-4 d-flex align-items-center gap-3">
+                             <button class="btn btn-outline-secondary rounded-circle icon-btn-sm" onclick="backToDashboard()" title="Back">
+                                 <i class="ti ti-arrow-left"></i>
+                             </button>
+                             <h4 class="fw-bold mb-0" style="font-family: var(--font-heading);">Order Details</h4>
+                         </div>
+                         
+                         <div id="order-details-content">
+                             <!-- Loading state -->
+                             <div class="text-center py-5">
+                                 <i class="ti ti-loader fs-1 text-primary"></i>
+                                 <p class="text-muted mt-2">Loading order details...</p>
                              </div>
                          </div>
-                    </div>
-                    
+                     </div>
+                     
                 </div>
             </div>
         </div>
@@ -570,5 +668,266 @@ $(document).ready(function() {
             return false;
         }
     });
+    
+    // Add custom validation method for file extensions
+    $.validator.addMethod("extension", function(value, element, param) {
+        if (this.optional(element)) {
+            return true;
+        }
+        param = typeof param === "string" ? param.replace(/,/g, "|") : "png|jpe?g|gif";
+        return value.match(new RegExp("\\.(" + param + ")$", "i"));
+    }, "Please upload a valid image file (JPG, JPEG, PNG, GIF)");
+    
+    // Settings Form Validation and Submission
+    $('#settingsForm').validate({
+        rules: {
+            customer_name: {
+                required: true,
+                minlength: 2
+            },
+            mobile_no: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            gst_no: {
+                maxlength: 15
+            },
+            pan_no: {
+                maxlength: 10
+            },
+            profile_image: {
+                extension: "jpg|jpeg|png|gif"
+            },
+            new_password: {
+                minlength: 6
+            },
+            confirm_password: {
+                equalTo: "#new_password"
+            }
+        },
+        messages: {
+            customer_name: {
+                required: "Please enter your full name",
+                minlength: "Name must be at least 2 characters"
+            },
+            mobile_no: {
+                required: "Please enter mobile number",
+                digits: "Please enter valid digits",
+                minlength: "Mobile number must be 10 digits",
+                maxlength: "Mobile number must be 10 digits"
+            },
+            gst_no: {
+                maxlength: "GST number cannot exceed 15 characters"
+            },
+            pan_no: {
+                maxlength: "PAN number must be 10 characters"
+            },
+            profile_image: {
+                extension: "Please upload a valid image file (JPG, JPEG, PNG, GIF)"
+            },
+            new_password: {
+                minlength: "Password must be at least 6 characters"
+            },
+            confirm_password: {
+                equalTo: "Passwords do not match"
+            }
+        },
+        errorElement: 'div',
+        errorClass: 'text-danger small mt-1',
+        submitHandler: function(form) {
+            var formData = new FormData(form);
+            
+            $.ajax({
+                url: '<%base_url("shop/update-settings")%>',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.success) {
+                        toaster('success', response.message);
+                        // Clear password fields after successful update
+                        $('#current_password, #new_password, #confirm_password').val('');
+                        // Reload page after 1.5 seconds to show updated data
+                        setTimeout(function(){ location.reload(); }, 1500);
+                    } else {
+                        toaster('error', response.message);
+                    }
+                },
+                error: function() {
+                    toaster('error', 'An error occurred while updating settings.');
+                }
+            });
+            return false;
+        }
+    });
 });
+
+// Order Details Functions
+function viewOrderDetails(orderId) {
+    // Hide all tabs
+    $('.tab-pane').removeClass('show active');
+    
+    // Show order details tab
+    $('#order-details-tab').addClass('show active');
+    
+    // Remove active state from sidebar
+    $('.list-group-item').removeClass('active border-primary').addClass('text-muted border-transparent');
+    
+    // Load order data
+    loadOrderData(orderId);
+}
+
+function loadOrderData(orderId) {
+    // Show loading state
+    $('#order-details-content').html(`
+        <div class="text-center py-5">
+            <i class="ti ti-loader fs-1 text-primary"></i>
+            <p class="text-muted mt-2">Loading order details...</p>
+        </div>
+    `);
+    
+    // AJAX call to fetch order details
+    $.ajax({
+        url: base_url + 'shop/get-order-details/' + orderId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                renderOrderDetails(response.data);
+            } else {
+                $('#order-details-content').html(`
+                    <div class="text-center py-5">
+                        <i class="ti ti-alert-circle fs-1 text-danger"></i>
+                        <p class="text-danger mt-2">${response.message}</p>
+                        <button class="btn btn-primary rounded-pill px-4 mt-3" onclick="backToDashboard()">Back to Dashboard</button>
+                    </div>
+                `);
+            }
+        },
+        error: function() {
+            $('#order-details-content').html(`
+                <div class="text-center py-5">
+                    <i class="ti ti-alert-circle fs-1 text-danger"></i>
+                    <p class="text-danger mt-2">Failed to load order details</p>
+                    <button class="btn btn-primary rounded-pill px-4 mt-3" onclick="backToDashboard()">Back to Dashboard</button>
+                </div>
+            `);
+        }
+    });
+}
+
+function renderOrderDetails(order) {
+    // Format date
+    const orderDate = new Date(order.added_date);
+    const formattedDate = orderDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    
+    // Status badge
+    let statusBadge = '';
+    if (order.order_status === 'Delivered') {
+        statusBadge = '<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Delivered</span>';
+    } else if (order.order_status === 'Processing') {
+        statusBadge = '<span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">Processing</span>';
+    } else if (order.order_status === 'Confirmed') {
+        statusBadge = '<span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-2">Confirmed</span>';
+    } else if (order.order_status === 'Cancelled') {
+        statusBadge = '<span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-2">Cancelled</span>';
+    } else {
+        statusBadge = `<span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2">${order.order_status}</span>`;
+    }
+    
+    // Build items HTML
+    let itemsHTML = '';
+    if (order.items && order.items.length > 0) {
+        order.items.forEach(item => {
+            itemsHTML += `
+                <tr>
+                    <td class="ps-4 py-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; overflow: hidden;">
+                                ${item.product_image ? `<img src="${base_url}public/frontend/img/products/${item.product_image}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" onerror="this.innerHTML='<i class=\\'ti ti-box fs-4 text-secondary\\'></i>';">` : '<i class="ti ti-box fs-4 text-secondary"></i>'}
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">${item.product_name || 'Product'}</h6>
+                                <p class="small text-muted mb-0">Qty: ${item.quantity}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-end fw-bold">$${parseFloat(item.price).toFixed(2)}</td>
+                    <td class="pe-4 text-end fw-bold text-primary">$${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</td>
+                </tr>
+            `;
+        });
+    } else {
+        itemsHTML = '<tr><td colspan="3" class="text-center py-4 text-muted">No items found</td></tr>';
+    }
+    
+    // Render complete order details
+    const html = `
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h5 class="fw-bold mb-2">Order #${order.order_id}</h5>
+                            <p class="text-muted small mb-0"><i class="ti ti-calendar me-1"></i> Placed on ${formattedDate}</p>
+                        </div>
+                        <div class="text-end">
+                            ${statusBadge}
+                            <h4 class="fw-bold text-primary mt-2 mb-0">$${parseFloat(order.total_amount).toFixed(2)}</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light small fw-bold text-uppercase text-secondary">
+                                <tr>
+                                    <th class="ps-4 py-3">Product</th>
+                                    <th class="py-3 text-end">Price</th>
+                                    <th class="pe-4 py-3 text-end">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${itemsHTML}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <h6 class="fw-bold mb-3"><i class="ti ti-map-pin me-2 text-primary"></i>Shipping Address</h6>
+                    <p class="mb-1 fw-bold">${order.customer_name || 'N/A'}</p>
+                    <p class="text-muted small mb-1">${order.formatted_address || 'Address not available'}</p>
+                    <p class="text-muted small mb-0"><i class="ti ti-phone me-1"></i>${order.mobile_no || 'N/A'}</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <h6 class="fw-bold mb-3"><i class="ti ti-credit-card me-2 text-primary"></i>Payment Information</h6>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Payment Method:</span>
+                        <span class="fw-bold">${order.payment_method || 'N/A'}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">Payment Status:</span>
+                        <span class="badge ${order.payment_status === 'Success' ? 'bg-success' : 'bg-warning'}">${order.payment_status || 'Pending'}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('#order-details-content').html(html);
+}
+
+function backToDashboard() {
+    // Show dashboard tab
+    $('#dashboard-tab-link').click();
+}
 </script>

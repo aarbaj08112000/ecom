@@ -55,4 +55,89 @@ class Account_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    /**
+     * Get customer details by customer ID
+     */
+    public function get_customer_details($customer_id) {
+        $this->db->select('id, customer_code, customer_name, profile_image, mobile_no, email, gst_no, pan_no, dob, gender, identity_details');
+        $this->db->from('customer_master');
+        $this->db->where('id', $customer_id);
+        $this->db->where('is_delete', '0');
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    /**
+     * Verify customer password
+     */
+    public function verify_password($customer_id, $password) {
+        $this->db->select('password');
+        $this->db->from('customer_master');
+        $this->db->where('id', $customer_id);
+        $this->db->where('is_delete', '0');
+        $query = $this->db->get();
+        $result = $query->row();
+        
+        if ($result && $result->password) {
+            return password_verify($password, $result->password);
+        }
+        return false;
+    }
+
+    /**
+     * Update customer settings
+     */
+    public function update_customer_settings($customer_id, $data) {
+        $this->db->where('id', $customer_id);
+        $this->db->where('is_delete', '0');
+        
+        // Add update metadata
+        $data['update_date'] = date('Y-m-d H:i:s');
+        $data['update_by'] = $customer_id;
+        
+        return $this->db->update('customer_master', $data);
+    }
+
+    /**
+     * Get complete order details with items
+     * @param int $order_id
+     * @param int $customer_id
+     * @return object|null
+     */
+    public function get_order_details($order_id, $customer_id) {
+        // Get order header
+        $this->db->select('o.*, c.customer_name, c.email, c.mobile_no');
+        $this->db->from('orders o');
+        $this->db->join('customer_master c', 'c.id = o.user_id', 'left');
+        $this->db->where('o.order_id', $order_id);
+        $this->db->where('o.user_id', $customer_id); // Security: ensure order belongs to customer
+        $query = $this->db->get();
+        
+        $order = $query->row();
+        
+        if (!$order) {
+            return null;
+        }
+        
+        // Parse shipping address if it's JSON
+        if (!empty($order->shipping_address_json)) {
+            $address = json_decode($order->shipping_address_json, true);
+            if ($address) {
+                $order->formatted_address = ($address['address'] ?? '') . ', ' . ($address['city'] ?? '') . ', ' . ($address['state'] ?? '') . ' - ' . ($address['zip'] ?? '');
+            } else {
+                $order->formatted_address = $order->shipping_address_json;
+            }
+        }
+        
+        // Get order items
+        $this->db->select('oi.*, p.name as product_name, p.image as product_image');
+        $this->db->from('order_items oi');
+        $this->db->join('products p', 'p.id = oi.product_id', 'left');
+        $this->db->where('oi.order_id', $order_id);
+        $items_query = $this->db->get();
+        $order->items = $items_query->result();
+        
+        return $order;
+    }
 }

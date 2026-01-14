@@ -24,34 +24,35 @@
                     <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden">
                         <div class="card-body p-5">
                             <h3 class="fw-bold mb-4" style="font-family: var(--font-heading);">Send us a Message</h3>
-                            <form>
+                            <form id="contactForm" method="POST" action="javascript:void(0);">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control bg-light border-0 rounded-3" id="contactName" placeholder="Your Name">
+                                            <input type="text" class="form-control bg-light border-0 rounded-3" id="contactName" name="contact_name" placeholder="Your Name">
                                             <label for="contactName">Your Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control bg-light border-0 rounded-3" id="contactEmail" placeholder="name@example.com">
+                                            <input type="email" class="form-control bg-light border-0 rounded-3" id="contactEmail" name="contact_email" placeholder="name@example.com">
                                             <label for="contactEmail">Email Address</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <select class="form-select bg-light border-0 rounded-3" id="contactSubject">
-                                                <option selected>General Inquiry</option>
-                                                <option value="1">Custom Order Request</option>
-                                                <option value="2">Order Status</option>
-                                                <option value="3">Collaboration</option>
+                                            <select class="form-select bg-light border-0 rounded-3" id="contactSubject" name="contact_subject">
+                                                <option value="">Select Subject</option>
+                                                <option value="General Inquiry">General Inquiry</option>
+                                                <option value="Custom Order Request">Custom Order Request</option>
+                                                <option value="Order Status">Order Status</option>
+                                                <option value="Collaboration">Collaboration</option>
                                             </select>
                                             <label for="contactSubject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control bg-light border-0 rounded-3" placeholder="Leave a message here" id="contactMessage" style="height: 150px"></textarea>
+                                            <textarea class="form-control bg-light border-0 rounded-3" placeholder="Leave a message here" id="contactMessage" name="contact_message" style="height: 150px"></textarea>
                                             <label for="contactMessage">Your Message</label>
                                         </div>
                                     </div>
@@ -144,3 +145,83 @@
 </div>
 
 <%include file="layout/footer.tpl"%>
+
+<script>
+$(document).ready(function() {
+    // Initialize form validation
+    $('#contactForm').validate({
+        rules: {
+            contact_name: {
+                required: true,
+                minlength: 2
+            },
+            contact_email: {
+                required: true,
+                email: true
+            },
+            contact_subject: {
+                required: true
+            },
+            contact_message: {
+                required: true,
+                minlength: 10
+            }
+        },
+        messages: {
+            contact_name: {
+                required: "Please enter your name",
+                minlength: "Name must be at least 2 characters"
+            },
+            contact_email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address"
+            },
+            contact_subject: {
+                required: "Please select a subject"
+            },
+            contact_message: {
+                required: "Please enter your message",
+                minlength: "Message must be at least 10 characters"
+            }
+        },
+        errorElement: 'div',
+        errorClass: 'text-danger small mt-1',
+        submitHandler: function(form) {
+            // Get form data
+            var formData = $(form).serialize();
+            
+            // Disable submit button to prevent double submission
+            var submitBtn = $(form).find('button[type="submit"]');
+            var originalText = submitBtn.html();
+            submitBtn.prop('disabled', true).html('<i class="ti ti-loader"></i> Sending...');
+            
+            // Submit via AJAX
+            $.ajax({
+                url: '<%base_url("shop/submit-contact")%>',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        toaster('success', response.message);
+                        // Reset form on success
+                        $('#contactForm')[0].reset();
+                        $('#contactForm').validate().resetForm();
+                    } else {
+                        toaster('error', response.message);
+                    }
+                },
+                error: function() {
+                    toaster('error', 'An error occurred while sending your message. Please try again later.');
+                },
+                complete: function() {
+                    // Re-enable submit button
+                    submitBtn.prop('disabled', false).html(originalText);
+                }
+            });
+            
+            return false;
+        }
+    });
+});
+</script>
