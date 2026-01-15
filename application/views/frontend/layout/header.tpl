@@ -57,6 +57,7 @@
                 Products <i class="ti ti-chevron-down" style="font-size: 0.8rem;"></i>
             </a>
             <div class="dropdown-menu w-100 border-0 shadow-lg rounded-0 rounded-bottom p-4" style="margin-top: -10px;">
+                
                 <div class="container">
                     <div class="row g-4">
                         <%if !empty($header_categories)%>
