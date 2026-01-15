@@ -56,7 +56,7 @@
             <a class="nav-link d-flex align-items-center gap-1 <%if isset($page) && ($page == 'product_list' || $page == 'product_details')%>active<%/if%>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Products <i class="ti ti-chevron-down" style="font-size: 0.8rem;"></i>
             </a>
-            <div class="dropdown-menu w-100 border-0 shadow-lg rounded-0 rounded-bottom p-4" style="margin-top: 0px;">
+            <div class="dropdown-menu w-100 border-0 shadow-lg rounded-0 rounded-bottom p-4" style="margin-top: -10px;">
                 <div class="container">
                     <div class="row g-4">
                         <%if !empty($header_categories)%>
