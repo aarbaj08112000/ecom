@@ -38,7 +38,7 @@ $(document).ready(function ($) {
         beforeSend: function () {
           $(".main-loader-box").show();
         },
-        url: "user/Login/signin",
+        url: base_url + "secure_admin/signin",
         data: formdata,
         processData: false,
         contentType: false,
@@ -128,7 +128,7 @@ $(document).ready(function ($) {
         beforeSend: function () {
           $(".main-loader-box").show();
         },
-        url: "user/Login/reset_password",
+        url: base_url + "secure_admin/reset_password",
         data: formdata,
         processData: false,
         contentType: false,

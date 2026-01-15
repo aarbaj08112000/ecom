@@ -3,66 +3,47 @@
 <!-- 1. HERO SLIDER -->
 <div class="swiper hero-slider mb-5">
     <div class="swiper-wrapper">
-        <!-- Slide 1 -->
-        <div class="swiper-slide position-relative" style="height: 600px;">
-            <img src="https://images.unsplash.com/photo-1459749411177-33450b2ccac6?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Handmade Crafts" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Handmade+Craft';">
-            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
-                <div class="text-white px-4">
-                    <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Handmade with Love, <br>Crafted Just for You</h1>
-                     <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Handmade with Love</h1>
-                    <p class="lead mb-4 opacity-90">Discover unique resin art, crochet treasures, and personalized gifts.</p>
-                    <a href="<%base_url('shop/products')%>" class="btn btn-light rounded-pill px-5 py-3 fw-bold btn-animate shadow-lg">Explore Crafts</a>
+        <%if !empty($banners)%>
+            <%foreach $banners as $banner%>
+                <!-- Dynamic Slide -->
+                <div class="swiper-slide position-relative" style="height: 600px;">
+                    <img src="<%base_url()%>public/uploads/banner/<%$banner['banner_image']%>" class="w-100 h-100 object-fit-cover" alt="Banner" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Handmade+Craft';">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
+                        <div class="text-white px-4">
+                            <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Handmade with Love, <br>Crafted Just for You</h1>
+                             <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Handmade with Love</h1>
+                            <p class="lead mb-4 opacity-90">Discover unique resin art, crochet treasures, and personalized gifts.</p>
+                            <a href="<%base_url('shop/products')%>" class="btn btn-light rounded-pill px-5 py-3 fw-bold btn-animate shadow-lg">Explore Crafts</a>
+                        </div>
+                    </div>
+                </div>
+            <%/foreach%>
+        <%else%>
+            <!-- Fallback Slide 1 -->
+            <div class="swiper-slide position-relative" style="height: 600px;">
+                <img src="https://images.unsplash.com/photo-1459749411177-33450b2ccac6?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Handmade Crafts" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Handmade+Craft';">
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
+                    <div class="text-white px-4">
+                        <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Handmade with Love, <br>Crafted Just for You</h1>
+                         <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Handmade with Love</h1>
+                        <p class="lead mb-4 opacity-90">Discover unique resin art, crochet treasures, and personalized gifts.</p>
+                        <a href="<%base_url('shop/products')%>" class="btn btn-light rounded-pill px-5 py-3 fw-bold btn-animate shadow-lg">Explore Crafts</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="swiper-slide position-relative" style="height: 600px;">
-            <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Resin Art" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Resin+Art';">
-             <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
-                <div class="text-white px-4">
-                    <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Unique Resin & <br>Crochet Creations</h1>
-                    <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Unique Creations</h1>
-                    <p class="lead mb-4 opacity-90">Add a touch of elegance to your home with our handmade decor.</p>
-                    <a href="<%base_url('shop/products')%>" class="btn btn-outline-light rounded-pill px-5 py-3 fw-bold btn-animate">Shop Now</a>
+            <!-- Fallback Slide 2 -->
+            <div class="swiper-slide position-relative" style="height: 600px;">
+                <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Resin Art" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Resin+Art';">
+                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
+                    <div class="text-white px-4">
+                        <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Unique Resin & <br>Crochet Creations</h1>
+                        <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Unique Creations</h1>
+                        <p class="lead mb-4 opacity-90">Add a touch of elegance to your home with our handmade decor.</p>
+                        <a href="<%base_url('shop/products')%>" class="btn btn-outline-light rounded-pill px-5 py-3 fw-bold btn-animate">Shop Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-         <!-- Slide 3 -->
-        <div class="swiper-slide position-relative" style="height: 600px;">
-            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Festive Gifts" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Festive+Gifts';">
-             <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
-                <div class="text-white px-4">
-                    <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Celebrate Every Moment <br>With Custom Gifts</h1>
-                    <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Celebrate Moments</h1>
-                    <p class="lead mb-4 opacity-90">Make every occasion special with our personalized gifting range.</p>
-                    <a href="<%base_url('shop/contact')%>" class="btn btn-light rounded-pill px-5 py-3 fw-bold btn-animate shadow-lg">Start Custom Order</a>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 4 -->
-        <div class="swiper-slide position-relative" style="height: 600px;">
-            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Handmade Jewellery" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Handmade+Jewellery';">
-             <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
-                <div class="text-white px-4">
-                    <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Elegant Handmade <br>Jewellery</h1>
-                    <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Handmade Jewellery</h1>
-                    <p class="lead mb-4 opacity-90">Adorn yourself with unique resin and crochet accessories.</p>
-                    <a href="<%base_url('shop/products')%>" class="btn btn-outline-light rounded-pill px-5 py-3 fw-bold btn-animate">View Collection</a>
-                </div>
-            </div>
-        </div>
-         <!-- Slide 5 -->
-        <div class="swiper-slide position-relative" style="height: 600px;">
-            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1920&fit=crop" class="w-100 h-100 object-fit-cover" alt="Home Decor" onerror="this.src='https://placehold.co/1920x600/e2e8f0/84a98c?text=Home+Decor';">
-             <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center text-center">
-                <div class="text-white px-4">
-                    <h1 class="display-3 fw-bold mb-3 d-none d-md-block" style="font-family: var(--font-heading);">Transform Your Space <br>With Art</h1>
-                    <h1 class="display-5 fw-bold mb-3 d-md-none" style="font-family: var(--font-heading);">Transform Your Space</h1>
-                    <p class="lead mb-4 opacity-90">Handcrafted home decor that adds warmth to every corner.</p>
-                    <a href="<%base_url('shop/products')%>" class="btn btn-light rounded-pill px-5 py-3 fw-bold btn-animate shadow-lg">Shop Decor</a>
-                </div>
-            </div>
-        </div>
+        <%/if%>
     </div>
     <div class="swiper-pagination"></div>
     <div class="swiper-button-prev d-none d-md-flex text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>

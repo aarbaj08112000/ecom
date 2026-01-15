@@ -32,12 +32,16 @@ $route['shop/privacy-policy'] = 'frontend/Support/privacy_policy';
 $route['shop/about'] = 'frontend/Home/about';
 
 #------------ Login -----------------------------
-$route['default_controller'] = 'LogonDashboard/login';
+$route['default_controller'] = 'frontend/Home/index';
 // $route['login'] = 'LogonDashboard/login';
 /* login & forgot password */
-$route['login'] = 'user/login/index';
+$route['secure_admin/login'] = 'user/login/index';
+$route['secure_admin/signin'] = 'user/login/signin';
+$route['secure_admin/reset_password'] = 'user/login/reset_password';
+$route['secure_admin'] = 'user/login/index';
 $route['change_password'] = 'user/login/change_password';
 $route['forgot_password/(:any)/(:any)'] = 'user/login/forgot_password/$1/$2';
+$route['secure_admin/logout'] = 'user/login/logout';
 $route['logout'] = 'user/login/logout';
 $route['page_not_found'] = 'user/login/page_not_found';
 $route['inprogress_page'] = 'user/login/inprogress_page';
@@ -165,6 +169,11 @@ $route['testimonials'] = 'content_managemnet/testimonials/testimonials';
 $route['add_testimonials'] = 'content_managemnet/testimonials/add_testimonials';
 $route['update_testimonials'] = 'content_managemnet/testimonials/update_testimonials';
 $route['delete_testimonials'] = 'content_managemnet/testimonials/delete_testimonials';
+
+// Contact Us
+$route['contact_us'] = 'content_managemnet/contact/index';
+$route['update_contact_status'] = 'content_managemnet/contact/update_status';
+$route['delete_contact'] = 'content_managemnet/contact/delete_contact';
 
 // reports
 $route['sales_report'] = 'report/report/sales_report';

@@ -311,6 +311,12 @@
               <i class="menu-icon ti ti-message-question"></i> <div data-i18n="Without menu">Testimonials</div>
             </a>
          </li>
+
+         <li class="menu-item">
+            <a href="contact_us" class="menu-link">
+              <i class="menu-icon ti ti-address-book"></i> <div data-i18n="Without menu">Contact Us</div>
+            </a>
+         </li>
          
       </ul>
    </li> 
@@ -462,7 +468,7 @@
                                     </a>
                               </li>
                               <li class="top-child-menu">
-                                    <a hijacked="yes" href="<%base_url('logout')%>" title="" class="top-menu-link">
+                                    <a hijacked="yes" href="<%base_url('secure_admin/logout')%>" title="" class="top-menu-link">
                                         <span class="las la-sign-in-alt"></span>Sign Out
                                     </a>
                               </li>
@@ -531,7 +537,7 @@
                                     </a>
                               </li>
                               <li class="top-child-menu">
-                                    <a hijacked="yes" href="<%base_url('logout')%>" title="" class="top-menu-link">
+                                    <a hijacked="yes" href="<%base_url('secure_admin/logout')%>" title="" class="top-menu-link">
                                         <span class="las la-sign-in-alt"></span>Sign Out
                                     </a>
                               </li>

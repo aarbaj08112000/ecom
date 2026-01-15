@@ -329,7 +329,7 @@
       <script type="text/javascript">
          var base_url = <%$base_url|@json_encode%>;
       </script>
-      <script src="public/js/toaster/custom_toaster.js"></script>
+      <script src="<%$base_url%>public/js/toaster/custom_toaster.js"></script>
       <!-- Included login.js for validation logic -->
       <script src="<%$base_url%>public/js/login.js"></script>
       

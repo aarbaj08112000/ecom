@@ -6,6 +6,9 @@ class Login extends MY_Controller {
         $this->load->model('Login_model');
     }
 	public function index() {
+		if ($this->checkSession()) {
+			redirect(base_url("dashboard"));
+		}
 		$data['base_url'] = base_url();
 		$this->smarty->loadView('login.tpl',$data,'No','No');
 	}
@@ -16,7 +19,7 @@ class Login extends MY_Controller {
 		$this->session->set_userdata($user_data);
 		unset($_SESSION["userdata"]);
 		session_destroy();
-		redirect(base_url("login"));
+		redirect(base_url("secure_admin/login"));
 	}
 	public function signin()
 	{
@@ -152,7 +155,7 @@ class Login extends MY_Controller {
 	    	$success = 1;
 			$messages = "Password reset successful!";
 	    }
-	    $return_arr['redirect_url'] = "login";
+	    $return_arr['redirect_url'] = "secure_admin/login";
 		$return_arr['success']=$success;
 		$return_arr['messages']=$messages;
 		echo json_encode($return_arr);
@@ -195,7 +198,7 @@ class Login extends MY_Controller {
 
 	public function change_password() {
 		if (!$this->checkSession()) {
-			redirect(base_url("login"));
+			redirect(base_url("secure_admin/login"));
 		}
 		$data['base_url'] = base_url();
 		$this->smarty->loadView('change_password.tpl', $data, 'Yes', 'Yes');

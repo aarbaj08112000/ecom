@@ -12,6 +12,10 @@ class Product extends MY_Controller {
         $data['title'] = 'Shop Collection';
         $data['page'] = 'product_list';
         
+        // Load Categories Model
+        $this->load->model('product/Categories_model');
+        $data['categories'] = $this->Categories_model->get_categories();
+
         // Mock Data for now
         $data['products'] = $this->_get_mock_products();
         

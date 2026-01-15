@@ -13,6 +13,11 @@ class Home extends MY_Controller {
         $data['title'] = 'Home';
         $data['page'] = 'home';
         
+        // Load Banner Model
+        $this->load->model('content_managemnet/Banner_model');
+        $data['banners'] = $this->Banner_model->get_banner();
+        // pr($data['banners']);
+        // exit;
         $data['best_sellers'] = $this->_get_best_sellers();
         $data['new_arrivals'] = $this->_get_new_arrivals();
         

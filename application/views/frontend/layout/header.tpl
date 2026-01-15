@@ -59,63 +59,24 @@
             <div class="dropdown-menu w-100 border-0 shadow-lg rounded-0 rounded-bottom p-4" style="margin-top: 0px;">
                 <div class="container">
                     <div class="row g-4">
-                        <div class="col-lg-2 col-md-4">
-                            <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Resin Art</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Keychains</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Name Plates</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Photo Frames</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Jewellery</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Wall Art</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4">
-                            <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Crochet</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Bags & Pouches</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Flowers & Bouquets</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Soft Toys</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Coasters</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Wearables</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4">
-                             <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Custom Gifts</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Name Gifts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Couple Gifts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Birthday Gifts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Anniversary Gifts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Baby Gifts</a></li>
-                            </ul>
-                        </div>
-                         <div class="col-lg-2 col-md-4">
-                             <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Home Décor</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Wall Hangings</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Table Décor</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Showpieces</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Lamps & Lights</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4">
-                             <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Jewellery</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Resin Jewellery</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Crochet Jewellery</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Earrings</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Bracelets</a></li>
-                            </ul>
-                        </div>
-                         <div class="col-lg-2 col-md-4">
-                             <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2">Festive</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Diwali Décor</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Rakhi Gifts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Christmas Crafts</a></li>
-                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products')%>">Wedding Gifts</a></li>
-                            </ul>
-                        </div>
+                        <%if !empty($header_categories)%>
+                            <%foreach $header_categories as $parent_id => $parent%>
+                                <div class="col-lg-2 col-md-4">
+                                    <h6 class="dropdown-header text-primary fw-bold text-uppercase ps-0 mb-2"><%$parent['category_name']%></h6>
+                                    <ul class="list-unstyled">
+                                        <%if !empty($parent['children'])%>
+                                            <%foreach $parent['children'] as $child%>
+                                                <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products?category=')%><%$child['category_id']%>"><%$child['category_name']%></a></li>
+                                            <%/foreach%>
+                                        <%else%>
+                                            <li><a class="dropdown-item py-1 ps-3" href="<%base_url('shop/products?category=')%><%$parent['category_id']%>">All <%$parent['category_name']%></a></li>
+                                        <%/if%>
+                                    </ul>
+                                </div>
+                            <%/foreach%>
+                        <%else%>
+                            <div class="col-12 text-center text-muted py-3">No categories found</div>
+                        <%/if%>
                     </div>
                 </div>
             </div>

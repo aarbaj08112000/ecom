@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         var heroSwiper = new Swiper(".hero-slider", {
                             loop: true,
                             autoplay: {
-                                delay: 3000,
+                                delay: 5000,
                                 disableOnInteraction: false,
                             },
                             pagination: {

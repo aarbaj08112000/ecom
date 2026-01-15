@@ -21,6 +21,29 @@ class MY_Controller extends MX_Controller
         $this->smarty->setTemplateDir(APPPATH . 'views/' . $current_folder . '/');
     }
 
+    // Fetch and group categories for header menu (Only for frontend)
+    if ($current_folder == 'frontend' || $current_folder == 'shop') {
+        $this->load->model('product/Categories_model');
+        $all_categories = $this->Categories_model->get_categories();
+        $header_categories = [];
+        if (!empty($all_categories)) {
+            foreach ($all_categories as $cat) {
+                if ($cat['parent_category_id'] == NULL || $cat['parent_category_id'] == 0) {
+                    $header_categories[$cat['category_id']] = $cat;
+                    $header_categories[$cat['category_id']]['children'] = [];
+                }
+            }
+            foreach ($all_categories as $cat) {
+                if ($cat['parent_category_id'] != NULL && $cat['parent_category_id'] != 0) {
+                    if (isset($header_categories[$cat['parent_category_id']])) {
+                        $header_categories[$cat['parent_category_id']]['children'][] = $cat;
+                    }
+                }
+            }
+        }
+        $this->smarty->assign('header_categories', $header_categories);
+    }
+
     // Pass customer session data directly to Smarty views
     $this->smarty->assign('is_customer_logged_in', $this->session->userdata('is_customer_logged_in'));
     $this->smarty->assign('customer_name', $this->session->userdata('customer_name'));
@@ -54,23 +77,29 @@ class MY_Controller extends MX_Controller
     return 'Desktop'; // Default
   }
   public function checkEntryAuth($current_folder='',$controller_route='',$current_route=''){
-    $routes = $this->router->routes;
+    if ($current_folder == 'frontend' || $current_folder == 'shop') {
+      return;
+    }
     $url_string = $this->uri->uri_string;
+    if ($url_string == 'secure_admin') {
+       redirect(base_url("secure_admin/login"));
+    }
+    $routes = $this->router->routes;
     if(array_key_exists($url_string, $routes) && !$this->checkSession()){
       $admin_allow_arr = array(
             'user' => array(
                 'login' => array(
-                    'login','forgot_password'
+                    'login','forgot_password','secure_admin','signin','reset_password'
                 )
             )
       );
 
       if(isset($admin_allow_arr[$current_folder][$controller_route])){
         if(!in_array($current_route, $admin_allow_arr[$current_folder][$controller_route])){
-            redirect(base_url("login"));
+            redirect(base_url("secure_admin/login"));
         }
       }else{
-        redirect(base_url("login"));
+        redirect(base_url("secure_admin/login"));
       }
     }
   }

@@ -62,32 +62,25 @@
                             <button class="btn btn-link text-primary p-0 text-decoration-none small">Clear All</button>
                         </div>
                         
-                        <!-- Categories -->
                         <div class="mb-4">
                             <h6 class="fw-bold mb-3 small text-uppercase text-muted d-flex align-items-center gap-2">
                                 <i class="ti ti-category"></i> Categories
                             </h6>
                             <div class="d-flex flex-column gap-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cat1">
-                                    <label class="form-check-label" for="cat1">Resin Art <span class="text-muted">(42)</span></label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cat2">
-                                    <label class="form-check-label" for="cat2">Crochet <span class="text-muted">(38)</span></label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cat3">
-                                    <label class="form-check-label" for="cat3">Custom Gifts <span class="text-muted">(56)</span></label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cat4">
-                                    <label class="form-check-label" for="cat4">Home Décor <span class="text-muted">(34)</span></label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cat5">
-                                    <label class="form-check-label" for="cat5">Jewellery <span class="text-muted">(28)</span></label>
-                                </div>
+                                <%if !empty($categories)%>
+                                    <%foreach $categories as $index => $cat%>
+                                        <%if empty($cat['parent_category_id'])%>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="cat<%$cat['category_id']%>" value="<%$cat['category_id']%>">
+                                                <label class="form-check-label" for="cat<%$cat['category_id']%>">
+                                                    <%$cat['category_name']%>
+                                                </label>
+                                            </div>
+                                        <%/if%>
+                                    <%/foreach%>
+                                <%else%>
+                                    <div class="text-muted small">No categories found</div>
+                                <%/if%>
                             </div>
                         </div>
                         

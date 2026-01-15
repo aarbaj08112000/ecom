@@ -438,9 +438,6 @@
                      <!-- Order Details Tab (Hidden from menu) -->
                      <div class="tab-pane fade" id="order-details-tab" role="tabpanel">
                          <div class="mb-4 d-flex align-items-center gap-3">
-                             <button class="btn btn-outline-secondary rounded-circle icon-btn-sm" onclick="backToDashboard()" title="Back">
-                                 <i class="ti ti-arrow-left"></i>
-                             </button>
                              <h4 class="fw-bold mb-0" style="font-family: var(--font-heading);">Order Details</h4>
                          </div>
                          
