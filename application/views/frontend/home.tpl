@@ -247,35 +247,57 @@
     </div>
     
     <div class="row g-2 mb-5">
+        <!-- Big Square Left -->
         <div class="col-lg-4 col-md-6">
             <div class="ratio ratio-1x1 rounded-4 overflow-hidden position-relative group">
-                <img src="https://images.unsplash.com/photo-1629196914168-3a958801e540?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+1';">
+                <%if isset($gallery[0])%>
+                    <img src="<%base_url()%>public/uploads/gallery/<%$gallery[0]['gallery_image']%>" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 1">
+                <%else%>
+                    <img src="https://images.unsplash.com/photo-1629196914168-3a958801e540?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 1" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+1';">
+                <%/if%>
                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 opacity-0 group-hover-opacity transition-all d-flex align-items-center justify-content-center">
                     <i class="ti ti-brand-instagram text-white fs-1"></i>
                 </div>
             </div>
         </div>
+        
+        <!-- Middle Column -->
          <div class="col-lg-4 col-md-6">
              <div class="row g-2 h-100">
+                 <!-- Small Square Middle Left -->
                  <div class="col-6">
                       <div class="ratio ratio-1x1 rounded-4 overflow-hidden position-relative group">
-                        <img src="https://images.unsplash.com/photo-1572295283584-6997b8304915?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+2';">
+                        <%if isset($gallery[1])%>
+                            <img src="<%base_url()%>public/uploads/gallery/<%$gallery[1]['gallery_image']%>" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 2">
+                        <%else%>
+                            <img src="https://images.unsplash.com/photo-1572295283584-6997b8304915?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 2" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+2';">
+                        <%/if%>
                          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 opacity-0 group-hover-opacity transition-all d-flex align-items-center justify-content-center">
                             <i class="ti ti-brand-instagram text-white fs-1"></i>
                         </div>
                     </div>
                  </div>
+                 <!-- Small Square Middle Right -->
                  <div class="col-6">
                       <div class="ratio ratio-1x1 rounded-4 overflow-hidden position-relative group">
-                        <img src="https://images.unsplash.com/photo-1601633513364-7729f220310e?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+3';">
+                        <%if isset($gallery[2])%>
+                            <img src="<%base_url()%>public/uploads/gallery/<%$gallery[2]['gallery_image']%>" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 3">
+                        <%else%>
+                            <img src="https://images.unsplash.com/photo-1601633513364-7729f220310e?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 3" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+3';">
+                        <%/if%>
                          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 opacity-0 group-hover-opacity transition-all d-flex align-items-center justify-content-center">
                             <i class="ti ti-brand-instagram text-white fs-1"></i>
                         </div>
                     </div>
                  </div>
+                 <!-- Horizontal Rectangle Middle Bottom -->
                  <div class="col-12">
                       <div class="ratio ratio-21x9 rounded-4 overflow-hidden position-relative group">
-                        <img src="https://images.unsplash.com/photo-1603673397940-1bc7d0cb0056?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+4';">
+                        <%if isset($gallery[3])%>
+                            <img src="<%base_url()%>public/uploads/gallery/<%$gallery[3]['gallery_image']%>" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 4">
+                        <%else%>
+                            <img src="https://images.unsplash.com/photo-1603673397940-1bc7d0cb0056?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 4" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+4';">
+                        <%/if%>
                          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 opacity-0 group-hover-opacity transition-all d-flex align-items-center justify-content-center">
                             <i class="ti ti-brand-instagram text-white fs-1"></i>
                         </div>
@@ -283,9 +305,15 @@
                  </div>
              </div>
         </div>
+        
+        <!-- Big Square Right (Desktop Only) -->
          <div class="col-lg-4 col-md-12 d-none d-lg-block">
              <div class="ratio ratio-1x1 rounded-4 overflow-hidden position-relative group">
-                <img src="https://images.unsplash.com/photo-1616880017122-ce5ea5040f7f?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+5';">
+                <%if isset($gallery[4])%>
+                    <img src="<%base_url()%>public/uploads/gallery/<%$gallery[4]['gallery_image']%>" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 5">
+                <%else%>
+                    <img src="https://images.unsplash.com/photo-1616880017122-ce5ea5040f7f?q=80&w=800&fit=crop" class="object-fit-cover w-100 h-100 transition-scale" alt="Gallery 5" onerror="this.src='https://placehold.co/800x800/e2e8f0/84a98c?text=Gallery+5';">
+                <%/if%>
                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 opacity-0 group-hover-opacity transition-all d-flex align-items-center justify-content-center">
                     <i class="ti ti-brand-instagram text-white fs-1"></i>
                 </div>
@@ -302,21 +330,31 @@
              
              <div class="swiper reviews-slider">
                  <div class="swiper-wrapper">
-                     <div class="swiper-slide px-5">
-                         <p class="lead fst-italic mb-4">"Absolutely stunning resin clock! The packing was so safe and the handwritten note made my day. Will definitely order again."</p>
-                         <h6 class="fw-bold text-dark">Priya Sharma</h6>
-                         <p class="small text-muted">Mumbai</p>
-                     </div>
-                     <div class="swiper-slide px-5">
-                         <p class="lead fst-italic mb-4">"The crochet bunny is adorable. My niece hasn't put it down since her birthday. Detail is amazing!"</p>
-                         <h6 class="fw-bold text-dark">Anjali Mehta</h6>
-                         <p class="small text-muted">Delhi</p>
-                     </div>
-                     <div class="swiper-slide px-5">
-                         <p class="lead fst-italic mb-4">"Ordered a custom nameplate and it turned out better than I imagined. Very professional service."</p>
-                         <h6 class="fw-bold text-dark">Rahul Verma</h6>
-                         <p class="small text-muted">Bangalore</p>
-                     </div>
+                    <%if !empty($testimonials)%>
+                        <%foreach from=$testimonials item=val %>
+                         <div class="swiper-slide px-5 mb-4">
+                             <p class="lead fst-italic mb-4">"<%$val['message']%>"</p>
+                             <h6 class="fw-bold text-dark"><%$val['name']%></h6>
+                             <p class="small text-muted"><%$val['designation']%></p>
+                         </div>
+                        <%/foreach%>
+                    <%else%>
+                         <div class="swiper-slide px-5">
+                             <p class="lead fst-italic mb-4">"Absolutely stunning resin clock! The packing was so safe and the handwritten note made my day. Will definitely order again."</p>
+                             <h6 class="fw-bold text-dark">Priya Sharma</h6>
+                             <p class="small text-muted">Mumbai</p>
+                         </div>
+                         <div class="swiper-slide px-5">
+                             <p class="lead fst-italic mb-4">"The crochet bunny is adorable. My niece hasn't put it down since her birthday. Detail is amazing!"</p>
+                             <h6 class="fw-bold text-dark">Anjali Mehta</h6>
+                             <p class="small text-muted">Delhi</p>
+                         </div>
+                         <div class="swiper-slide px-5">
+                             <p class="lead fst-italic mb-4">"Ordered a custom nameplate and it turned out better than I imagined. Very professional service."</p>
+                             <h6 class="fw-bold text-dark">Rahul Verma</h6>
+                             <p class="small text-muted">Bangalore</p>
+                         </div>
+                    <%/if%>
                  </div>
                  <div class="swiper-pagination mt-4"></div>
              </div>

@@ -124,6 +124,7 @@ class MY_Controller extends MX_Controller
             }
         }
     }   
+    $this->smarty->assign('config', $this->config->config);
   }
   /* send Mail */
   public function email_sender($data = array(),$email = "",$template_name){

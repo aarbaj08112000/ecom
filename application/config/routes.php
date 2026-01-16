@@ -155,6 +155,12 @@ $route['add_banner'] = 'content_managemnet/banner/add_banner';
 $route['update_banner'] = 'content_managemnet/banner/update_banner';
 $route['delete_banners'] = 'content_managemnet/banner/delete_banners';
 
+// gallery
+$route['gallery'] = 'content_managemnet/gallery/gallery';
+$route['add_gallery'] = 'content_managemnet/gallery/add_gallery';
+$route['update_gallery'] = 'content_managemnet/gallery/update_gallery';
+$route['delete_gallery'] = 'content_managemnet/gallery/delete_gallery';
+
 
 $route['blog'] = 'content_managemnet/blog/blog';
 $route['add_blog'] = 'content_managemnet/blog/add_blog';
@@ -184,3 +190,6 @@ $route['product_performance_details'] = 'report/report/product_performance_detai
 $route['low_stock_report'] = 'report/report/low_stock_report';
 $route['traffic_analytics'] = 'report/report/traffic_analytics';
 
+// General Settings
+$route['general_settings'] = 'user/Settings/index';
+$route['update_setting'] = 'user/Settings/update_setting';

@@ -16,8 +16,15 @@ class Home extends MY_Controller {
         // Load Banner Model
         $this->load->model('content_managemnet/Banner_model');
         $data['banners'] = $this->Banner_model->get_banner();
-        // pr($data['banners']);
-        // exit;
+        
+        // Load Gallery Model
+        $this->load->model('content_managemnet/Gallery_model');
+        $data['gallery'] = $this->Gallery_model->get_active_gallery(5); 
+        
+        // Load Testimonials Model
+        $this->load->model('content_managemnet/Testimonials_model');
+        $data['testimonials'] = $this->Testimonials_model->get_active_testimonials();
+        
         $data['best_sellers'] = $this->_get_best_sellers();
         $data['new_arrivals'] = $this->_get_new_arrivals();
         

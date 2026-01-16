@@ -14,11 +14,11 @@
          name="viewport"
          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
          />
-      <title><%$config['company_name']%></title>
+      <title><%$config['admin_company_name']%></title>
       <meta name="description" content="" />
       <base href="<%base_url()%>">
       <!-- Favicon -->
-      <link rel="icon" type="image/x-icon" href="<%base_url()%><%$config['company_fav_icon']%>" />
+      <link rel="icon" type="image/x-icon" href="<%base_url()%><%$config['admin_company_fav_icon']%>" />
       <!-- Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -112,7 +112,7 @@
          <div class="app-brand demo ps-3">
             <a href="javascript:void(0)" class="app-brand-link">
             <span class="app-brand-logo demo">
-               <img src="<%base_url()%><%$config['company_logo']%>" alt="" width="100">
+               <img src="<%base_url()%><%$config['admin_company_logo']%>" alt="" width="100">
             </span>
              <i class="ti ti-x fs-3 close-vertical-btn" id="close-vertical-btn" title="Close"></i>
             </a>
@@ -293,6 +293,11 @@
             </a>
          </li>
          <li class="menu-item">
+            <a href="gallery" class="menu-link">
+              <i class="menu-icon ti ti-photo"></i> <div data-i18n="Without menu">Gallery Master</div>
+            </a>
+         </li>
+         <li class="menu-item">
             <a href="blog" class="menu-link">
               <i class="menu-icon ti ti-blockquote"></i> <div data-i18n="Without menu">Blog Management
               </div>
@@ -386,7 +391,7 @@
       </a>
       <ul class="menu-sub">
          <li class="menu-item">
-            <a href="inprogress_page" class="menu-link">
+            <a href="general_settings" class="menu-link">
               <i class="menu-icon ti ti-settings-plus"></i> <div data-i18n="Without menu">General Settings</div>
             </a>
          </li>
@@ -411,14 +416,14 @@
          <div class="container-fluid">
             <a href="sitemap" class="app-brand-link navbar-brand">
             <span class="app-brand-logo demo">
-            <img src="<%base_url()%><%$config['company_logo']%>" alt="" width="100" title="<%$config['company_name']%>">
+            <img src="<%base_url()%><%$config['admin_company_logo']%>" alt="" width="100" title="<%$config['admin_company_name']%>">
             </span>
             <!-- <span class="stat-cards-info__num fw-bolder ms-2 pt-1">AROM</span> -->
             </a>
 
             <!-- for horizontal menu bar  -->
 
-            <%if $config['menu_type'] eq 'horizontal'%>
+            <%if $config['admin_menu_type'] eq 'horizontal'%>
             <p class="horizontal-line-header" style="
     border-left: 1px solid gray;
     padding: 0px;
@@ -437,7 +442,7 @@
            
 
             <!-- vertical menu bar -->
-            <%if $config['menu_type'] eq 'vertical'%>
+            <%if $config['admin_menu_type'] eq 'vertical'%>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> <label>Menu</label>
             </button>
@@ -486,7 +491,7 @@
                   </li>
                </ul>
             </div>
-            <%if $config['menu_type'] eq 'vertical'%>
+            <%if $config['admin_menu_type'] eq 'vertical'%>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                <ul class="navbar-nav">
                   <!-- <li class="nav-item">

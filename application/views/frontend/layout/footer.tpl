@@ -6,16 +6,32 @@
             <!-- Brand -->
             <div class="col-lg-3">
                 <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
-                    <div class="bg-white text-dark rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px">
-                        <i class="ti ti-brush" style="font-size:1.2rem; color: var(--primary);"></i>
-                    </div>
-                    <span style="font-family: var(--font-heading);">Craftology</span>
+                    <%if isset($config['frontend_company_logo']) && $config['frontend_company_logo'] != ''%>
+                        <img src="<%base_url()%><%$config['frontend_company_logo']%>" alt="Logo" style="max-height: 32px; filter: brightness(0) invert(1);">
+                    <%else%>
+                        <div class="bg-white text-dark rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px">
+                            <i class="ti ti-brush" style="font-size:1.2rem; color: var(--primary);"></i>
+                        </div>
+                        <span style="font-family: var(--font-heading);">Craftology</span>
+                    <%/if%>
                 </h4>
-                <p class="text-white-50 small mb-4">Handcrafted with love. Discover unique resin art, crochet treasures, and personalized gifts made just for you.</p>
+                <p class="text-white-50 small mb-4"><%if isset($config['company_description']) && $config['company_description'] != ''%><%$config['company_description']%><%else%>Handcrafted with love. Discover unique resin art, crochet treasures, and personalized gifts made just for you.<%/if%></p>
                 <div class="d-flex gap-2">
-                    <a href="#" class="social-btn"><i class="ti ti-brand-facebook"></i></a>
-                    <a href="#" class="social-btn"><i class="ti ti-brand-instagram"></i></a>
-                    <a href="#" class="social-btn"><i class="ti ti-brand-pinterest"></i></a>
+                    <%if isset($config['social_facebook']) && $config['social_facebook'] != ''%>
+                        <a href="<%$config['social_facebook']%>" target="_blank" class="social-btn"><i class="ti ti-brand-facebook"></i></a>
+                    <%/if%>
+                    <%if isset($config['social_instagram']) && $config['social_instagram'] != ''%>
+                        <a href="<%$config['social_instagram']%>" target="_blank" class="social-btn"><i class="ti ti-brand-instagram"></i></a>
+                    <%/if%>
+                    <%if isset($config['social_whatsapp']) && $config['social_whatsapp'] != ''%>
+                        <a href="https://wa.me/<%$config['social_whatsapp']%>" target="_blank" class="social-btn"><i class="ti ti-brand-whatsapp"></i></a>
+                    <%/if%>
+                    <%if isset($config['social_linkedin']) && $config['social_linkedin'] != ''%>
+                        <a href="<%$config['social_linkedin']%>" target="_blank" class="social-btn"><i class="ti ti-brand-linkedin"></i></a>
+                    <%/if%>
+                    <%if isset($config['company_email']) && $config['company_email'] != ''%>
+                        <a href="mailto:<%$config['company_email']%>" class="social-btn" title="<%$config['company_email']%>"><i class="ti ti-mail"></i></a>
+                    <%/if%>
                 </div>
             </div>
             
@@ -63,7 +79,7 @@
         </div>
         
         <div class="border-top border-secondary pt-3 text-center text-white-50 small">
-            &copy; <%$smarty.now|date_format:"%Y"%> Craftology. All rights reserved. Made with <i class="ti ti-heart-filled text-danger mx-1"></i> for Art Lovers.
+            &copy; <%$smarty.now|date_format:"%Y"%> Craftology. All rights reserved. Made with <i class="ti ti-heart text-white mx-1"></i> for Art Lovers.
         </div>
     </div>
 </footer>

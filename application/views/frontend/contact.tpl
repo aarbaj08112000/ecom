@@ -81,7 +81,7 @@
                                     </div>
                                     <div>
                                         <h6 class="fw-bold mb-1">Our Studio</h6>
-                                        <p class="mb-0 small text-white-50">123 Creative Avenue, Art District<br>Mumbai, Maharashtra, 400001</p>
+                                        <p class="mb-0 small text-white-50"><%if isset($config['contact_location']) && $config['contact_location'] != ''%><%$config['contact_location']|nl2br%><%else%>123 Creative Avenue, Art District<br>Mumbai, Maharashtra, 400001<%/if%></p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-start gap-3 mb-4">
@@ -90,7 +90,7 @@
                                     </div>
                                     <div>
                                         <h6 class="fw-bold mb-1">Email Us</h6>
-                                        <p class="mb-0 small text-white-50">hello@craftology.com<br>support@craftology.com</p>
+                                        <p class="mb-0 small text-white-50"><%if isset($config['company_email']) && $config['company_email'] != ''%><%$config['company_email']%><%else%>hello@craftology.com<br>support@craftology.com<%/if%></p>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-start gap-3">
@@ -99,7 +99,7 @@
                                     </div>
                                     <div>
                                         <h6 class="fw-bold mb-1">Call Us</h6>
-                                        <p class="mb-0 small text-white-50">+91 98765 43210<br>Mon - Fri, 9am - 6pm</p>
+                                        <p class="mb-0 small text-white-50"><%if isset($config['contact_phone']) && $config['contact_phone'] != ''%><%$config['contact_phone']|nl2br%><%else%>+91 98765 43210<br>Mon - Fri, 9am - 6pm<%/if%></p>
                                     </div>
                                 </div>
                             </div>
@@ -138,10 +138,11 @@
         </div>
     </section>
 
-    <!-- Map Section (Optional Placeholder) -->
-    <div class="ratio ratio-21x9 bg-secondary-subtle">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.817359556488!2d72.82583831490216!3d19.07185598709121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c91c32729793%3A0x6968d87747551e7a!2sBandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1633519392237!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
+    <!-- Map Section -->
+    <div class="bg-secondary-subtle" style="height: 350px;">
+        <iframe src="<%if isset($config['google_map_location']) && $config['google_map_location'] != ''%><%$config['google_map_location']%><%else%>https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.817359556488!2d72.82583831490216!3d19.07185598709121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c91c32729793%3A0x6968d87747551e7a!2sBandra%20West%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1633519392237!5m2!1sen!2sin<%/if%>" style="border:0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy"></iframe>
+    
+        </div>
 </div>
 
 <%include file="layout/footer.tpl"%>

@@ -15,6 +15,18 @@ class Testimonials_model extends CI_Model {
         $this->db->select('t.*');
         $this->db->from('testimonials as t');
         $this->db->where("t.is_delete",'0');
+        $this->db->order_by("t.testimonials_id", "DESC");
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
+
+    public function get_active_testimonials(){
+        $this->db->select('t.*');
+        $this->db->from('testimonials as t');
+        $this->db->where("t.is_delete",'0');
+        $this->db->where("t.status",'Active');
+        $this->db->order_by("t.testimonials_id", "DESC");
         $result_obj = $this->db->get();
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;

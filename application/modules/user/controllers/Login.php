@@ -23,7 +23,7 @@ class Login extends MY_Controller {
 	}
 	public function signin()
 	{
-		$login_attempt_count = $this->config->item("login_attempt");
+		$login_attempt_count = $this->config->item("admin_login_attempt");
 		$this->form_validation->set_rules('email', ' Email', 'trim|required|min_length[3]');
 		$this->form_validation->set_rules('password', ' Password', 'trim|required|min_length[3]');
 
@@ -130,7 +130,7 @@ class Login extends MY_Controller {
 				"time_stramp" => time(),
 				"user_id" => $user_id,
 				"email_name" => "Reset Password ",
-				"email_subject" => "Reset Password Of ".$this->config->item("company_name")
+				"email_subject" => "Reset Password Of ".$this->config->item("admin_company_name")
 			];
 			$this->email_sender($email_data,$result['user_email'],"forgot_password");
 		}else{

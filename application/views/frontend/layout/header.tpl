@@ -28,6 +28,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<%base_url('public/frontend/css/style.css')%>">
     <link rel="stylesheet" href="<%base_url('public/css/toaster/custom_toaster.css')%>">
+    
+    <%if isset($config['frontend_company_fav_icon']) && $config['frontend_company_fav_icon'] != ''%>
+        <link rel="icon" type="image/x-icon" href="<%base_url()%><%$config['frontend_company_fav_icon']%>">
+    <%/if%>
+
     <script type="text/javascript">
         var base_url = "<%base_url()%>";
     </script>
@@ -39,10 +44,14 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-glass trans-nav" id="mainNav">
   <div class="container">
     <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="<%base_url('shop')%>">
-      <div class="brand-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px">
-        <i class="ti ti-brush" style="font-size:1.5rem"></i>
-      </div>
-      <span class="tracking-tight" style="font-family: var(--font-heading); font-size: 1.5rem;">Craftology</span>
+      <%if isset($config['frontend_company_logo']) && $config['frontend_company_logo'] != ''%>
+        <img src="<%base_url()%><%$config['frontend_company_logo']%>" alt="Logo" style="max-height: 40px;">
+      <%else%>
+        <div class="brand-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px">
+            <i class="ti ti-brush" style="font-size:1.5rem"></i>
+        </div>
+        <span class="tracking-tight" style="font-family: var(--font-heading); font-size: 1.5rem;">Craftology</span>
+      <%/if%>
     </a>
     
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
