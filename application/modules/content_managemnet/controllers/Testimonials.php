@@ -74,11 +74,11 @@ public function update_testimonials()
     $success = 1;
     
     $testimonials_id = $this->input->post("testimonials_id");
-    $hidden_brand_image = $this->input->post("hidden_image"); 
+    $hidden_image = $this->input->post("hidden_image"); 
     
-    $image_path = $hidden_brand_image; 
+    $image_path = $hidden_image; 
 
-    if (!empty($_FILES['brand_image']['name'])) {
+    if (!empty($_FILES['image']['name'])) {
        
         $config['upload_path'] = './public/uploads/testimonials/';
         $config['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -86,16 +86,22 @@ public function update_testimonials()
         $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
         if ($this->upload->do_upload('image')) {
           
             $upload_data = $this->upload->data();
             $image_path = $upload_data['file_name'];
 
-            if (!empty($hidden_brand_image) && file_exists($hidden_brand_image)) {
-                unlink($hidden_brand_image);
+            if (!empty($hidden_image) && file_exists($config['upload_path'] . $hidden_image)) {
+                unlink($config['upload_path'] . $hidden_image);
             }
-        } 
+        } else {
+            $ret_arr['msg'] = $this->upload->display_errors();
+            $ret_arr['success'] = 0;
+            echo json_encode($ret_arr);
+            return;
+        }
     }
 
     $data = [
