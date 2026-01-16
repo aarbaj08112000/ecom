@@ -64,8 +64,8 @@
         <!-- Resin Art -->
         <div class="col-md-4 col-6">
             <a href="#" class="text-decoration-none">
-                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1595188735235-c30997195c47?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Resin Art" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Resin+Art';">
+                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/resin_art.jpg')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Resin Art" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Resin+Art';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                         <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Resin Art</h5>
                     </div>
@@ -75,8 +75,8 @@
         <!-- Crochet -->
          <div class="col-md-4 col-6">
              <a href="#" class="text-decoration-none">
-                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1584992236310-6eddd724a4c5?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Crochet" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Crochet';">
+                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/crochet.webp')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Crochet" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Crochet';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                         <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Crochet</h5>
                     </div>
@@ -86,8 +86,8 @@
         <!-- Custom Gifts -->
          <div class="col-md-4 col-6">
              <a href="#" class="text-decoration-none">
-                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Custom Gifts" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Custom+Gifts';">
+                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/customized_gifts.webp')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Custom Gifts" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Custom+Gifts';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                         <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Custom Gifts</h5>
                     </div>
@@ -97,8 +97,8 @@
          <!-- Home Decor -->
          <div class="col-md-4 col-6">
              <a href="#" class="text-decoration-none">
-                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Home Décor" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Home+Decor';">
+                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/home_decor.jpg')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Home Décor" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Home+Decor';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                         <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Home Décor</h5>
                     </div>
@@ -108,8 +108,8 @@
          <!-- Jewellery -->
          <div class="col-md-4 col-6">
              <a href="#" class="text-decoration-none">
-                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Jewellery" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Jewellery';">
+                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/jewellery.webp')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Jewellery" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Jewellery';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                         <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Jewellery</h5>
                     </div>
@@ -119,8 +119,8 @@
          <!-- Festive -->
          <div class="col-md-4 col-6">
              <a href="#" class="text-decoration-none">
-                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 280px;">
-                    <img src="https://images.unsplash.com/photo-1512760678229-373b9409848d?q=80&w=600&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Festive" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Festive';">
+                  <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm h-100 group" style="min-height: 250px;">
+                    <img src="<%base_url('public/uploads/category/festival.webp')%>" class="img-fluid w-100 h-100 object-fit-cover transition-scale" alt="Festive" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Festive';">
                     <div class="position-absolute bottom-0 start-0 w-100 bg-gradient-to-t p-4 text-center">
                          <h5 class="fw-bold mb-0 text-white" style="font-family: var(--font-heading);">Festive Specials</h5>
                     </div>
@@ -145,17 +145,26 @@
                 <div class="card h-100 border-0 shadow-sm rounded-4 product-card overflow-hidden">
                     <div class="position-relative overflow-hidden">
                          <span class="badge bg-warning position-absolute top-0 start-0 m-3 z-3">Best Seller</span>
-                        <img src="<%$product->image%>" class="card-img-top object-fit-cover" alt="<%$product->name%>" style="height: 280px;" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Craft';">
+                        <img src="<%base_url('public/uploads/products/')%><%$product->id%>/<%$product->cover_image%>" class="card-img-top object-fit-cover" alt="<%$product->name%>" style="height: 280px;" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Craft';">
                         <!-- Hover Action -->
                         <div class="product-action position-absolute bottom-0 start-0 w-100 p-3 d-flex gap-2 justify-content-center translate-y-100 transition-up">
-                            <button class="btn btn-white rounded-circle shadow-sm" data-bs-toggle="tooltip" title="Quick View"><i class="ti ti-eye"></i></button>
+                            <button class="btn btn-white rounded-circle shadow-sm" 
+                                    data-bs-toggle="tooltip" 
+                                    title="Quick View"
+                                    data-name="<%$product->name%>"
+                                    data-price="₹<%$product->price|number_format:2%>"
+                                    data-detail="<%$product->detail%>"
+                                    data-image="<%base_url('public/uploads/products/')%><%$product->id%>/<%$product->cover_image%>"
+                                    data-url="<%base_url('shop/product/')%><%$product->id%>">
+                                <i class="ti ti-eye"></i>
+                            </button>
                             <button class="btn btn-primary rounded-circle shadow-sm" data-bs-toggle="tooltip" title="Add to Cart"><i class="ti ti-shopping-cart-plus"></i></button>
                         </div>
                     </div>
                     <div class="card-body text-center">
                         <div class="text-warning small mb-2"><i class="ti ti-star-filled"></i> <i class="ti ti-star-filled"></i> <i class="ti ti-star-filled"></i> <i class="ti ti-star-filled"></i> <i class="ti ti-star-filled"></i></div>
                         <h6 class="fw-bold mb-1" style="font-family: var(--font-heading);"><%$product->name%></h6>
-                        <p class="text-primary fw-bold mb-0">$<%$product->price|number_format:2%></p>
+                        <p class="text-primary fw-bold mb-0">₹<%$product->price|number_format:2%></p>
                     </div>
                 </div>
             </div>
@@ -200,15 +209,24 @@
                 <div class="card h-100 border-0 shadow-sm rounded-4 product-card overflow-hidden aos-init" data-aos="fade-up">
                     <div class="position-relative overflow-hidden">
                         <span class="badge bg-info position-absolute top-0 start-0 m-3 z-3">New</span>
-                        <img src="<%$product->image%>" class="card-img-top object-fit-cover" alt="<%$product->name%>" style="height: 280px;" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Craft';">
+                        <img src="<%base_url('public/uploads/products/')%><%$product->id%>/<%$product->cover_image%>" class="card-img-top object-fit-cover" alt="<%$product->name%>" style="height: 280px;" onerror="this.src='https://placehold.co/600x600/e2e8f0/84a98c?text=Craft';">
                          <div class="product-action position-absolute bottom-0 start-0 w-100 p-3 d-flex gap-2 justify-content-center translate-y-100 transition-up">
-                            <button class="btn btn-white rounded-circle shadow-sm"><i class="ti ti-eye"></i></button>
+                            <button class="btn btn-white rounded-circle shadow-sm" 
+                                    data-bs-toggle="tooltip" 
+                                    title="Quick View"
+                                    data-name="<%$product->name%>"
+                                    data-price="₹<%$product->price|number_format:2%>"
+                                    data-detail="<%$product->detail%>"
+                                    data-image="<%base_url('public/uploads/products/')%><%$product->id%>/<%$product->cover_image%>"
+                                    data-url="<%base_url('shop/product/')%><%$product->id%>">
+                                <i class="ti ti-eye"></i>
+                            </button>
                             <button class="btn btn-primary rounded-circle shadow-sm"><i class="ti ti-shopping-cart-plus"></i></button>
                         </div>
                     </div>
                     <div class="card-body text-center">
                         <h6 class="fw-bold mb-1" style="font-family: var(--font-heading);"><%$product->name%></h6>
-                        <p class="text-primary fw-bold mb-0">$<%$product->price|number_format:2%></p>
+                        <p class="text-primary fw-bold mb-0">₹<%$product->price|number_format:2%></p>
                     </div>
                 </div>
             </div>

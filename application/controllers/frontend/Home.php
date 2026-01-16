@@ -25,8 +25,10 @@ class Home extends MY_Controller {
         $this->load->model('content_managemnet/Testimonials_model');
         $data['testimonials'] = $this->Testimonials_model->get_active_testimonials();
         
-        $data['best_sellers'] = $this->_get_best_sellers();
-        $data['new_arrivals'] = $this->_get_new_arrivals();
+        // Load Product Model
+        $this->load->model('product/Product_model');
+        $data['best_sellers'] = $this->Product_model->get_products_by_type('best_sellers', 4);
+        $data['new_arrivals'] = $this->Product_model->get_products_by_type('new_arrivals', 4);
         
         $this->smarty->view('home.tpl', $data);
     }

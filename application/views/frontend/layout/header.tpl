@@ -97,7 +97,16 @@
       
       <div class="d-flex align-items-center gap-3">
         <!-- Search -->
-        <a href="#" class="nav-icon-btn"><i class="ti ti-search"></i></a>
+        <!-- Search -->
+        <form action="<%base_url('shop/products')%>" method="GET" class="d-none d-lg-flex me-2">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control border-end-0 rounded-start-pill ps-3 bg-light border-light" placeholder="Search..." aria-label="Search" value="<%if isset($active_filters.search)%><%$active_filters.search%><%/if%>" style="width: 200px;">
+                <button class="btn btn-light border-start-0 rounded-end-pill pe-3 text-muted" type="submit">
+                    <i class="ti ti-search"></i>
+                </button>
+            </div>
+        </form>
+        <a href="#" class="nav-icon-btn d-lg-none"><i class="ti ti-search"></i></a>
         
         <!-- Cart -->
         <a href="<%base_url('shop/cart')%>" class="nav-icon-btn position-relative" title="Cart">

@@ -110,22 +110,21 @@
             <div class="modal-body p-0">
                 <div class="row g-0">
                     <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4">
-                        <img src="https://images.unsplash.com/photo-1595188735235-c30997195c47?q=80&w=600&auto=format&fit=crop" class="img-fluid rounded-3 shadow-sm" alt="Product">
+                        <img src="" class="img-fluid rounded-3 shadow-sm qv-image" alt="Product">
                     </div>
                     <div class="col-md-6 p-4 p-lg-5">
                         <div class="d-flex justify-content-between align-items-start mb-3">
-                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1">New Arrival</span>
+                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1">Quick View</span>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <h3 class="fw-bold mb-2">Detailed Product Name</h3>
+                        <h3 class="fw-bold mb-2 qv-name">Detailed Product Name</h3>
                         <div class="d-flex align-items-center gap-2 mb-4">
-                            <span class="h4 fw-bold text-dark mb-0">$129.00</span>
-                            <span class="text-decoration-line-through text-muted small">$159.00</span>
+                            <span class="h4 fw-bold text-dark mb-0 qv-price">$0.00</span>
                         </div>
-                        <p class="text-muted small mb-4">Experience premium quality with our latest collection. Designed for comfort and style.</p>
+                        <p class="text-muted small mb-4 qv-detail">Product description will appear here.</p>
                         
                         <div class="d-grid gap-2">
-                             <a href="<%base_url('shop/product/1')%>" class="btn btn-dark rounded-pill py-3 fw-bold">View Full Details</a>
+                             <a href="" class="btn btn-dark rounded-pill py-3 fw-bold qv-url">View Full Details</a>
                              <button type="button" class="btn btn-outline-dark rounded-pill py-3 fw-bold" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>

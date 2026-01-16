@@ -23,8 +23,8 @@
                             <%foreach $product->images as $index => $img%>
                             <div class="thumb-container p-2 bg-white shadow-sm cursor-pointer border-2 <%if $index === 0%>border-primary<%else%>border-transparent<%/if%>" 
                                  style="width: 80px; height: 80px; border-radius: 12px; transition: all 0.3s ease;"
-                                 onclick="changeMainImage('<%$img%>', this)">
-                                <img src="<%$img%>" 
+                                 onclick="changeMainImage('<%base_url('public/uploads/products/')%><%$product->id%>/<%$img["image_path"]%>', this)">
+                                <img src="<%base_url('public/uploads/products/')%><%$product->id%>/<%$img["image_path"]%>" 
                                      class="img-fluid w-100 h-100" 
                                      style="object-fit: cover; border-radius: 8px;" 
                                      alt="thumbnail"
@@ -42,7 +42,7 @@
                              id="imageZoomWrapper">
                             <div class="image-inner p-4 w-100 h-100" id="imageInner">
                                 <img id="mainProductImg" 
-                                     src="<%$product->images[0]%>" 
+                                     src="<%base_url('public/uploads/products/')%><%$product->id%>/<%$product->images[0]["image_path"]%>" 
                                      class="img-fluid w-100 h-100" 
                                      style="object-fit: contain; border-radius: 16px;" 
                                      alt="<%$product->name%>"
@@ -68,7 +68,7 @@
                 <div data-aos="fade-left">
                     <!-- Product Title & Category -->
                     <div class="mb-3">
-                        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3"><%$product->category%></span>
+                        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3"><%$product->category_name%></span>
                         <h1 class="fw-bold mb-0" style="font-family: var(--font-heading); font-size: 2.5rem; line-height: 1.2;">
                             <%$product->name%>
                         </h1>
@@ -78,7 +78,7 @@
                     <div class="d-flex align-items-center gap-3 mb-4 pb-4 border-bottom">
                         <div class="d-flex text-warning fs-5">
                             <%for $i=1 to 5%>
-                                <i class="ti ti-star<%if $i<=$product->rating%>-filled<%/if%>"></i>
+                                <i class="ti <%if $i <= $product->rating%>ti-star-filled text-warning<%else%>ti-star text-muted<%/if%>"></i>
                             <%/for%>
                         </div>
                         <span class="text-muted"><%$product->rating%> / 5.0</span>
@@ -92,11 +92,11 @@
                     <!-- Price Section -->
                     <div class="price-section mb-4 pb-4 border-bottom">
                         <div class="d-flex align-items-baseline gap-3 mb-2">
-                            <span class="display-5 fw-bold text-primary">$<%$product->price%></span>
-                            <%if $product->old_price > $product->price%>
-                                <span class="h4 text-muted text-decoration-line-through">$<%$product->old_price%></span>
+                            <span class="display-5 fw-bold text-primary">₹<%$product->price|number_format:2%></span>
+                            <%if isset($product->price_before_discount) && $product->price_before_discount > $product->price%>
+                                <span class="h4 text-muted text-decoration-line-through">₹<%$product->price_before_discount|number_format:2%></span>
                                 <span class="badge bg-danger px-3 py-2">
-                                    Save $<%($product->old_price - $product->price)%>
+                                    Save ₹<%($product->price_before_discount - $product->price)|number_format:2%>
                                 </span>
                             <%/if%>
                         </div>
@@ -105,7 +105,7 @@
 
                     <!-- Description -->
                     <div class="mb-4">
-                        <p class="text-secondary lead mb-0"><%$product->description%></p>
+                        <p class="text-secondary lead mb-0"><%$product->detail%></p>
                     </div>
 
                     <!-- Quantity & Add to Cart -->
@@ -212,24 +212,53 @@
                 </ul>
                 <div class="tab-content" id="productTabsContent">
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
-                        <p class="text-secondary mb-3"><%$product->description%></p>
+                        <p class="text-secondary mb-3"><%$product->detail%></p>
                         <p class="text-secondary">Each piece is lovingly handcrafted by skilled artisans, making every item unique. The attention to detail and quality craftsmanship ensures you receive a product that's not just beautiful, but built to last.</p>
                     </div>
                     <div class="tab-pane fade" id="specifications" role="tabpanel">
+                        <%if !empty($product->attributes)%>
                         <table class="table table-borderless">
-                            <tr><td class="fw-bold" style="width: 200px;">Material:</td><td>Premium Resin</td></tr>
-                            <tr><td class="fw-bold">Dimensions:</td><td>10" x 8" x 2"</td></tr>
-                            <tr><td class="fw-bold">Weight:</td><td>500g</td></tr>
-                            <tr><td class="fw-bold">Care Instructions:</td><td>Wipe with soft cloth</td></tr>
-                            <tr><td class="fw-bold">Made In:</td><td>India</td></tr>
+                            <%foreach $product->attributes as $attr%>
+                            <tr><td class="fw-bold" style="width: 200px;"><%$attr['attribute_name']%>:</td><td><%$attr['attribute_value']%></td></tr>
+                            <%/foreach%>
                         </table>
+                        <%else%>
+                            <p class="text-muted">No specifications listed for this product.</p>
+                        <%/if%>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
-                        <div class="text-center text-muted py-5">
-                            <i class="ti ti-message-circle fs-1 mb-3 d-block"></i>
-                            <p>No reviews yet. Be the first to review this product!</p>
-                            <button class="btn btn-primary rounded-pill px-4 mt-2" onclick="openReviewModal()">Write a Review</button>
-                        </div>
+                        <%if !empty($product->reviews)%>
+                            <div class="reviews-list mt-4">
+                                <%foreach $product->reviews as $review%>
+                                    <div class="review-item mb-4 pb-4 border-bottom">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="fw-bold mb-0"><%$review['reviewer_name']%></h6>
+                                            <small class="text-muted"><%$review['added_date']|date_format:"%b %e, %Y"%></small>
+                                        </div>
+                                        <div class="text-warning mb-2">
+                                            <!-- <span class="small text-muted me-2">(R: <%$review['rating']%>)</span> -->
+                                            <i class="ti ti-star-filled text-success" title="Static Test"></i>
+                                           <%assign var=rating value=$review['rating']|intval%>
+
+                                            <%for $star=1 to 5%>
+                                                <i class="ti <%if $rating >= $star%>ti-star text-warning<%else%>ti-star text-muted<%/if%>"></i>
+                                            <%/for%>
+
+                                        </div>
+                                        <p class="text-secondary mb-0"><%$review['comment']%></p>
+                                    </div>
+                                <%/foreach%>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-outline-primary rounded-pill px-4" onclick="openReviewModal()">Write a Review</button>
+                            </div>
+                        <%else%>
+                            <div class="text-center text-muted py-5">
+                                <i class="ti ti-message-circle fs-1 mb-3 d-block"></i>
+                                <p>No reviews yet. Be the first to review this product!</p>
+                                <button class="btn btn-primary rounded-pill px-4 mt-2" onclick="openReviewModal()">Write a Review</button>
+                            </div>
+                        <%/if%>
                     </div>
                 </div>
             </div>
@@ -292,6 +321,7 @@
             </div>
             <div class="modal-body p-4">
                 <form id="reviewForm">
+                    <input type="hidden" id="reviewProductId" name="product_id" value="<%$product->id%>">
                     <!-- Star Rating -->
                     <div class="mb-4">
                         <label class="form-label fw-bold">Your Rating <span class="text-danger">*</span></label>
@@ -308,19 +338,19 @@
                     <!-- Name -->
                     <div class="mb-3">
                         <label for="reviewName" class="form-label fw-bold">Your Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control bg-light border-0 py-3 rounded-3" id="reviewName" required>
+                        <input type="text" class="form-control bg-light border-0 py-3 rounded-3" id="reviewName" name="name" required>
                     </div>
                     
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="reviewEmail" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control bg-light border-0 py-3 rounded-3" id="reviewEmail" required>
+                        <input type="email" class="form-control bg-light border-0 py-3 rounded-3" id="reviewEmail" name="email" required>
                     </div>
                     
                     <!-- Review Text -->
                     <div class="mb-4">
                         <label for="reviewText" class="form-label fw-bold">Your Review <span class="text-danger">*</span></label>
-                        <textarea class="form-control bg-light border-0 rounded-3" id="reviewText" rows="4" placeholder="Share your experience with this product..." required></textarea>
+                        <textarea class="form-control bg-light border-0 rounded-3" id="reviewText" name="review" rows="4" placeholder="Share your experience with this product..." required></textarea>
                     </div>
                     
                     <!-- Submit Button -->
@@ -486,7 +516,6 @@ function copyProductLink() {
 }
 
 // Review Functionality
-let currentRating = 0;
 
 function openReviewModal() {
     const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
@@ -494,17 +523,17 @@ function openReviewModal() {
 }
 
 function setRating(rating) {
-    currentRating = rating;
-    document.getElementById('ratingValue').value = rating;
+    const input = document.getElementById('ratingValue');
+    if(input) input.value = rating;
     
-    // Update star icons
-    const stars = document.querySelectorAll('.star-icon');
+    // Update star icons - Scoped to modal
+    const stars = document.querySelectorAll('#reviewModal .star-icon');
     stars.forEach((star, index) => {
         if (index < rating) {
             star.classList.remove('ti-star');
-            star.classList.add('ti-star-filled', 'active');
+            star.classList.add('ti-star-filled', 'active', 'text-warning');
         } else {
-            star.classList.remove('ti-star-filled', 'active');
+            star.classList.remove('ti-star-filled', 'active', 'text-warning');
             star.classList.add('ti-star');
         }
     });
@@ -517,29 +546,72 @@ document.addEventListener('DOMContentLoaded', function() {
         reviewForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            if (currentRating === 0) {
-                alert('Please select a star rating');
+            const ratingVal = parseInt(document.getElementById('ratingValue').value || 0);
+            
+            if (ratingVal === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Please select a star rating',
+                    confirmButtonColor: '#84a98c'
+                });
                 return;
             }
             
-            const formData = {
-                rating: currentRating,
-                name: document.getElementById('reviewName').value,
-                email: document.getElementById('reviewEmail').value,
-                review: document.getElementById('reviewText').value
-            };
+            const submitBtn = reviewForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
             
-            // Here you would normally send this to your backend
-            console.log('Review submitted:', formData);
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting...';
             
-            // Show success message
-            alert('Thank you for your review! It will be published after moderation.');
+            const formData = new FormData(reviewForm);
             
-            // Close modal and reset form
-            const modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-            modal.hide();
-            reviewForm.reset();
-            setRating(0);
+            fetch('<%base_url()%>shop/product/submit_review', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message,
+                        confirmButtonColor: '#84a98c'
+                    });
+                    
+                    // Close modal and reset form
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+                    modal.hide();
+                    reviewForm.reset();
+                    setRating(0);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: data.message,
+                        confirmButtonColor: '#84a98c'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred. Please try again later.',
+                    confirmButtonColor: '#84a98c'
+                });
+            })
+            .finally(() => {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            });
         });
     }
 });

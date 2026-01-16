@@ -9,15 +9,44 @@ class Product extends MY_Controller {
     }
 
     public function index() {
+        // Load Models
+        $this->load->model('product/Categories_model');
+        $this->load->model('product/Product_model');
+
+        // Get Filters from URL/POST
+        $filters = [
+            'categories' => $this->input->get('categories'),
+            'min_price' => $this->input->get('min_price'),
+            'max_price' => $this->input->get('max_price'),
+            'sort' => $this->input->get('sort', TRUE) ?: 'default',
+            'search' => $this->input->get('search', TRUE)
+        ];
+
+        // Process categories if it's a comma-separated string
+        if (!empty($filters['categories']) && is_string($filters['categories'])) {
+            $filters['categories'] = explode(',', $filters['categories']);
+        }
+
+        // Fetch Data
+        $data['products'] = $this->Product_model->get_filtered_products($filters);
+        $data['total_products'] = count($data['products']);
+        $data['categories'] = $this->Categories_model->get_categories();
+        $data['active_filters'] = $filters;
+        
         $data['title'] = 'Shop Collection';
         $data['page'] = 'product_list';
-        
-        // Load Categories Model
-        $this->load->model('product/Categories_model');
-        $data['categories'] = $this->Categories_model->get_categories();
 
-        // Mock Data for now
-        $data['products'] = $this->_get_mock_products();
+        // Handle AJAX Request for filtering
+        if ($this->input->is_ajax_request()) {
+            $html = $this->smarty->fetch('product/product_grid.tpl', $data);
+            echo json_encode([
+                'status' => 'success',
+                'html' => $html,
+                'total_products' => $data['total_products'],
+                'showing_text' => 'Showing 1-' . ($data['total_products'] > 12 ? 12 : $data['total_products']) . ' of ' . $data['total_products']
+            ]);
+            return;
+        }
         
         $this->smarty->view('product/list.tpl', $data);
     }
@@ -25,9 +54,22 @@ class Product extends MY_Controller {
     public function details($id = null) {
         if(!$id) redirect('shop');
 
-        $data['title'] = 'Product Details';
+        $this->load->model('product/Product_model');
+        $product_data = $this->Product_model->get_product_by_id($id);
+        
+        if(empty($product_data)) redirect('shop/products');
+
+        $data['title'] = $product_data['name'];
         $data['page'] = 'product_details';
-        $data['product'] = $this->_get_mock_product($id);
+        
+        // Prepare product object for view consistency
+        $data['product'] = (object)$product_data;
+        $data['product']->images = $this->Product_model->get_product_images($id);
+        $data['product']->attributes = $this->Product_model->get_product_attributes($id);
+        
+        // Fetch Dynamic Reviews
+        $data['product']->reviews = $this->Product_model->get_product_reviews($id);
+        $data['product']->reviews_count = count($data['product']->reviews);
 
         $this->smarty->view('product/details.tpl', $data);
     }
@@ -111,6 +153,54 @@ class Product extends MY_Controller {
         return $products;
     }
     
+    public function submit_review() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('product_id', 'Product ID', 'required|numeric');
+        $this->form_validation->set_rules('rating', 'Rating', 'required|numeric|greater_than[0]|less_than_equal_to[5]');
+        $this->form_validation->set_rules('name', 'Name', 'required|trim|max_length[100]');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|max_length[150]');
+        $this->form_validation->set_rules('review', 'Review', 'required|trim|min_length[10]|max_length[1000]');
+
+        if ($this->form_validation->run() == FALSE) {
+            $response = [
+                'status' => 'error',
+                'message' => validation_errors()
+            ];
+        } else {
+            $this->load->model('product/Product_model');
+            
+            $data = [
+                'product_id' => $this->input->post('product_id'),
+                'reviewer_name' => $this->input->post('name'),
+                'email' => $this->input->post('email'),
+                'rating' => $this->input->post('rating'),
+                'comment' => $this->input->post('review'),
+                'status' => 'Pending',
+                'added_date' => date('Y-m-d H:i:s'),
+                'is_delete' => '0'
+            ];
+
+            if ($this->Product_model->add_product_review($data)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Thank you for your review! It will be published after moderation.'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong. Please try again later.'
+                ];
+            }
+        }
+
+        echo json_encode($response);
+    }
+
     private function _get_mock_product($id) {
         return (object)[
             'id' => $id,

@@ -436,9 +436,24 @@ const page = {
     let flag = false;
     $(".custom-form." + form_class + " .required-input").each(function (index) {
       var value = $(this).val();
+      var name = $(this).attr('name');
+      var isUpdate = $("input[name='id']").val() != "";
       var dataMax = parseFloat($(this).attr('data-max'));
       var dataMin = parseFloat($(this).attr('data-min'));
+
       if (value == '') {
+        // Relax validation for product attributes in update mode
+        if ((name === 'attribute_name[]' || name === 'attribute_value[]') && form_class === 'add_product' && isUpdate) {
+          const parentRow = $(this).closest('.row');
+          const attrName = parentRow.find('select[name="attribute_name[]"]').val();
+          const attrValue = parentRow.find('input[name="attribute_value[]"]').val();
+
+          // If BOTH are empty, skip this field (it's likely the template row or an unused row)
+          if (attrName == "" && attrValue == "") {
+            return true;
+          }
+        }
+
         flag = true;
         var label = $(this).parents(".form-group").find("label").contents().filter(function () {
           return this.nodeType === 3; // Filter out non-text nodes (nodeType 3 is Text node)

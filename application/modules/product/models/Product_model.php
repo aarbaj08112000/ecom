@@ -226,5 +226,110 @@ class Product_model extends CI_Model {
         $this->db->where('image_id', $image_id);
         return $this->db->update('product_images', ['is_cover' => '1']);
     }
+
+    /**
+     * Get products with their cover images
+     * @param string $type best_sellers, new_arrivals, or all
+     * @param int $limit Number of products to fetch
+     * @return array Array of products
+     */
+    public function get_products_by_type($type = 'all', $limit = 4) {
+        $this->db->select('p.*, pi.image_path as cover_image, c.category_name');
+        $this->db->from('products as p');
+        $this->db->join('product_images as pi', 'pi.product_id = p.id AND pi.is_cover = "1"', 'left');
+        $this->db->join('categories as c', 'c.category_id = p.category_id', 'left');
+        $this->db->where('p.is_delete', '0');
+        $this->db->where('p.status', 'Active');
+
+        if ($type === 'best_sellers') {
+            // Logic for best sellers - for now, just order by price or something? 
+            // In a real app, join with order_items. Here let's just use random/desc
+            $this->db->order_by('p.price', 'DESC');
+        } elseif ($type === 'new_arrivals') {
+            $this->db->order_by('p.id', 'DESC');
+        }
+
+        if ($limit > 0) {
+            $this->db->limit($limit);
+        }
+
+        $result_obj = $this->db->get();
+        return is_object($result_obj) ? $result_obj->result() : [];
+    }
+
+    /**
+     * Get filtered products for shop page
+     * @param array $filters Filter parameters (categories, min_price, max_price, sort)
+     * @return array Array of products
+     */
+    public function get_filtered_products($filters = []) {
+        $this->db->select('p.*, pi.image_path as cover_image, c.category_name');
+        $this->db->from('products as p');
+        $this->db->join('product_images as pi', 'pi.product_id = p.id AND pi.is_cover = "1"', 'left');
+        $this->db->join('categories as c', 'c.category_id = p.category_id', 'left');
+        $this->db->where('p.is_delete', '0');
+        $this->db->where('p.status', 'Active');
+
+        // Category Filter
+        if (!empty($filters['categories'])) {
+            $this->db->where_in('p.category_id', $filters['categories']);
+        }
+
+        // Price Filter
+        if (isset($filters['min_price'])) {
+            $this->db->where('p.price >=', $filters['min_price']);
+        }
+        if (isset($filters['max_price'])) {
+            $this->db->where('p.price <=', $filters['max_price']);
+        }
+
+        // Search Filter
+        if (!empty($filters['search'])) {
+            $this->db->like('p.name', $filters['search']);
+        }
+
+        // Sorting
+        $sort = isset($filters['sort']) ? $filters['sort'] : 'default';
+        switch ($sort) {
+            case 'price_low':
+                $this->db->order_by('p.price', 'ASC');
+                break;
+            case 'price_high':
+                $this->db->order_by('p.price', 'DESC');
+                break;
+            case 'newest':
+                $this->db->order_by('p.id', 'DESC');
+                break;
+            case 'popularity':
+                $this->db->order_by('p.price', 'DESC'); // Placeholder for popularity
+                break;
+            default:
+                $this->db->order_by('p.id', 'DESC');
+                break;
+        }
+
+        $result_obj = $this->db->get();
+        return is_object($result_obj) ? $result_obj->result() : [];
+    }
+
+    /**
+     * Get approved reviews for a product
+     * @param int $product_id Product ID
+     * @return array Array of reviews
+     */
+    public function get_product_reviews($product_id) {
+        $this->db->select('reviewer_name, rating, comment, added_date');
+        $this->db->from('product_reviews');
+        $this->db->where('product_id', $product_id);
+        $this->db->where('status', 'Approved');
+        $this->db->where('is_delete', '0');
+        $this->db->order_by('added_date', 'DESC');
+        $result_obj = $this->db->get();
+        return is_object($result_obj) ? $result_obj->result_array() : [];
+    }
+
+    public function add_product_review($data) {
+        return $this->db->insert('product_reviews', $data);
+    }
 }
 

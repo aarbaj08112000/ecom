@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['shop'] = 'frontend/Home/index';
 $route['shop/products'] = 'frontend/Product/index';
 $route['shop/product/(:num)'] = 'frontend/Product/details/$1';
+$route['shop/product/submit_review'] = 'frontend/Product/submit_review';
 $route['shop/cart'] = 'frontend/Cart/index';
 $route['shop/checkout'] = 'frontend/Cart/checkout';
 $route['shop/login'] = 'frontend/Auth/login';

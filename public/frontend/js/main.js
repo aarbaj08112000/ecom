@@ -241,6 +241,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 newBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+
+                    const name = newBtn.getAttribute('data-name');
+                    const price = newBtn.getAttribute('data-price');
+                    const detail = newBtn.getAttribute('data-detail');
+                    const image = newBtn.getAttribute('data-image');
+                    const url = newBtn.getAttribute('data-url');
+
+                    modalEl.querySelector('.qv-name').textContent = name || 'Product Name';
+                    modalEl.querySelector('.qv-price').textContent = price || '₹0.00';
+                    modalEl.querySelector('.qv-detail').textContent = detail || 'No description available.';
+                    modalEl.querySelector('.qv-image').src = image || '';
+                    modalEl.querySelector('.qv-url').href = url || '#';
+
                     modal.show();
                 });
             });
