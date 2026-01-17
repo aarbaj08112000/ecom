@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="fw-bold small" style="font-family: var(--font-heading);"><%$item->name%></div>
-                                    <div class="text-muted small">₹<%$item->price * $item->quantity%></div>
+                                    <div class="text-muted small"><%$config.currency_symbol%><%$item->price * $item->quantity%></div>
                                 </div>
                             </div>
                             <%/foreach%>
@@ -96,14 +96,14 @@
                         
                          <div class="d-flex justify-content-between mb-2 pt-3 border-top">
                              <span class="text-muted">Subtotal</span>
-                            <span class="fw-bold">₹<%$total%></span>
+                            <span class="fw-bold"><%$config.currency_symbol%><%$total%></span>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                              <span class="text-muted">Total</span>
-                            <span class="fw-bold fs-4 text-primary">₹<%$total%></span>
+                            <span class="fw-bold fs-4 text-primary"><%$config.currency_symbol%><%$total%></span>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold" id="placeOrderBtn" <%if empty($cart_items)%>disabled<%/if%>>Pay ₹<%$total%></button>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold" id="placeOrderBtn" <%if empty($cart_items)%>disabled<%/if%>>Pay <%$config.currency_symbol%><%$total%></button>
                     </div>
                 </div>
             </div>
@@ -224,6 +224,7 @@
                                             merchant_order_id: response.razorpay_options.notes.merchant_order_id
                                         },
                                         success: function(cbResponse) {
+                                            console.log(cbResponse);
                                             if (cbResponse.success) {
                                                toaster('success', cbResponse.message);
                                                 setTimeout(function() {

@@ -110,7 +110,7 @@ class Cart_model extends CI_Model {
         $this->db->where('order_id', $order_id);
         return $this->db->update('orders', [
             'payment_status' => 'Paid', 
-            'transaction_id' => $payment_id,
+            'payment_method' => 'Credit Card (' . $payment_id . ')',
             'updated_date' => date('Y-m-d H:i:s')
         ]);
     }

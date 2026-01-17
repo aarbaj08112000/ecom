@@ -100,7 +100,7 @@
                                              <div class="bg-white bg-opacity-25 rounded-circle p-1 d-flex"><i class="ti ti-wallet fs-5"></i></div>
                                             <h6 class="mb-0 opacity-75 fw-bold text-uppercase small letter-spacing-1">Total Spent</h6>
                                         </div>
-                                        <h3 class="fw-bold mb-0 fs-2">$<%if isset($stats->total_spent)%><%$stats->total_spent%><%else%>0<%/if%></h3>
+                                        <h3 class="fw-bold mb-0 fs-2"><%$config.currency_symbol%><%if isset($stats->total_spent)%><%$stats->total_spent%><%else%>0<%/if%></h3>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                                  </td>
                                                  <td>
                                                      <div class="small text-muted"><i class="ti ti-calendar me-1"></i> <%$order->added_date|date_format:"%b %d, %Y"%></div>
-                                                     <span class="fw-bold text-dark small">$<%$order->total_amount%></span>
+                                                     <span class="fw-bold text-dark small"><%$config.currency_symbol%><%$order->total_amount%></span>
                                                  </td>
                                                  <td>
                                                      <%if $order->order_status == 'Delivered'%>
@@ -200,7 +200,7 @@
                                              <tr>
                                                  <td class="ps-4 fw-bold text-primary">#<%$order->order_id%></td>
                                                  <td class="text-muted"><%$order->added_date|date_format:"%b %d, %Y"%></td>
-                                                 <td class="fw-bold">$<%$order->total_amount%></td>
+                                                 <td class="fw-bold"><%$config.currency_symbol%><%$order->total_amount%></td>
                                                  <td>
                                                      <%if $order->order_status == 'Delivered'%>
                                                         <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Delivered</span>
@@ -255,7 +255,7 @@
                                             <div class="col-8">
                                                 <div class="card-body h-100 d-flex flex-column justify-content-center">
                                                     <h6 class="fw-bold mb-1 line-clamp-1"><%$item->name%></h6>
-                                                    <p class="text-primary fw-bold mb-2">$<%$item->price%></p>
+                                                    <p class="text-primary fw-bold mb-2"><%$config.currency_symbol%><%$item->price%></p>
                                                     <div class="d-flex gap-2 mt-auto">
                                                         <button class="btn btn-sm btn-primary rounded-pill px-3 flex-fill">Add to Cart</button>
                                                         <button class="btn btn-sm btn-outline-danger rounded-circle icon-btn-sm"><i class="ti ti-trash"></i></button>
@@ -845,7 +845,7 @@ function renderOrderDetails(order) {
                     <td class="ps-4 py-3">
                         <div class="d-flex align-items-center gap-3">
                             <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; overflow: hidden;">
-                                ${item.product_image ? `<img src="${base_url}public/frontend/img/products/${item.product_image}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" onerror="this.innerHTML='<i class=\\'ti ti-box fs-4 text-secondary\\'></i>';">` : '<i class="ti ti-box fs-4 text-secondary"></i>'}
+                                ${item.product_image ? `<img src="${base_url}public/uploads/products/${item.product_id}/${item.product_image}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;" onerror="this.src='https://placehold.co/200x200';">` : '<i class="ti ti-box fs-4 text-secondary"></i>'}
                             </div>
                             <div>
                                 <h6 class="fw-bold mb-0">${item.product_name || 'Product'}</h6>
@@ -853,8 +853,8 @@ function renderOrderDetails(order) {
                             </div>
                         </div>
                     </td>
-                    <td class="text-end fw-bold">$${parseFloat(item.price).toFixed(2)}</td>
-                    <td class="pe-4 text-end fw-bold text-primary">$${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</td>
+                    <td class="text-end fw-bold">${currency_symbol}${parseFloat(item.price).toFixed(2)}</td>
+                    <td class="pe-4 text-end fw-bold text-primary">${currency_symbol}${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</td>
                 </tr>
             `;
         });
@@ -874,7 +874,7 @@ function renderOrderDetails(order) {
                         </div>
                         <div class="text-end">
                             ${statusBadge}
-                            <h4 class="fw-bold text-primary mt-2 mb-0">$${parseFloat(order.total_amount).toFixed(2)}</h4>
+                            <h4 class="fw-bold text-primary mt-2 mb-0">${currency_symbol}${parseFloat(order.total_amount).toFixed(2)}</h4>
                         </div>
                     </div>
                     

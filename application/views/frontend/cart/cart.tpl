@@ -28,7 +28,7 @@
                                         <input type="text" class="form-control form-control-sm text-center border-0 bg-light" value="<%$item->quantity%>" style="width: 40px;" readonly id="qty-<%$item->cart_id%>">
                                         <button class="btn btn-sm btn-outline-light text-dark border" onclick="updateCartQty(<%$item->cart_id%>, 1)">+</button>
                                     </div>
-                                    <div class="fw-bold fs-5">₹<span class="item-total" id="item-total-<%$item->cart_id%>" data-price="<%$item->price%>"><%$item->price * $item->quantity%></span></div>
+                                    <div class="fw-bold fs-5"><%$config.currency_symbol%><span class="item-total" id="item-total-<%$item->cart_id%>" data-price="<%$item->price%>"><%$item->price * $item->quantity%></span></div>
                                     <button class="btn btn-link text-danger p-0" onclick="removeFromCart(<%$item->cart_id%>)"><i class="ti ti-trash"></i></button>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                         
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted">Subtotal</span>
-                            <span class="fw-bold">₹<span id="cart-subtotal"><%$total%></span></span>
+                            <span class="fw-bold"><%$config.currency_symbol%><span id="cart-subtotal"><%$total%></span></span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted">Shipping</span>
@@ -64,12 +64,12 @@
                         <div class="d-flex justify-content-between mb-4">
                              <span class="text-muted">Tax</span>
                              <!-- Fixed tax for now as example or 0 -->
-                            <span class="fw-bold">₹<span id="cart-tax">0.00</span></span>
+                            <span class="fw-bold"><%$config.currency_symbol%><span id="cart-tax">0.00</span></span>
                         </div>
                         
                         <div class="d-flex justify-content-between mb-4 pt-3 border-top">
                              <span class="fw-bold fs-5">Total</span>
-                            <span class="fw-bold fs-4 text-primary">₹<span id="cart-total"><%$total%></span></span>
+                            <span class="fw-bold fs-4 text-primary"><%$config.currency_symbol%><span id="cart-total"><%$total%></span></span>
                         </div>
                         
                         <a href="<%base_url('shop/checkout')%>" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold btn-animate">Proceed to Checkout</a>

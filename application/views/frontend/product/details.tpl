@@ -94,11 +94,11 @@
                     <!-- Price Section -->
                     <div class="price-section mb-4 pb-4 border-bottom">
                         <div class="d-flex align-items-baseline gap-3 mb-2">
-                            <span class="display-5 fw-bold text-primary">₹<%$product->price|number_format:2%></span>
+                            <span class="display-5 fw-bold text-primary"><%$config.currency_symbol%><%$product->price|number_format:2%></span>
                             <%if isset($product->price_before_discount) && $product->price_before_discount > $product->price%>
-                                <span class="h4 text-muted text-decoration-line-through">₹<%$product->price_before_discount|number_format:2%></span>
+                                <span class="h4 text-muted text-decoration-line-through"><%$config.currency_symbol%><%$product->price_before_discount|number_format:2%></span>
                                 <span class="badge bg-danger px-3 py-2">
-                                    Save ₹<%($product->price_before_discount - $product->price)|number_format:2%>
+                                    Save <%$config.currency_symbol%><%($product->price_before_discount - $product->price)|number_format:2%>
                                 </span>
                             <%/if%>
                         </div>

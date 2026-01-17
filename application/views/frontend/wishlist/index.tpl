@@ -65,7 +65,7 @@
                                 <!-- Price & Action -->
                                 <div class="d-flex align-items-center justify-content-between mt-3">
                                     <div class="d-flex align-items-baseline gap-2">
-                                        <span class="fw-bold text-primary" style="font-size: 1.4rem;">₹<%$item->price|number_format:2%></span>
+                                        <span class="fw-bold text-primary" style="font-size: 1.4rem;"><%$config.currency_symbol%><%$item->price|number_format:2%></span>
                                     </div>
                                     <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm" onclick="addToCart(event, <%$item->product_id%>)" style="transition: all 0.3s ease;">
                                         <i class="ti ti-shopping-cart me-1"></i> Add

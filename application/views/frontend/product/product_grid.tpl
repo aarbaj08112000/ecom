@@ -59,9 +59,9 @@
                 <!-- Price -->
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-baseline gap-2">
-                        <span class="fw-bold text-primary" style="font-size: 1.4rem;">₹<%$p->price|number_format:2%></span>
+                        <span class="fw-bold text-primary" style="font-size: 1.4rem;"><%$config.currency_symbol%><%$p->price|number_format:2%></span>
                         <%if $p->price_before_discount > $p->price%>
-                            <span class="small text-decoration-line-through text-muted">₹<%$p->price_before_discount|number_format:2%></span>
+                            <span class="small text-decoration-line-through text-muted"><%$config.currency_symbol%><%$p->price_before_discount|number_format:2%></span>
                         <%/if%>
                     </div>
                     <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm" style="transition: all 0.3s ease;" onclick="addToCart(event, <%$p->id%>)">

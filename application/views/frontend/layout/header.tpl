@@ -35,6 +35,7 @@
 
     <script type="text/javascript">
         var base_url = "<%base_url()%>";
+    var currency_symbol = "<%$config.currency_symbol|default:'₹'%>";
     </script>
     <script src="<%base_url('public/frontend/js/wishlist.js?v='|cat:time())%>"></script>
     <script src="<%base_url('public/frontend/js/cart.js?v='|cat:time())%>"></script>
