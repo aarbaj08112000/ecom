@@ -42,6 +42,15 @@ class MY_Controller extends MX_Controller
             }
         }
         $this->smarty->assign('header_categories', $header_categories);
+
+        // Fetch Cart Count
+        $cart_count = 0;
+        if ($this->session->userdata('is_customer_logged_in')) {
+            $this->load->model('Cart_model');
+            $customer_id = $this->session->userdata('customer_id');
+            $cart_count = $this->Cart_model->get_cart_count($customer_id);
+        }
+        $this->smarty->assign('cart_count', $cart_count);
     }
 
     // Pass customer session data directly to Smarty views

@@ -36,6 +36,8 @@
     <script type="text/javascript">
         var base_url = "<%base_url()%>";
     </script>
+    <script src="<%base_url('public/frontend/js/wishlist.js?v='|cat:time())%>"></script>
+    <script src="<%base_url('public/frontend/js/cart.js?v='|cat:time())%>"></script>
 </head>
 <body>
     <div class="outer-div-box"></div>
@@ -111,7 +113,9 @@
         <!-- Cart -->
         <a href="<%base_url('shop/cart')%>" class="nav-icon-btn position-relative" title="Cart">
             <i class="ti ti-shopping-cart"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="font-size:0.6rem">2</span>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="font-size:0.6rem" id="header-cart-count">
+                <%if isset($cart_count)%><%$cart_count%><%else%>0<%/if%>
+            </span>
         </a>
 
         <!-- User Account Dropdown -->
@@ -124,7 +128,7 @@
                     <li><h6 class="dropdown-header">Welcome, <%if isset($customer_name)%><%$customer_name%><%else%>User<%/if%>!</h6></li>
                     <li><a class="dropdown-item rounded-2" href="<%base_url('shop/dashboard')%>"><i class="ti ti-user-circle me-2"></i>My Account</a></li>
                     <li><a class="dropdown-item rounded-2" href="#"><i class="ti ti-package me-2"></i>My Orders</a></li>
-                    <li><a class="dropdown-item rounded-2" href="#"><i class="ti ti-heart me-2"></i>Wishlist</a></li>
+                    <li><a class="dropdown-item rounded-2" href="<%base_url('shop/wishlist')%>"><i class="ti ti-heart me-2"></i>Wishlist</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item rounded-2 text-danger" href="<%base_url('shop/logout')%>"><i class="ti ti-logout me-2"></i>Logout</a></li>
                 <%else%>

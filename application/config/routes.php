@@ -7,7 +7,12 @@ $route['shop/products'] = 'frontend/Product/index';
 $route['shop/product/(:num)'] = 'frontend/Product/details/$1';
 $route['shop/product/submit_review'] = 'frontend/Product/submit_review';
 $route['shop/cart'] = 'frontend/Cart/index';
+$route['shop/cart/add'] = 'frontend/Cart/add';
+$route['shop/cart/update'] = 'frontend/Cart/update';
+$route['shop/cart/remove'] = 'frontend/Cart/remove';
 $route['shop/checkout'] = 'frontend/Cart/checkout';
+$route['shop/cart/place_order'] = 'frontend/Cart/place_order';
+$route['shop/cart/razorpay_callback'] = 'frontend/Cart/razorpay_callback';
 $route['shop/login'] = 'frontend/Auth/login';
 $route['shop/login-action'] = 'frontend/Auth/login_action';
 $route['shop/register'] = 'frontend/Auth/register';
@@ -23,6 +28,9 @@ $route['shop/forgot-password-action'] = 'frontend/Auth/forgot_password_action';
 $route['shop/dashboard'] = 'frontend/Account/index';
 $route['shop/contact'] = 'frontend/Home/contact';
 $route['shop/submit-contact'] = 'frontend/Home/submit_contact';
+$route['shop/wishlist'] = 'frontend/Wishlist/index';
+$route['shop/wishlist/add'] = 'frontend/Wishlist/add';
+$route['shop/wishlist/remove'] = 'frontend/Wishlist/remove';
 
 // Support Routes
 $route['shop/track-order'] = 'frontend/Support/track_order';

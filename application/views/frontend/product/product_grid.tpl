@@ -14,16 +14,19 @@
             <!-- Image Container -->
             <div class="position-relative overflow-hidden bg-white" style="height: 280px;">
                 <!-- Hover Actions -->
+                <!-- Hover Actions -->
                 <div class="product-actions position-absolute top-50 start-50 translate-middle d-flex gap-2 z-2" style="opacity: 0; transition: opacity 0.3s ease;">
-                    <button class="btn btn-white rounded-circle shadow icon-btn" title="Add to Cart" style="width: 45px; height: 45px;">
+                    <button class="btn btn-white rounded-circle shadow icon-btn" title="Add to Cart" style="width: 45px; height: 45px;" onclick="addToCart(event, <%$p->id%>)">
                         <i class="ti ti-shopping-cart"></i>
                     </button>
                     <a href="<%base_url('shop/product/'|cat:$p->id)%>" class="btn btn-white rounded-circle shadow icon-btn" title="Quick View" style="width: 45px; height: 45px;">
                         <i class="ti ti-eye"></i>
                     </a>
-                    <button class="btn btn-white rounded-circle shadow icon-btn" title="Wishlist" style="width: 45px; height: 45px;">
-                        <i class="ti ti-heart"></i>
+                    <%if isset($is_customer_logged_in) && $is_customer_logged_in%>
+                    <button class="btn btn-white rounded-circle shadow icon-btn" title="<%if isset($wishlisted_products) && in_array($p->id, $wishlisted_products)%>Remove wishlist<%else%>Add wishlist<%/if%>" style="width: 45px; height: 45px;" onclick="addToWishlist(<%$p->id%>, this)">
+                        <i class="ti <%if isset($wishlisted_products) && in_array($p->id, $wishlisted_products)%>ti-heart text-danger<%else%>ti-heart<%/if%>"></i>
                     </button>
+                    <%/if%>
                 </div>
                 
                 <!-- Product Image -->
@@ -61,7 +64,7 @@
                             <span class="small text-decoration-line-through text-muted">₹<%$p->price_before_discount|number_format:2%></span>
                         <%/if%>
                     </div>
-                    <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm" style="transition: all 0.3s ease;">
+                    <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm" style="transition: all 0.3s ease;" onclick="addToCart(event, <%$p->id%>)">
                         <i class="ti ti-shopping-cart me-1"></i> Add
                     </button>
                 </div>

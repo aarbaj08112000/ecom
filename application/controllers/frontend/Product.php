@@ -9,6 +9,15 @@ class Product extends MY_Controller {
     }
 
     public function index() {
+        // Load Wishlist Model
+        $this->load->model('Wishlist_model');
+        
+        $data['wishlisted_products'] = [];
+        if ($this->session->userdata('is_customer_logged_in')) {
+            $customer_id = $this->session->userdata('customer_id');
+            $data['wishlisted_products'] = $this->Wishlist_model->get_wishlisted_product_ids($customer_id);
+        }
+
         // Load Models
         $this->load->model('product/Categories_model');
         $this->load->model('product/Product_model');
@@ -70,6 +79,14 @@ class Product extends MY_Controller {
         // Fetch Dynamic Reviews
         $data['product']->reviews = $this->Product_model->get_product_reviews($id);
         $data['product']->reviews_count = count($data['product']->reviews);
+
+        // Check if logged in and fetch wishlist
+        $this->load->model('Wishlist_model');
+        $data['wishlisted_products'] = [];
+        if ($this->session->userdata('is_customer_logged_in')) {
+            $customer_id = $this->session->userdata('customer_id');
+            $data['wishlisted_products'] = $this->Wishlist_model->get_wishlisted_product_ids($customer_id);
+        }
 
         $this->smarty->view('product/details.tpl', $data);
     }

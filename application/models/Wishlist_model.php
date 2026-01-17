@@ -18,9 +18,28 @@ class Wishlist_model extends CI_Model {
         $this->db->where('w.user_id', $user_id);
         $this->db->where('w.is_delete', '0');
         $this->db->where('w.status', 'Active');
+        $this->db->order_by('w.added_date', 'DESC');
         
         $query = $this->db->get();
         return $query->result();
+    }
+
+    /**
+     * Get array of product IDs in user's wishlist
+     */
+    public function get_wishlisted_product_ids($user_id) {
+        $this->db->select('product_id');
+        $this->db->from('wishlist');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('is_delete', '0');
+        $this->db->where('status', 'Active');
+        $query = $this->db->get();
+        
+        $result = [];
+        foreach ($query->result() as $row) {
+            $result[] = $row->product_id;
+        }
+        return $result;
     }
 
     /**

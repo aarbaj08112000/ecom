@@ -51,9 +51,11 @@
                             
                             <!-- Wishlist & Share Buttons -->
                             <div class="position-absolute top-0 end-0 m-3 d-flex flex-column gap-2" style="z-index: 100;">
-                                <button class="btn btn-white rounded-circle shadow-sm" style="width: 45px; height: 45px;" title="Add to Wishlist">
-                                    <i class="ti ti-heart"></i>
+                                <%if isset($is_customer_logged_in) && $is_customer_logged_in%>
+                                <button class="btn btn-white rounded-circle shadow-sm" style="width: 45px; height: 45px;" title="<%if isset($wishlisted_products) && in_array($product->id, $wishlisted_products)%>Remove wishlist<%else%>Add wishlist<%/if%>" onclick="addToWishlist(<%$product->id%>, this)">
+                                    <i class="ti <%if isset($wishlisted_products) && in_array($product->id, $wishlisted_products)%>ti-heart text-danger<%else%>ti-heart<%/if%>"></i>
                                 </button>
+                                <%/if%>
                                 <button class="btn btn-white rounded-circle shadow-sm" style="width: 45px; height: 45px;" title="Share" onclick="openShareModal()">
                                     <i class="ti ti-share"></i>
                                 </button>
@@ -124,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary btn-lg w-100 rounded-pill shadow-lg py-3 fw-bold" style="transition: all 0.3s ease;">
+                                <button class="btn btn-primary btn-lg w-100 rounded-pill shadow-lg py-3 fw-bold" style="transition: all 0.3s ease;" onclick="addToCart(event, <%$product->id%>, 1, true)">
                                     <i class="ti ti-shopping-cart me-2"></i> Add to Cart
                                 </button>
                             </div>
