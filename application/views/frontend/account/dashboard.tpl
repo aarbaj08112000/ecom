@@ -142,13 +142,15 @@
                                                      <span class="fw-bold text-dark small"><%$config.currency_symbol%><%$order->total_amount%></span>
                                                  </td>
                                                  <td>
-                                                     <%if $order->order_status == 'Delivered'%>
+                                                     <%if $order->order_status == 'delivered'%>
                                                         <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 small"><i class="ti ti-check me-1"></i> Delivered</span>
-                                                     <%elseif $order->order_status == 'Processing'%>
+                                                     <%elseif $order->order_status == 'processing'%>
                                                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-1 small"><i class="ti ti-package me-1"></i> Processing</span>
-                                                     <%elseif $order->order_status == 'Confirmed'%>
+                                                     <%elseif $order->order_status == 'confirmed'%>
                                                         <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-2 py-1 small"><i class="ti ti-check me-1"></i> Confirmed</span>
-                                                     <%elseif $order->order_status == 'Cancelled'%>
+                                                     <%elseif $order->order_status == 'pending'%>
+                                                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2 py-1 small"><i class="ti ti-clock me-1"></i> Pending</span>
+                                                     <%elseif $order->order_status == 'cancelled'%>
                                                         <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1 small"><i class="ti ti-x me-1"></i> Cancelled</span>
                                                      <%else%>
                                                         <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2 py-1 small"><i class="ti ti-loader me-1"></i> <%$order->order_status%></span>
@@ -202,21 +204,34 @@
                                                  <td class="text-muted"><%$order->added_date|date_format:"%b %d, %Y"%></td>
                                                  <td class="fw-bold"><%$config.currency_symbol%><%$order->total_amount%></td>
                                                  <td>
-                                                     <%if $order->order_status == 'Delivered'%>
+                                                     <%if $order->order_status == 'delivered'%>
                                                         <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Delivered</span>
-                                                     <%elseif $order->order_status == 'Processing'%>
+                                                     <%elseif $order->order_status == 'processing'%>
                                                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">Processing</span>
-                                                     <%elseif $order->order_status == 'Confirmed'%>
+                                                     <%elseif $order->order_status == 'confirmed'%>
                                                         <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-2">Confirmed</span>
-                                                      <%elseif $order->order_status == 'Cancelled'%>
+                                                     <%elseif $order->order_status == 'pending'%>
+                                                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2">Pending</span>
+                                                      <%elseif $order->order_status == 'cancelled'%>
                                                         <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-2">Cancelled</span>
                                                      <%else%>
                                                         <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2"><%$order->order_status%></span>
                                                      <%/if%>
                                                  </td>
                                                   <td class="pe-4 text-end">
-                                                      <button class="btn btn-white btn-sm shadow-sm rounded-circle icon-btn-sm me-2" onclick="viewOrderDetails(<%$order->order_id%>)" title="View Details"><i class="ti ti-eye"></i></button>
-                                                      <button class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="window.location.href='<%base_url('shop/track-order')%>'">Track Order</button>
+                                                      <div class="d-flex justify-content-end gap-2 align-items-center">
+                                                          <button class="btn btn-white btn-sm shadow-sm rounded-circle icon-btn-sm" onclick="viewOrderDetails(<%$order->order_id%>)" title="View Details"><i class="ti ti-eye"></i></button>
+                                                          
+                                                          <%if $order->order_status == 'pending' || $order->order_status == 'processing' || $order->order_status == 'confirmed'%>
+                                                              <button class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="cancelOrder(<%$order->order_id%>)">Cancel</button>
+                                                          <%elseif $order->order_status == 'delivered'%>
+                                                              <button class="btn btn-outline-warning btn-sm rounded-pill px-3" onclick="requestReturnRefund(<%$order->order_id%>)">Return</button>
+                                                          <%/if%>
+                                                          
+                                                          <%if $order->order_status != 'cancelled' && $order->order_status != 'delivered'%>
+                                                              <button class="btn btn-outline-primary btn-sm rounded-pill px-3" onclick="window.location.href='<%base_url('shop/track-order')%>'">Track</button>
+                                                          <%/if%>
+                                                      </div>
                                                   </td>
                                              </tr>
                                              <%/foreach%>
@@ -606,6 +621,17 @@ function deleteAddress(id) {
 }
 
 $(document).ready(function() {
+    // Hide order details when switching tabs from sidebar
+    $('#accountTabs a[data-bs-toggle="list"]').on('shown.bs.tab', function (e) {
+        $('#order-details-tab').removeClass('show active');
+        $('#order-details-content').html(`
+            <div class="text-center py-5">
+                <i class="ti ti-loader fs-1 text-primary"></i>
+                <p class="text-muted mt-2">Loading order details...</p>
+            </div>
+        `);
+    });
+
     $('#addressForm').validate({
         rules: {
             receiver_name: "required",
@@ -824,13 +850,16 @@ function renderOrderDetails(order) {
     
     // Status badge
     let statusBadge = '';
-    if (order.order_status === 'Delivered') {
+    const status = order.order_status.toLowerCase();
+    if (status === 'delivered') {
         statusBadge = '<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Delivered</span>';
-    } else if (order.order_status === 'Processing') {
+    } else if (status === 'processing') {
         statusBadge = '<span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">Processing</span>';
-    } else if (order.order_status === 'Confirmed') {
+    } else if (status === 'confirmed') {
         statusBadge = '<span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-2">Confirmed</span>';
-    } else if (order.order_status === 'Cancelled') {
+    } else if (status === 'pending') {
+        statusBadge = '<span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2">Pending</span>';
+    } else if (status === 'cancelled') {
         statusBadge = '<span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-2">Cancelled</span>';
     } else {
         statusBadge = `<span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-2">${order.order_status}</span>`;
@@ -911,9 +940,22 @@ function renderOrderDetails(order) {
                         <span class="text-muted">Payment Method:</span>
                         <span class="fw-bold">${order.payment_method || 'N/A'}</span>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted">Payment Status:</span>
                         <span class="badge ${order.payment_status === 'Success' ? 'bg-success' : 'bg-warning'}">${order.payment_status || 'Pending'}</span>
+                    </div>
+                    
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="d-grid gap-2">
+                            ${(order.order_status.toLowerCase() === 'pending' || order.order_status.toLowerCase() === 'processing' || order.order_status.toLowerCase() === 'confirmed') ? 
+                                `<button class="btn btn-danger rounded-pill py-2" onclick="cancelOrder(${order.order_id})"><i class="ti ti-trash me-2"></i>Cancel Order</button>` : ''}
+                            
+                            ${(order.order_status.toLowerCase() === 'delivered') ? 
+                                `<button class="btn btn-warning rounded-pill py-2" onclick="requestReturnRefund(${order.order_id})"><i class="ti ti-refresh me-2"></i>Return / Refund</button>` : ''}
+                            
+                            ${(status !== 'cancelled' && status !== 'delivered') ? 
+                                `<button class="btn btn-outline-primary rounded-pill py-2" onclick="window.location.href='${base_url}shop/track-order'"><i class="ti ti-truck-delivery me-2"></i>Track Order</button>` : ''}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -926,5 +968,111 @@ function renderOrderDetails(order) {
 function backToDashboard() {
     // Show dashboard tab
     $('#dashboard-tab-link').click();
+}
+
+function cancelOrder(orderId) {
+    Swal.fire({
+        title: 'Cancel Order',
+        text: 'Are you sure you want to cancel this order?',
+        icon: 'warning',
+        input: 'textarea',
+        inputPlaceholder: 'Please provide a reason for cancellation...',
+        inputAttributes: {
+            'aria-label': 'Reason for cancellation'
+        },
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, cancel it!',
+        preConfirm: (reason) => {
+            if (!reason) {
+                Swal.showValidationMessage('Cancellation reason is required');
+            }
+            return reason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: base_url + 'shop/cancel-order',
+                type: 'POST',
+                data: {
+                    order_id: orderId,
+                    reason: result.value
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Cancelled!',
+                            text: response.message,
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Error!', response.message, 'error');
+                    }
+                },
+                error: function() {
+                    Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
+                }
+            });
+        }
+    });
+}
+
+function requestReturnRefund(orderId) {
+    Swal.fire({
+        title: 'Return / Refund Request',
+        text: 'Please provide a reason for returning this order.',
+        icon: 'info',
+        input: 'textarea',
+        inputPlaceholder: 'Reason for return...',
+        inputAttributes: {
+            'aria-label': 'Reason for return'
+        },
+        showCancelButton: true,
+        confirmButtonColor: '#f39c12',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Submit Request',
+        preConfirm: (reason) => {
+            if (!reason) {
+                Swal.showValidationMessage('Reason is required for return request');
+            }
+            return reason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: base_url + 'shop/return-order',
+                type: 'POST',
+                data: {
+                    order_id: orderId,
+                    reason: result.value
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Submitted!',
+                            text: response.message,
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Error!', response.message, 'error');
+                    }
+                },
+                error: function() {
+                    Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
+                }
+            });
+        }
+    });
 }
 </script>

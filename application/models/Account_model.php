@@ -140,4 +140,67 @@ class Account_model extends CI_Model {
         
         return $order;
     }
+
+    /**
+     * Cancel an order
+     * @param int $order_id
+     * @param int $customer_id
+     * @param string $reason
+     * @return bool
+     */
+    public function cancel_order($order_id, $customer_id, $reason) {
+        // First get current status
+        $this->db->select('order_status');
+        $this->db->where('order_id', $order_id);
+        $this->db->where('user_id', $customer_id);
+        $query = $this->db->get('orders');
+        $order = $query->row();
+
+        if (!$order) return false;
+
+        // Start transaction
+        $this->db->trans_start();
+
+        // Update order status
+        $this->db->where('order_id', $order_id);
+        $this->db->update('orders', [
+            'order_status' => 'cancelled',
+            'updated_date' => date('Y-m-d H:i:s')
+        ]);
+
+        // Add to history
+        $this->db->insert('order_history', [
+            'order_id' => $order_id,
+            'status_from' => $order->order_status,
+            'status_to' => 'cancelled',
+            'remarks' => $reason,
+            'added_by' => $customer_id,
+            'added_date' => date('Y-m-d H:i:s')
+        ]);
+
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
+    /**
+     * Submit a refund/return request
+     * @param array $data
+     * @return bool
+     */
+    public function submit_refund_request($data) {
+        return $this->db->insert('refunds', $data);
+    }
+
+    /**
+     * Get payment details for an order
+     * @param int $order_id
+     * @return object|null
+     */
+    public function get_payment_by_order($order_id) {
+        $this->db->where('order_id', $order_id);
+        $this->db->order_by('payment_id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('payments');
+        return $query->row();
+    }
 }

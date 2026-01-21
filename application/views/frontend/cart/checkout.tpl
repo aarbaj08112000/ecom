@@ -8,32 +8,51 @@
             <div class="col-lg-8">
                  <h4 class="fw-bold mb-4">Details</h4>
                  
-                 <div class="card border-0 shadow-sm rounded-4 mb-4">
+                 <%if $has_details%>
+                 <div id="savedAddressCard" class="card border-0 shadow-sm rounded-4 mb-4 bg-light-subtle">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                             <h6 class="fw-bold mb-0 text-primary"><i class="ti ti-map-pin me-2"></i>Delivery Address</h6>
+                             <button type="button" class="btn btn-sm btn-link text-decoration-none fw-bold" id="changeAddressBtn">Edit Address</button>
+                        </div>
+                        <p class="mb-0 small text-muted">
+                            <strong class="text-dark fs-6"><%$prefill->first_name%> <%$prefill->last_name%></strong><br>
+                            <span class="d-block mt-2">
+                            <%$prefill->address%><br>
+                            <%$prefill->city%>, <%$prefill->state%> - <%$prefill->zip%>
+                            </span>
+                            <span class="d-block mt-2"><i class="ti ti-mail me-1"></i> <%$prefill->email%></span>
+                        </p>
+                    </div>
+                </div>
+                <%/if%>
+
+                 <div class="card border-0 shadow-sm rounded-4 mb-4" id="shippingFormWrapper" <%if $has_details%>style="display:none;"<%/if%>>
                      <div class="card-body p-4">
                          <div class="row g-3">
                              <div class="col-md-6">
                                  <label class="form-label small fw-bold text-muted">First Name</label>
-                                 <input type="text" name="first_name" class="form-control bg-light border-0 py-2" required>
+                                 <input type="text" name="first_name" class="form-control bg-light border-0 py-2" value="<%$prefill->first_name%>" required>
                              </div>
                              <div class="col-md-6">
                                  <label class="form-label small fw-bold text-muted">Last Name</label>
-                                 <input type="text" name="last_name" class="form-control bg-light border-0 py-2" required>
+                                 <input type="text" name="last_name" class="form-control bg-light border-0 py-2" value="<%$prefill->last_name%>" required>
                              </div>
                               <div class="col-12">
                                  <label class="form-label small fw-bold text-muted">Email Address</label>
-                                 <input type="email" name="email" class="form-control bg-light border-0 py-2" required>
+                                 <input type="email" name="email" class="form-control bg-light border-0 py-2" value="<%$prefill->email%>" required>
                              </div>
                               <div class="col-12">
                                  <label class="form-label small fw-bold text-muted">Address</label>
-                                 <input type="text" name="address" class="form-control bg-light border-0 py-2 mb-2" placeholder="Street, House No." required>
+                                 <input type="text" name="address" class="form-control bg-light border-0 py-2 mb-2" placeholder="Street, House No." value="<%$prefill->address%>" required>
                              </div>
                               <div class="col-md-5">
                                  <label class="form-label small fw-bold text-muted">City</label>
-                                 <input type="text" name="city" class="form-control bg-light border-0 py-2" required>
+                                 <input type="text" name="city" class="form-control bg-light border-0 py-2" value="<%$prefill->city%>" required>
                              </div>
                               <div class="col-md-4">
                                  <label class="form-label small fw-bold text-muted">State</label>
-                                 <select name="state" class="form-select bg-light border-0 py-2" required>
+                                 <select name="state" class="form-select bg-light border-0 py-2" id="stateSelect" required>
                                      <option value="">Select</option>
                                      <option value="Maharashtra">Maharashtra</option>
                                      <option value="Gujarat">Gujarat</option>
@@ -43,7 +62,7 @@
                              </div>
                               <div class="col-md-3">
                                  <label class="form-label small fw-bold text-muted">Zip</label>
-                                 <input type="text" name="zip" class="form-control bg-light border-0 py-2" required>
+                                 <input type="text" name="zip" class="form-control bg-light border-0 py-2" value="<%$prefill->zip%>" required>
                              </div>
                          </div>
                      </div>
@@ -129,6 +148,19 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     $(document).ready(function() {
+        
+        // set default state
+        var defaultState = "<%$prefill->state%>";
+        if(defaultState) {
+            $('#stateSelect').val(defaultState);
+        }
+        
+        // Toggle Address View
+        $('#changeAddressBtn').on('click', function() {
+            $('#savedAddressCard').fadeOut('fast', function() {
+                $('#shippingFormWrapper').fadeIn('fast');
+            });
+        });
         
         // Custom method for letters only (optional, but good for names)
         $.validator.addMethod("lettersonly", function(value, element) {
@@ -263,6 +295,11 @@
                         } else {
                             toaster('error', response.message);
                             btn.html(originalText).prop('disabled', false);
+                            // Show form on error so user can fix details
+                            if ($('#shippingFormWrapper').is(':hidden')) {
+                                $('#savedAddressCard').hide();
+                                $('#shippingFormWrapper').fadeIn();
+                            }
                         }
                     },
                     error: function() {

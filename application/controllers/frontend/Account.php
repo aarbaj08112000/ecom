@@ -233,4 +233,104 @@ class Account extends MY_Controller {
             echo json_encode(['success' => 0, 'message' => 'Order not found or access denied.']);
         }
     }
+
+    /**
+     * AJAX endpoint to cancel an order
+     */
+    public function cancel_order() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $order_id = $this->input->post('order_id');
+        $reason = $this->input->post('reason');
+        $customer_id = $this->session->userdata('customer_id');
+
+        if (empty($order_id)) {
+            echo json_encode(['success' => 0, 'message' => 'Order ID is required.']);
+            return;
+        }
+
+        $this->load->model('Account_model');
+        $order = $this->Account_model->get_order_details($order_id, $customer_id);
+
+        if (!$order) {
+            echo json_encode(['success' => 0, 'message' => 'Order not found.']);
+            return;
+        }
+
+        // Only allow cancellation if status is pending or processing
+        $allowed_status = ['pending', 'processing'];
+        if (!in_array(strtolower($order->order_status), $allowed_status)) {
+            echo json_encode(['success' => 0, 'message' => 'Order cannot be cancelled in its current status.']);
+            return;
+        }
+
+        if ($this->Account_model->cancel_order($order_id, $customer_id, $reason)) {
+            echo json_encode(['success' => 1, 'message' => 'Order cancelled successfully!']);
+        } else {
+            echo json_encode(['success' => 0, 'message' => 'Failed to cancel order. Please try again.']);
+        }
+    }
+
+    /**
+     * AJAX endpoint to submit a return/refund request
+     */
+    public function submit_return_request() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $order_id = $this->input->post('order_id');
+        $reason = $this->input->post('reason');
+        $customer_id = $this->session->userdata('customer_id');
+
+        if (empty($order_id)) {
+            echo json_encode(['success' => 0, 'message' => 'Order ID is required.']);
+            return;
+        }
+
+        $this->load->model('Account_model');
+        $order = $this->Account_model->get_order_details($order_id, $customer_id);
+
+        if (!$order) {
+            echo json_encode(['success' => 0, 'message' => 'Order not found.']);
+            return;
+        }
+
+        // Only allow return if status is delivered
+        if (strtolower($order->order_status) !== 'delivered') {
+            echo json_encode(['success' => 0, 'message' => 'Returns are only allowed for delivered orders.']);
+            return;
+        }
+
+        // Check if already requested
+        $this->db->where('order_id', $order_id);
+        $this->db->where_in('refund_status', ['Requested', 'Processing', 'Completed']);
+        $existing = $this->db->get('refunds')->row();
+        
+        if ($existing) {
+            echo json_encode(['success' => 0, 'message' => 'A return/refund request has already been submitted for this order.']);
+            return;
+        }
+
+        // Get payment details
+        $payment = $this->Account_model->get_payment_by_order($order_id);
+        $payment_id = $payment ? $payment->payment_id : 0;
+
+        $refund_data = [
+            'order_id' => $order_id,
+            'payment_id' => $payment_id,
+            'refund_amount' => $order->total_amount,
+            'refund_status' => 'Requested',
+            'reason' => $reason,
+            'added_date' => date('Y-m-d H:i:s')
+        ];
+
+        if ($this->Account_model->submit_refund_request($refund_data)) {
+            echo json_encode(['success' => 1, 'message' => 'Return request submitted successfully!']);
+        } else {
+            echo json_encode(['success' => 0, 'message' => 'Failed to submit return request. Please try again.']);
+        }
+    }
 }

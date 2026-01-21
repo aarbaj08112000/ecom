@@ -116,6 +116,46 @@ class Cart extends MY_Controller {
         $data['title'] = 'Checkout';
         $data['page'] = 'checkout';
         
+        // Load Models
+        $this->load->model('Account_model');
+        $this->load->model('Address_model');
+        
+        // Fetch Data
+        $customer = $this->Account_model->get_customer_details($customer_id);
+        $addresses = $this->Address_model->get_user_addresses($customer_id);
+        
+        // Prepare Prefill Data
+        $prefill = [
+            'first_name' => '', 'last_name' => '', 'email' => '', 
+            'address' => '', 'city' => '', 'state' => '', 'zip' => ''
+        ];
+        $has_details = false;
+        
+        if ($customer) {
+            $prefill['email'] = $customer->email;
+            $names = explode(' ', $customer->customer_name, 2);
+            $prefill['first_name'] = $names[0] ?? '';
+            $prefill['last_name'] = $names[1] ?? '';
+        }
+
+        if (!empty($addresses)) {
+             $addr = $addresses[0]; // Use latest address
+             $has_details = true;
+             
+             if (!empty($addr->receiver_name)) {
+                  $names = explode(' ', $addr->receiver_name, 2);
+                  $prefill['first_name'] = $names[0] ?? '';
+                  $prefill['last_name'] = $names[1] ?? '';
+             }
+             $prefill['address'] = $addr->address;
+             $prefill['city'] = $addr->city;
+             $prefill['state'] = $addr->state;
+             $prefill['zip'] = $addr->pincode;
+        }
+        
+        $data['prefill'] = (object)$prefill; // Pass as object for easier smarty access if array access fails or consistent style
+        $data['has_details'] = $has_details;
+
         // Fetch Cart Items
         $data['cart_items'] = $this->Cart_model->get_cart_items($customer_id);
         
