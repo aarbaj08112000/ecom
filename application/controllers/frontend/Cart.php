@@ -202,22 +202,50 @@ class Cart extends MY_Controller {
             $total += $item->price * $item->quantity;
         }
 
+        // Calculate Shipping
+        $pincode = $this->input->post('zip');
+        $shipping = $this->Cart_model->get_shipping_charge($pincode, $total);
+        $shipping_charge = $shipping['is_serviceable'] ? $shipping['charge'] : 0.00;
+        
+        if (!$shipping['is_serviceable']) {
+            echo json_encode(['success' => 0, 'message' => 'Sorry, we do not deliver to this pincode.']);
+            return;
+        }
+
+        $net_total = $total + $shipping_charge;
+
+        // Handle Coupon
+        $coupon_id = $this->input->post('applied_coupon_id');
+        $discount_amount = 0;
+        if (!empty($coupon_id)) {
+            // Verify coupon again server-side
+            $coupon_code = $this->input->post('coupon_code');
+            $coupon_result = $this->Cart_model->validate_coupon($coupon_code, $total);
+            if ($coupon_result['success'] && $coupon_result['coupon_id'] == $coupon_id) {
+                $discount_amount = $coupon_result['discount_amount'];
+                $net_total -= $discount_amount;
+            }
+        }
+
         $shipping_address = [
             'name' => $this->input->post('first_name') . ' ' . $this->input->post('last_name'),
             'address' => $this->input->post('address'),
             'city' => $this->input->post('city'),
             'state' => $this->input->post('state'),
-            'zip' => $this->input->post('zip'),
+            'zip' => $pincode,
             'email' => $this->input->post('email')
         ];
 
         $order_data = [
             'user_id' => $customer_id,
             'shipping_address_json' => json_encode($shipping_address),
-            'total_amount' => $total,
-            'net_amount' => $total,
+            'coupon_id' => $coupon_id ? $coupon_id : NULL,
+            'total_amount' => $total, // This is subtotal in some systems, depends on schema. 
+            'discount_amount' => $discount_amount,
+            'shipping_charge' => $shipping_charge,
+            'net_amount' => $net_total,
             'order_status' => 'pending',
-            'payment_status' => 'Unpaid', // Or 'Paid' if integrated with mock gateway
+            'payment_status' => 'Unpaid',
             'payment_method' => $this->input->post('payment'),
             'added_date' => date('Y-m-d H:i:s'),
             'updated_date' => date('Y-m-d H:i:s')
@@ -237,7 +265,7 @@ class Cart extends MY_Controller {
                     'message' => 'Processing Payment...',
                     'razorpay_options' => [
                         'key' => 'rzp_test_UfEGkvD0w78cSN',
-                        'amount' => $total * 100, // Amount in paise
+                        'amount' => $net_total * 100, // Amount in paise
                         'name' => 'Craftology',
                         'description' => 'Order # ' . $order_id,
                         'currency' => 'INR',
@@ -284,6 +312,73 @@ class Cart extends MY_Controller {
             echo json_encode(['success' => 1, 'message' => 'Payment Successful!', 'redirect' => base_url('shop/dashboard')]);
         } else {
             echo json_encode(['success' => 0, 'message' => 'Payment Failed or Invalid Response']);
+        }
+    }
+
+    public function get_shipping_charge() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $pincode = $this->input->post('pincode');
+        $customer_id = $this->session->userdata('customer_id');
+
+        if (empty($pincode)) {
+            echo json_encode(['success' => 0, 'message' => 'Pincode is required']);
+            return;
+        }
+
+        $cart_items = $this->Cart_model->get_cart_items($customer_id);
+        $total = 0;
+        foreach($cart_items as $item){
+            $total += $item->price * $item->quantity;
+        }
+
+        $shipping = $this->Cart_model->get_shipping_charge($pincode, $total);
+
+        if ($shipping['is_serviceable']) {
+            echo json_encode([
+                'success' => 1, 
+                'shipping_charge' => $shipping['charge'], 
+                'estimated_days' => $shipping['estimated_days'],
+                'total_payable' => $total + $shipping['charge']
+            ]);
+        } else {
+            echo json_encode(['success' => 0, 'message' => $shipping['message']]);
+        }
+    }
+
+    public function apply_coupon() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $code = $this->input->post('coupon_code');
+        $customer_id = $this->session->userdata('customer_id');
+
+        if (empty($code)) {
+            echo json_encode(['success' => 0, 'message' => 'Please enter coupon code.']);
+            return;
+        }
+
+        $cart_items = $this->Cart_model->get_cart_items($customer_id);
+        $subtotal = 0;
+        foreach($cart_items as $item){
+            $subtotal += $item->price * $item->quantity;
+        }
+
+        $result = $this->Cart_model->validate_coupon($code, $subtotal);
+
+        if ($result['success']) {
+            echo json_encode([
+                'success' => 1,
+                'message' => 'Coupon applied successfully!',
+                'coupon_id' => $result['coupon_id'],
+                'discount_amount' => $result['discount_amount'],
+                'new_subtotal' => $subtotal - $result['discount_amount']
+            ]);
+        } else {
+            echo json_encode(['success' => 0, 'message' => $result['message']]);
         }
     }
 }

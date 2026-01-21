@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 17, 2026 at 08:01 PM
+-- Generation Time: Jan 21, 2026 at 04:25 PM
 -- Server version: 8.0.44-0ubuntu0.22.04.2
 -- PHP Version: 8.1.2-1ubuntu2.23
 
@@ -145,6 +145,14 @@ CREATE TABLE `cart` (
   `quantity` int NOT NULL,
   `added_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `added_date`) VALUES
+(5, 1, 5, 1, '2026-01-17 19:58:36'),
+(9, 11, 5, 1, '2026-01-21 10:49:04');
 
 -- --------------------------------------------------------
 
@@ -755,7 +763,14 @@ INSERT INTO `orders` (`order_id`, `user_id`, `shipping_address_json`, `billing_a
 (2, 2, '{\"name\":\"Riya Sharma\",\"address\":\"456 Knit Rd\",\"city\":\"Pune\",\"state\":\"Maharashtra\",\"zip\":\"411001\"}', NULL, NULL, '2500.00', '125.00', '0.00', '427.50', '2802.50', 'shipped', 'Paid', 'PayPal', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
 (3, 4, '{\"name\":\"Sneha Desai\",\"address\":\"789 Resin Ave\",\"city\":\"Surat\",\"state\":\"Gujarat\",\"zip\":\"395001\"}', NULL, NULL, '1800.00', '0.00', '100.00', '324.00', '2224.00', 'processing', 'Unpaid', 'COD', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
 (4, 5, '{\"name\":\"Nikhil Singh\",\"address\":\"321 Craft Blvd\",\"city\":\"Jaipur\",\"state\":\"Rajasthan\",\"zip\":\"302001\"}', NULL, NULL, '850.00', '0.00', '50.00', '0.00', '900.00', 'pending', 'Failed', 'Razorpay', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
-(5, 7, '{\"name\":\"Rahul Yadav\",\"address\":\"222 Jewel Ln\",\"city\":\"Indore\",\"state\":\"MP\",\"zip\":\"452001\"}', NULL, NULL, '1100.00', '110.00', '0.00', '0.00', '990.00', 'cancelled', 'Refunded', 'Credit Card', '2026-01-09 18:45:53', '2026-01-09 18:45:53');
+(5, 7, '{\"name\":\"Rahul Yadav\",\"address\":\"222 Jewel Ln\",\"city\":\"Indore\",\"state\":\"MP\",\"zip\":\"452001\"}', NULL, NULL, '1100.00', '110.00', '0.00', '0.00', '990.00', 'cancelled', 'Refunded', 'Credit Card', '2026-01-09 18:45:53', '2026-01-09 18:45:53'),
+(6, 1, '{\"name\":\"GAYATRI HEDAU\",\"address\":\"Vaishali Nagar\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"411037\",\"email\":\"gayatrihedau3@gmail.com\"}', NULL, NULL, '780.00', '0.00', '0.00', '0.00', '780.00', 'pending', 'Unpaid', NULL, '2026-01-17 18:24:34', '2026-01-17 18:24:34'),
+(7, 1, '{\"name\":\"Gayatri Hedau\",\"address\":\"Plot No - G-10 ,Vaishali Nagar Nagpur\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"440017\",\"email\":\"gayatri.arom@gmail.com\"}', NULL, NULL, '85.00', '0.00', '0.00', '0.00', '85.00', 'pending', 'Unpaid', 'Credit Card', '2026-01-17 18:38:06', '2026-01-17 18:38:06'),
+(8, 1, '{\"name\":\"Gayatri Hedau\",\"address\":\"Plot No - G-10 ,Vaishali Nagar Nagpur\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"440017\",\"email\":\"gayatri.arom@gmail.com\"}', NULL, NULL, '85.00', '0.00', '0.00', '0.00', '85.00', 'pending', 'Unpaid', 'Credit Card', '2026-01-17 18:39:54', '2026-01-17 18:39:54'),
+(9, 1, '{\"name\":\"Gayatri Hedau\",\"address\":\"Plot No - G-10 ,Vaishali Nagar Nagpur\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"440017\",\"email\":\"gayatri.arom@gmail.com\"}', NULL, NULL, '85.00', '0.00', '0.00', '0.00', '85.00', 'pending', 'Unpaid', 'Credit Card', '2026-01-17 18:41:17', '2026-01-17 18:41:17'),
+(10, 1, '{\"name\":\"Gayatri Hedau\",\"address\":\"Plot No - G-10 ,Vaishali Nagar Nagpur\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"440017\",\"email\":\"gayatri.arom@gmail.com\"}', NULL, NULL, '85.00', '0.00', '0.00', '0.00', '85.00', 'pending', 'Paid', 'Credit Card (pay_S537DffqLZZ8Us)', '2026-01-17 18:44:48', '2026-01-17 18:45:12'),
+(11, 11, '{\"name\":\"GAYATRI HEDAU\",\"address\":\"Vaishali Nagar\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"411037\",\"email\":\"gayu@yopmail.com\"}', NULL, NULL, '210.00', '0.00', '0.00', '0.00', '210.00', 'pending', 'Paid', 'Credit Card (pay_S6Qtjvl8bA2lXo)', '2026-01-21 06:39:38', '2026-01-21 06:40:05'),
+(12, 11, '{\"name\":\"GAYATRI HEDAU\",\"address\":\"Vaishali Nagar\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"zip\":\"411037\",\"email\":\"gayu@yopmail.com\"}', NULL, NULL, '60.00', '0.00', '0.00', '0.00', '60.00', 'cancelled', 'Paid', 'Credit Card (pay_S6Tnp4QLR8xaGs)', '2026-01-21 09:23:47', '2026-01-21 09:37:48');
 
 -- --------------------------------------------------------
 
@@ -781,7 +796,8 @@ INSERT INTO `order_history` (`history_id`, `order_id`, `status_from`, `status_to
 (1, 1, 'pending', 'delivered', 'Order completed successfully', NULL, '2026-01-09 18:45:53'),
 (2, 2, 'pending', 'shipped', 'Package handed over to carrier', NULL, '2026-01-09 18:45:53'),
 (3, 3, 'pending', 'processing', 'Order under review', NULL, '2026-01-09 18:45:53'),
-(4, 5, 'pending', 'cancelled', 'Customer requested cancellation', NULL, '2026-01-09 18:45:53');
+(4, 5, 'pending', 'cancelled', 'Customer requested cancellation', NULL, '2026-01-09 18:45:53'),
+(5, 12, 'pending', 'cancelled', 'I want to cancel this product due to Wrong order', 11, '2026-01-21 09:37:48');
 
 -- --------------------------------------------------------
 
@@ -812,7 +828,17 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `product_n
 (2, 2, 2, 'Pressed Flower Resin Tray', NULL, 1, '2500.00', '125.00', '427.50', '2802.50', '2026-01-09 18:45:53'),
 (3, 3, 3, 'Glow-in-the-Dark Resin Pyramid', NULL, 1, '1800.00', '0.00', '324.00', '2124.00', '2026-01-09 18:45:53'),
 (4, 4, 7, 'Amigurumi Crochet Bunny', NULL, 1, '850.00', '0.00', '0.00', '850.00', '2026-01-09 18:45:53'),
-(5, 5, 23, 'Silk Thread Bangle Set', NULL, 1, '1100.00', '110.00', '0.00', '990.00', '2026-01-09 18:45:53');
+(5, 5, 23, 'Silk Thread Bangle Set', NULL, 1, '1100.00', '110.00', '0.00', '990.00', '2026-01-09 18:45:53'),
+(6, 6, 1, 'Ocean Resin Coaster', NULL, 1, '120.00', '0.00', '0.00', '0.00', '2026-01-17 18:24:34'),
+(7, 6, 4, 'Macrame Wall Hanging', NULL, 2, '150.00', '0.00', '0.00', '0.00', '2026-01-17 18:24:34'),
+(8, 6, 5, 'Crystal Amethyst Bracelet', NULL, 6, '60.00', '0.00', '0.00', '0.00', '2026-01-17 18:24:34'),
+(9, 7, 3, 'Personalized Wood Frame', NULL, 1, '85.00', '0.00', '0.00', '0.00', '2026-01-17 18:38:06'),
+(10, 8, 3, 'Personalized Wood Frame', NULL, 1, '85.00', '0.00', '0.00', '0.00', '2026-01-17 18:39:54'),
+(11, 9, 3, 'Personalized Wood Frame', NULL, 1, '85.00', '0.00', '0.00', '0.00', '2026-01-17 18:41:17'),
+(12, 10, 3, 'Personalized Wood Frame', NULL, 1, '85.00', '0.00', '0.00', '0.00', '2026-01-17 18:44:48'),
+(13, 11, 4, 'Macrame Wall Hanging', NULL, 1, '150.00', '0.00', '0.00', '0.00', '2026-01-21 06:39:38'),
+(14, 11, 5, 'Crystal Amethyst Bracelet', NULL, 1, '60.00', '0.00', '0.00', '0.00', '2026-01-21 06:39:38'),
+(15, 12, 5, 'Crystal Amethyst Bracelet', NULL, 1, '60.00', '0.00', '0.00', '0.00', '2026-01-21 09:23:47');
 
 -- --------------------------------------------------------
 
@@ -1094,6 +1120,67 @@ INSERT INTO `shipping_methods` (`id`, `method_name`, `carrier`, `shipping_fee`, 
 (1, 'Standard Shipping', 'FedEx', '5.00', 3, 5, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL),
 (2, 'Express Shipping', 'DHL', '15.00', 1, 2, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL),
 (3, 'Free Shipping', 'Local Post', '0.00', 7, 10, 'Active', 0, '2026-01-07 23:57:44', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_pincode_charge`
+--
+
+CREATE TABLE `shipping_pincode_charge` (
+  `id` int NOT NULL,
+  `pincode_from` int NOT NULL,
+  `pincode_to` int NOT NULL,
+  `zone` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `min_order_amount` decimal(10,2) DEFAULT '0.00',
+  `shipping_charge` decimal(10,2) NOT NULL,
+  `cod_available` tinyint(1) DEFAULT '1',
+  `cod_charge` decimal(10,2) DEFAULT '0.00',
+  `estimated_days` varchar(20) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `shipping_pincode_charge`
+--
+
+INSERT INTO `shipping_pincode_charge` (`id`, `pincode_from`, `pincode_to`, `zone`, `state`, `city`, `min_order_amount`, `shipping_charge`, `cod_available`, `cod_charge`, `estimated_days`, `status`, `created_at`, `updated_at`) VALUES
+(1, 400000, 449999, 'West Zone', 'Maharashtra', NULL, '0.00', '50.00', 1, '0.00', '2-4 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(2, 450000, 479999, 'West Zone', 'Madhya Pradesh', NULL, '0.00', '55.00', 1, '0.00', '3-5 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(3, 380000, 389999, 'West Zone', 'Gujarat', NULL, '0.00', '50.00', 1, '0.00', '2-4 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(4, 403000, 403999, 'West Zone', 'Goa', NULL, '0.00', '55.00', 1, '0.00', '3-5 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(5, 300000, 329999, 'West Zone', 'Rajasthan', NULL, '0.00', '60.00', 1, '0.00', '3-5 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(6, 500000, 509999, 'South Zone', 'Telangana', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(7, 600000, 629999, 'South Zone', 'Kerala', NULL, '0.00', '70.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(8, 560000, 569999, 'South Zone', 'Karnataka', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(9, 620000, 629999, 'South Zone', 'Tamil Nadu', NULL, '0.00', '70.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(10, 520000, 529999, 'South Zone', 'Andhra Pradesh', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(11, 110000, 119999, 'North Zone', 'Delhi', NULL, '0.00', '55.00', 1, '0.00', '2-4 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(12, 120000, 129999, 'North Zone', 'Haryana', NULL, '0.00', '60.00', 1, '0.00', '3-5 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(13, 130000, 139999, 'North Zone', 'Punjab', NULL, '0.00', '60.00', 1, '0.00', '3-5 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(14, 140000, 149999, 'North Zone', 'Himachal Pradesh', NULL, '0.00', '65.00', 1, '0.00', '4-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(15, 160000, 169999, 'North Zone', 'Chandigarh', NULL, '0.00', '60.00', 1, '0.00', '2-4 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(16, 200000, 249999, 'North Zone', 'Uttar Pradesh', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(17, 246000, 246999, 'North Zone', 'Uttarakhand', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(18, 180000, 189999, 'North Zone', 'Jammu & Kashmir', NULL, '0.00', '80.00', 1, '0.00', '5-8 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(19, 700000, 729999, 'East Zone', 'West Bengal', NULL, '0.00', '60.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(20, 751000, 752999, 'East Zone', 'Odisha', NULL, '0.00', '65.00', 1, '0.00', '3-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(21, 800000, 829999, 'East Zone', 'Bihar', NULL, '0.00', '70.00', 1, '0.00', '4-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(22, 825000, 829999, 'East Zone', 'Jharkhand', NULL, '0.00', '70.00', 1, '0.00', '4-6 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(23, 781000, 781999, 'North East Zone', 'Assam', NULL, '0.00', '90.00', 1, '0.00', '6-9 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(24, 795000, 795999, 'North East Zone', 'Manipur', NULL, '0.00', '90.00', 1, '0.00', '6-9 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(25, 793000, 793999, 'North East Zone', 'Meghalaya', NULL, '0.00', '90.00', 1, '0.00', '6-9 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(26, 792000, 792999, 'North East Zone', 'Tripura', NULL, '0.00', '90.00', 1, '0.00', '6-9 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(27, 787000, 787999, 'North East Zone', 'Arunachal Pradesh', NULL, '0.00', '95.00', 1, '0.00', '7-10 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(28, 799000, 799999, 'North East Zone', 'Sikkim', NULL, '0.00', '95.00', 1, '0.00', '7-10 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(29, 744101, 744199, 'Union Territories', 'Andaman & Nicobar', NULL, '0.00', '120.00', 1, '0.00', '8-12 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(30, 682001, 682999, 'Union Territories', 'Lakshadweep', NULL, '0.00', '120.00', 1, '0.00', '8-12 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(31, 735101, 735199, 'Union Territories', 'Dadra & Nagar Haveli', NULL, '0.00', '70.00', 1, '0.00', '4-7 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44'),
+(32, 403101, 403799, 'Union Territories', 'Daman & Diu', NULL, '0.00', '70.00', 1, '0.00', '4-7 Days', 1, '2026-01-21 15:44:44', '2026-01-21 15:44:44');
 
 -- --------------------------------------------------------
 
@@ -2019,7 +2106,316 @@ INSERT INTO `traffic_logs` (`id`, `ip_address`, `user_agent`, `request_uri`, `re
 (867, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:27:12'),
 (868, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:27:19'),
 (869, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:27:25'),
-(870, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 14:27:35');
+(870, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 14:27:35'),
+(871, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:35:14'),
+(872, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 14:35:22'),
+(873, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:35:44'),
+(874, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', '', 'Desktop', '2026-01-17 14:35:59'),
+(875, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?category=12', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:36:19'),
+(876, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/products?max_price=5000&sort=default', 'Desktop', '2026-01-17 14:36:32'),
+(877, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:36:41'),
+(878, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:41:25'),
+(879, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:42:01'),
+(880, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:42:12'),
+(881, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:42:12'),
+(882, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:42:13'),
+(883, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:43:11'),
+(884, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:43:11'),
+(885, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:43:11'),
+(886, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 14:43:23'),
+(887, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:44:02'),
+(888, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:44:19'),
+(889, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:44:39'),
+(890, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/about', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 14:45:12'),
+(891, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/contact', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 14:45:15'),
+(892, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 14:45:21'),
+(893, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 14:46:47'),
+(894, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 14:47:48'),
+(895, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 14:48:49');
+INSERT INTO `traffic_logs` (`id`, `ip_address`, `user_agent`, `request_uri`, `referrer`, `device_type`, `timestamp`) VALUES
+(896, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?category=12', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 14:48:55'),
+(897, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products?category=12', 'Desktop', '2026-01-17 14:48:58'),
+(898, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:50:20'),
+(899, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:50:20'),
+(900, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 14:50:53'),
+(901, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:50:56'),
+(902, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:50:56'),
+(903, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:50:56'),
+(904, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:51:40'),
+(905, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:51:54'),
+(906, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:06'),
+(907, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:12'),
+(908, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:27'),
+(909, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:28'),
+(910, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:28'),
+(911, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:28'),
+(912, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:28'),
+(913, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:29'),
+(914, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:29'),
+(915, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:29'),
+(916, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:55:29'),
+(917, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:56:37'),
+(918, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 14:57:31'),
+(919, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/4', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 14:58:46'),
+(920, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:58:48'),
+(921, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 14:58:56'),
+(922, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 14:59:54'),
+(923, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:21'),
+(924, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:22'),
+(925, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:22'),
+(926, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:22'),
+(927, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:22'),
+(928, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:22'),
+(929, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:23'),
+(930, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:23'),
+(931, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:23'),
+(932, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:00:30'),
+(933, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', '', 'Desktop', '2026-01-17 15:00:30'),
+(934, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 15:00:38'),
+(935, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 15:00:44'),
+(936, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:02:38'),
+(937, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:02:41'),
+(938, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:03:05'),
+(939, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?max_price=5000&sort=default', '', 'Desktop', '2026-01-17 15:04:08'),
+(940, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?max_price=5000&sort=default', '', 'Desktop', '2026-01-17 15:05:29'),
+(941, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:05:56'),
+(942, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:12:21'),
+(943, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:12:22'),
+(944, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:12:22'),
+(945, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:12:33'),
+(946, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:12:34'),
+(947, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:12:34'),
+(948, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', '', 'Desktop', '2026-01-17 15:17:50'),
+(949, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:17:56'),
+(950, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:18:05'),
+(951, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:22:13'),
+(952, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:22:13'),
+(953, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:22:13'),
+(954, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:22:31'),
+(955, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:24:22'),
+(956, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:24:31'),
+(957, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:25:17'),
+(958, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:25:24'),
+(959, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:25:24'),
+(960, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:25:29'),
+(961, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:25:42'),
+(962, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:25:42'),
+(963, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:25:42'),
+(964, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:26:50'),
+(965, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:29:35'),
+(966, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:31:38'),
+(967, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:32:12'),
+(968, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:32:15'),
+(969, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:32:50'),
+(970, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:32:50'),
+(971, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:32:50'),
+(972, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:07'),
+(973, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:20'),
+(974, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:34'),
+(975, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:36'),
+(976, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:51'),
+(977, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:51'),
+(978, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:33:51'),
+(979, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/about', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:34:13'),
+(980, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/contact', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 15:34:15'),
+(981, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 15:34:20'),
+(982, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-17 15:34:29'),
+(983, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?category=12', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 15:34:33'),
+(984, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:34:51'),
+(985, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:37:19'),
+(986, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:01'),
+(987, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:01'),
+(988, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:01'),
+(989, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:14'),
+(990, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:14'),
+(991, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:14'),
+(992, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:14'),
+(993, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:38:29'),
+(994, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/products?category=12', 'Desktop', '2026-01-17 15:38:48'),
+(995, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/logout', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:39:10'),
+(996, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:39:10'),
+(997, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 15:39:17'),
+(998, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 15:39:22'),
+(999, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:39:37'),
+(1000, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/product/5', 'Desktop', '2026-01-17 15:39:42'),
+(1001, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 15:39:47'),
+(1002, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/about', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:40:03'),
+(1003, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 15:40:06'),
+(1004, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:49:42'),
+(1005, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:49:50'),
+(1006, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:49:50'),
+(1007, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:52:53'),
+(1008, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', '', 'Desktop', '2026-01-17 15:53:09'),
+(1009, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', '', 'Desktop', '2026-01-17 15:53:50'),
+(1010, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:53:53'),
+(1011, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:54:45'),
+(1012, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:56:19'),
+(1013, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:56:20'),
+(1014, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:56:20'),
+(1015, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', '', 'Desktop', '2026-01-17 15:56:27'),
+(1016, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', '', 'Desktop', '2026-01-17 15:56:36'),
+(1017, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 15:57:56'),
+(1018, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 15:58:05'),
+(1019, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/product/5', 'Desktop', '2026-01-17 15:58:32'),
+(1020, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/product/5', 'Desktop', '2026-01-17 15:58:53'),
+(1021, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:58:58'),
+(1022, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/wishlist', 'Desktop', '2026-01-17 15:59:02'),
+(1023, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:00:46'),
+(1024, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:01:03'),
+(1025, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:02:27'),
+(1026, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:02:36'),
+(1027, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:03:42'),
+(1028, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:03:42'),
+(1029, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:03:42'),
+(1030, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:05:01'),
+(1031, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:05:01'),
+(1032, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:05:01'),
+(1033, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:06:52'),
+(1034, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:06:52'),
+(1035, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:06:53'),
+(1036, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:06:57'),
+(1037, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:07:12'),
+(1038, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 16:11:49'),
+(1039, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:12:10'),
+(1040, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:12:42'),
+(1041, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 16:12:59'),
+(1042, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:13:09'),
+(1043, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:13:41'),
+(1044, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 16:13:50'),
+(1045, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:14:03'),
+(1046, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 16:14:23'),
+(1047, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:14:36'),
+(1048, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:14:42'),
+(1049, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:21'),
+(1050, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:21'),
+(1051, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:21'),
+(1052, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:59'),
+(1053, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:59'),
+(1054, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:15:59'),
+(1055, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:16:19'),
+(1056, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:16:19'),
+(1057, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:07'),
+(1058, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:07'),
+(1059, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:08'),
+(1060, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:08'),
+(1061, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:08'),
+(1062, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:17:21'),
+(1063, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:17:28'),
+(1064, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:18:48'),
+(1065, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:19:49'),
+(1066, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:20:03'),
+(1067, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 16:20:13'),
+(1068, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 16:20:28'),
+(1069, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 16:22:59'),
+(1070, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 16:22:59'),
+(1071, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-17 16:22:59'),
+(1072, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 16:23:11'),
+(1073, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 16:23:11'),
+(1074, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/wishlist', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 16:23:11'),
+(1075, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 17:59:14'),
+(1076, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/logout', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 17:59:37'),
+(1077, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 17:59:38'),
+(1078, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 17:59:45'),
+(1079, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/1', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 17:59:56'),
+(1080, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/product/1', 'Desktop', '2026-01-17 18:00:00'),
+(1081, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-17 18:00:06'),
+(1082, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/1', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 18:00:22'),
+(1083, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/product/1', 'Desktop', '2026-01-17 18:00:31'),
+(1084, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/contact', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:00:35'),
+(1085, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 18:00:39'),
+(1086, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 18:01:36'),
+(1087, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:03:39'),
+(1088, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-17 18:06:49'),
+(1089, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:07:00'),
+(1090, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:18:06'),
+(1091, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 18:18:12'),
+(1092, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:18:51'),
+(1093, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:20:53'),
+(1094, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:21:02'),
+(1095, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:21:02'),
+(1096, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:21:02'),
+(1097, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:24:23'),
+(1098, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:24:35'),
+(1099, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:27:06'),
+(1100, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:27:16'),
+(1101, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/3', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 18:27:24'),
+(1102, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/product/3', 'Desktop', '2026-01-17 18:27:29'),
+(1103, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:27:33'),
+(1104, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:27:55'),
+(1105, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:33:19'),
+(1106, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:33:20'),
+(1107, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:33:20'),
+(1108, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:34:04'),
+(1109, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:34:04'),
+(1110, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:34:04'),
+(1111, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:07'),
+(1112, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:08'),
+(1113, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:08'),
+(1114, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:08'),
+(1115, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:08'),
+(1116, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:09'),
+(1117, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:09'),
+(1118, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:09'),
+(1119, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 18:37:09');
+INSERT INTO `traffic_logs` (`id`, `ip_address`, `user_agent`, `request_uri`, `referrer`, `device_type`, `timestamp`) VALUES
+(1120, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:45:14'),
+(1121, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:47:15'),
+(1122, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:47:55'),
+(1123, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:49:33'),
+(1124, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:49:33'),
+(1125, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:49:33'),
+(1126, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:50:50'),
+(1127, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 18:53:49'),
+(1128, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 19:55:42'),
+(1129, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/track-order', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-17 19:55:58'),
+(1130, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 19:58:11'),
+(1131, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-17 19:58:21'),
+(1132, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 19:58:25'),
+(1133, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-17 19:58:31'),
+(1134, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 19:58:40'),
+(1135, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-17 19:58:44'),
+(1136, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/product/5', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-17 19:58:52'),
+(1137, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', '', 'Desktop', '2026-01-21 06:30:57'),
+(1138, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?category=17', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-21 06:31:31'),
+(1139, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/about', 'http://localhost/ecommerce/shop/products?category=17', 'Desktop', '2026-01-21 06:31:44'),
+(1140, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/contact', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-21 06:31:50'),
+(1141, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-21 06:31:54'),
+(1142, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-21 06:32:02'),
+(1143, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/login', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-21 06:32:09'),
+(1144, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop', 'http://localhost/ecommerce/shop/login', 'Desktop', '2026-01-21 06:32:20'),
+(1145, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products?category=12', 'http://localhost/ecommerce/shop', 'Desktop', '2026-01-21 06:32:26'),
+(1146, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products?category=12', 'Desktop', '2026-01-21 06:32:48'),
+(1147, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 06:39:15'),
+(1148, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 06:40:07'),
+(1149, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/about', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 08:30:00'),
+(1150, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/contact', 'http://localhost/ecommerce/shop/about', 'Desktop', '2026-01-21 08:30:04'),
+(1151, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/contact', 'Desktop', '2026-01-21 08:30:09'),
+(1152, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 08:31:16'),
+(1153, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-21 08:31:27'),
+(1154, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 08:31:31'),
+(1155, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 09:03:04'),
+(1156, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:04:35'),
+(1157, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/track-order', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:07:49'),
+(1158, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 09:23:33'),
+(1159, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 09:23:33'),
+(1160, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 09:23:33'),
+(1161, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 09:23:33'),
+(1162, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:30:35'),
+(1163, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:37:05'),
+(1164, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:37:51'),
+(1165, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/track-order', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:38:02'),
+(1166, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:38:05'),
+(1167, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:39:33'),
+(1168, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:41:15'),
+(1169, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:45:57'),
+(1170, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:47:23'),
+(1171, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/checkout', 'Desktop', '2026-01-21 09:48:19'),
+(1172, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:49:20'),
+(1173, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/track-order', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:49:32'),
+(1174, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/dashboard', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 09:49:36'),
+(1175, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/products', 'http://localhost/ecommerce/shop/dashboard', 'Desktop', '2026-01-21 10:48:59'),
+(1176, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/cart', 'http://localhost/ecommerce/shop/products', 'Desktop', '2026-01-21 10:49:12'),
+(1177, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '/ecommerce/shop/checkout', 'http://localhost/ecommerce/shop/cart', 'Desktop', '2026-01-21 10:49:22');
 
 -- --------------------------------------------------------
 
@@ -2071,8 +2467,8 @@ CREATE TABLE `wishlist` (
 --
 
 INSERT INTO `wishlist` (`wishlist_id`, `user_id`, `product_id`, `status`, `is_delete`, `added_date`) VALUES
-(1, 1, 1, 'Active', '0', '2026-01-10 16:30:52'),
-(2, 1, 2, 'Active', '0', '2026-01-10 16:30:52'),
+(1, 1, 1, 'Active', '1', '2026-01-10 16:30:52'),
+(2, 1, 2, 'Active', '1', '2026-01-10 16:30:52'),
 (3, 2, 3, 'Active', '0', '2026-01-10 16:30:52'),
 (4, 2, 1, 'Inactive', '0', '2026-01-10 16:30:52'),
 (5, 3, 4, 'Active', '0', '2026-01-10 16:30:52'),
@@ -2090,7 +2486,23 @@ INSERT INTO `wishlist` (`wishlist_id`, `user_id`, `product_id`, `status`, `is_de
 (17, 9, 5, 'Active', '0', '2026-01-10 16:30:52'),
 (18, 9, 2, 'Active', '0', '2026-01-10 16:30:52'),
 (19, 10, 3, 'Active', '0', '2026-01-10 16:30:52'),
-(20, 10, 1, 'Active', '0', '2026-01-10 16:30:52');
+(20, 10, 1, 'Active', '0', '2026-01-10 16:30:52'),
+(21, 1, 2, 'Active', '1', '2026-01-17 20:20:31'),
+(22, 1, 4, 'Active', '1', '2026-01-17 20:20:39'),
+(23, 1, 5, 'Active', '1', '2026-01-17 20:20:41'),
+(24, 1, 3, 'Active', '1', '2026-01-17 20:20:43'),
+(25, 1, 5, 'Active', '1', '2026-01-17 20:26:27'),
+(26, 1, 4, 'Active', '1', '2026-01-17 20:26:28'),
+(27, 1, 3, 'Active', '1', '2026-01-17 20:26:30'),
+(28, 1, 2, 'Active', '1', '2026-01-17 20:26:35'),
+(29, 1, 5, 'Active', '1', '2026-01-17 20:35:45'),
+(30, 1, 4, 'Active', '1', '2026-01-17 20:44:01'),
+(31, 1, 5, 'Active', '1', '2026-01-17 20:52:33'),
+(32, 1, 4, 'Active', '1', '2026-01-17 20:52:41'),
+(33, 1, 5, 'Active', '1', '2026-01-17 21:01:53'),
+(34, 1, 3, 'Active', '1', '2026-01-17 21:08:24'),
+(35, 1, 5, 'Active', '1', '2026-01-17 21:26:39'),
+(36, 1, 5, 'Active', '1', '2026-01-17 21:44:20');
 
 --
 -- Indexes for dumped tables
@@ -2333,6 +2745,12 @@ ALTER TABLE `shipping_methods`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shipping_pincode_charge`
+--
+ALTER TABLE `shipping_pincode_charge`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `testimonials`
 --
 ALTER TABLE `testimonials`
@@ -2392,7 +2810,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2506,19 +2924,19 @@ ALTER TABLE `menu_master`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `history_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `history_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_tracking`
@@ -2575,6 +2993,12 @@ ALTER TABLE `shipping_methods`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `shipping_pincode_charge`
+--
+ALTER TABLE `shipping_pincode_charge`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
@@ -2584,7 +3008,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `traffic_logs`
 --
 ALTER TABLE `traffic_logs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=871;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1178;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
@@ -2596,7 +3020,7 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlist_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `wishlist_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Constraints for dumped tables

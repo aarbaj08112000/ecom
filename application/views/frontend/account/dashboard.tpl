@@ -137,10 +137,10 @@
                                                          </div>
                                                      </div>
                                                  </td>
-                                                 <td>
-                                                     <div class="small text-muted"><i class="ti ti-calendar me-1"></i> <%$order->added_date|date_format:"%b %d, %Y"%></div>
-                                                     <span class="fw-bold text-dark small"><%$config.currency_symbol%><%$order->total_amount%></span>
-                                                 </td>
+                                                  <td>
+                                                      <div class="small text-muted"><i class="ti ti-calendar me-1"></i> <%$order->added_date|date_format:"%b %d, %Y"%></div>
+                                                      <span class="fw-bold text-dark small" title="Grand Total"><%$config.currency_symbol%><%$order->net_amount%></span>
+                                                  </td>
                                                  <td>
                                                      <%if $order->order_status == 'delivered'%>
                                                         <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 small"><i class="ti ti-check me-1"></i> Delivered</span>
@@ -190,9 +190,9 @@
                                      <thead class="bg-light small fw-bold text-uppercase text-secondary letter-spacing-1">
                                          <tr>
                                              <th class="ps-4 py-3">Order ID</th>
-                                             <th class="py-3">Date</th>
-                                             <th class="py-3">Amount</th>
-                                             <th class="py-3">Status</th>
+                                              <th class="py-3">Date</th>
+                                              <th class="py-3 text-end">Grand Total</th>
+                                              <th class="py-3">Status</th>
                                              <th class="pe-4 py-3 text-end">Action</th>
                                          </tr>
                                      </thead>
@@ -202,7 +202,7 @@
                                              <tr>
                                                  <td class="ps-4 fw-bold text-primary">#<%$order->order_id%></td>
                                                  <td class="text-muted"><%$order->added_date|date_format:"%b %d, %Y"%></td>
-                                                 <td class="fw-bold"><%$config.currency_symbol%><%$order->total_amount%></td>
+                                                  <td class="fw-bold text-end"><%$config.currency_symbol%><%$order->net_amount%></td>
                                                  <td>
                                                      <%if $order->order_status == 'delivered'%>
                                                         <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Delivered</span>
@@ -867,8 +867,11 @@ function renderOrderDetails(order) {
     
     // Build items HTML
     let itemsHTML = '';
+    let subtotal = 0;
     if (order.items && order.items.length > 0) {
         order.items.forEach(item => {
+            const itemTotal = parseFloat(item.price) * parseInt(item.quantity);
+            subtotal += itemTotal;
             itemsHTML += `
                 <tr>
                     <td class="ps-4 py-3">
@@ -883,12 +886,26 @@ function renderOrderDetails(order) {
                         </div>
                     </td>
                     <td class="text-end fw-bold">${currency_symbol}${parseFloat(item.price).toFixed(2)}</td>
-                    <td class="pe-4 text-end fw-bold text-primary">${currency_symbol}${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</td>
+                    <td class="pe-4 text-end fw-bold text-primary">${currency_symbol}${itemTotal.toFixed(2)}</td>
                 </tr>
             `;
         });
     } else {
         itemsHTML = '<tr><td colspan="3" class="text-center py-4 text-muted">No items found</td></tr>';
+    }
+
+    // Build coupon row if applied
+    let couponRow = '';
+    if (order.coupon_id && order.discount_amount > 0) {
+        couponRow = `
+            <tr>
+                <td colspan="2" class="text-end py-1 text-success small">
+                    <i class="ti ti-tag me-1"></i> Coupon (${order.coupon_code})
+                </td>
+                <td class="pe-4 py-1 text-end text-success fw-bold small">
+                    -${currency_symbol}${parseFloat(order.discount_amount).toFixed(2)}
+                </td>
+            </tr>`;
     }
     
     // Render complete order details
@@ -903,7 +920,6 @@ function renderOrderDetails(order) {
                         </div>
                         <div class="text-end">
                             ${statusBadge}
-                            <h4 class="fw-bold text-primary mt-2 mb-0">${currency_symbol}${parseFloat(order.total_amount).toFixed(2)}</h4>
                         </div>
                     </div>
                     
@@ -913,12 +929,27 @@ function renderOrderDetails(order) {
                                 <tr>
                                     <th class="ps-4 py-3">Product</th>
                                     <th class="py-3 text-end">Price</th>
-                                    <th class="pe-4 py-3 text-end">Subtotal</th>
+                                    <th class="pe-4 py-3 text-end">Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 ${itemsHTML}
                             </tbody>
+                            <tfoot class="bg-light-subtle">
+                                <tr>
+                                    <td colspan="2" class="text-end py-3 text-muted small">Subtotal</td>
+                                    <td class="pe-4 text-end fw-bold">${currency_symbol}${subtotal.toFixed(2)}</td>
+                                </tr>
+                                ${couponRow}
+                                <tr>
+                                    <td colspan="2" class="text-end py-3 text-muted small">Shipping Charge</td>
+                                    <td class="pe-4 text-end fw-bold text-success">${parseFloat(order.shipping_charge) > 0 ? currency_symbol + parseFloat(order.shipping_charge).toFixed(2) : 'Free'}</td>
+                                </tr>
+                                <tr class="border-top">
+                                    <td colspan="2" class="text-end py-3 fw-bold fs-6">Grand Total</td>
+                                    <td class="pe-4 text-end fw-bold text-primary fs-5">${currency_symbol}${parseFloat(order.net_amount).toFixed(2)}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

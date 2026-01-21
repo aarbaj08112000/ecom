@@ -114,4 +114,97 @@ class Cart_model extends CI_Model {
             'updated_date' => date('Y-m-d H:i:s')
         ]);
     }
+
+    /**
+     * Get shipping charge based on pincode
+     * Matches pincode against ranges in shipping_pincode_charge table
+     */
+    public function get_shipping_charge($pincode, $order_amount = 0) {
+        // Global Free Shipping Threshold
+        $global_free_threshold = $this->config->item('free_shipping_threshold');
+        if ($global_free_threshold > 0 && $order_amount >= $global_free_threshold) {
+            return [
+                'status' => 'success',
+                'charge' => 0.00,
+                'is_serviceable' => true,
+                'estimated_days' => 'Standard' // Or fetch from a default if needed
+            ];
+        }
+
+        $this->db->where('pincode_from <=', $pincode);
+        $this->db->where('pincode_to >=', $pincode);
+        $this->db->where('status', 1);
+        $query = $this->db->get('shipping_pincode_charge');
+        $charge_info = $query->row();
+
+        if ($charge_info) {
+            // Check if order amount qualifies for free shipping (if min_order_amount > 0 and met)
+            if ($charge_info->min_order_amount > 0 && $order_amount >= $charge_info->min_order_amount) {
+                return [
+                    'status' => 'success',
+                    'charge' => 0.00,
+                    'is_serviceable' => true,
+                    'estimated_days' => $charge_info->estimated_days
+                ];
+            }
+            return [
+                'status' => 'success',
+                'charge' => $charge_info->shipping_charge,
+                'is_serviceable' => true,
+                'estimated_days' => $charge_info->estimated_days
+            ];
+        }
+
+        return [
+            'status' => 'error',
+            'charge' => 0.00,
+            'is_serviceable' => false,
+            'message' => 'Shipping not available for this pincode.'
+        ];
+    }
+
+    /**
+     * Validate coupon code and calculate discount
+     */
+    public function validate_coupon($code, $subtotal) {
+        $this->db->where('code', $code);
+        $this->db->where('coupons_status', 'Active');
+        $this->db->where('status', 'Active');
+        $this->db->where('is_delete', '0');
+        $this->db->group_start();
+            $this->db->where('expires_at >=', date('Y-m-d'));
+            $this->db->or_where('expires_at IS NULL');
+        $this->db->group_end();
+        $query = $this->db->get('coupons');
+        $coupon = $query->row();
+
+        if (!$coupon) {
+            return ['success' => false, 'message' => 'Invalid or expired coupon code.'];
+        }
+
+        if ($subtotal < $coupon->min_order_value) {
+            return ['success' => false, 'message' => 'Minimum order value for this coupon is ' . $coupon->min_order_value];
+        }
+
+        $discount_amount = 0;
+        if ($coupon->discount_type === 'Percentage') {
+            $discount_amount = ($subtotal * $coupon->discount) / 100;
+        } else {
+            $discount_amount = $coupon->discount;
+        }
+
+        // Ensure discount doesn't exceed subtotal
+        if ($discount_amount > $subtotal) {
+            $discount_amount = $subtotal;
+        }
+
+        return [
+            'success' => true,
+            'coupon_id' => $coupon->coupons_id,
+            'code' => $coupon->code,
+            'discount_amount' => $discount_amount,
+            'discount_type' => $coupon->discount_type,
+            'discount_value' => $coupon->discount
+        ];
+    }
 }

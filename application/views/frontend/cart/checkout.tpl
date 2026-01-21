@@ -62,7 +62,8 @@
                              </div>
                               <div class="col-md-3">
                                  <label class="form-label small fw-bold text-muted">Zip</label>
-                                 <input type="text" name="zip" class="form-control bg-light border-0 py-2" value="<%$prefill->zip%>" required>
+                                 <input type="text" name="zip" id="zipInput" class="form-control bg-light border-0 py-2" value="<%$prefill->zip%>" maxlength="6" required>
+                                  <div id="pincode-status" class="small mt-1"></div>
                              </div>
                          </div>
                      </div>
@@ -113,16 +114,36 @@
                             <p class="text-muted text-center">Your cart is empty.</p>
                         <%/if%>
                         
+                         <div class="mb-3">
+                             <label class="form-label small fw-bold text-muted">Have a coupon?</label>
+                             <div class="input-group" id="couponInputGroup">
+                                 <input type="text" id="couponCode" name="coupon_code" class="form-control form-control-sm border-0 bg-light-subtle" placeholder="Enter coupon">
+                                 <button type="button" id="applyCouponBtn" class="btn btn-dark btn-sm px-3">Apply</button>
+                                 <button type="button" id="removeCouponBtn" class="btn btn-outline-danger btn-sm px-3" style="display:none;">Remove</button>
+                             </div>
+                             <div id="couponMsg" class="small mt-1"></div>
+                             <input type="hidden" name="applied_coupon_id" id="appliedCouponId" value="">
+                             <input type="hidden" name="discount_amount" id="discountAmountInput" value="0">
+                         </div>
+
                          <div class="d-flex justify-content-between mb-2 pt-3 border-top">
                              <span class="text-muted">Subtotal</span>
-                            <span class="fw-bold"><%$config.currency_symbol%><%$total%></span>
+                             <span class="fw-bold"><%$config.currency_symbol%><span id="order-subtotal"><%$total%></span></span>
+                         </div>
+                         <div id="discountBlock" class="d-flex justify-content-between mb-2 text-success" style="display:none !important;">
+                             <span class="small fw-bold">Discount</span>
+                             <span class="fw-bold">-<%$config.currency_symbol%><span id="discountValueDisplay">0.00</span></span>
+                         </div>
+                         <div class="d-flex justify-content-between mb-2">
+                             <span class="text-muted">Shipping</span>
+                            <span class="fw-bold" id="checkout-shipping-text"><%$config.currency_symbol%>0.00</span>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                              <span class="text-muted">Total</span>
-                            <span class="fw-bold fs-4 text-primary"><%$config.currency_symbol%><%$total%></span>
+                            <span class="fw-bold fs-4 text-primary"><%$config.currency_symbol%><span id="checkout-total"><%$total%></span></span>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold" id="placeOrderBtn" <%if empty($cart_items)%>disabled<%/if%>>Pay <%$config.currency_symbol%><%$total%></button>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 shadow fw-bold" id="placeOrderBtn" <%if empty($cart_items)%>disabled<%/if%>>Pay <%$config.currency_symbol%><span id="btn-total"><%$total%></span></button>
                     </div>
                 </div>
             </div>
@@ -153,6 +174,56 @@
         var defaultState = "<%$prefill->state%>";
         if(defaultState) {
             $('#stateSelect').val(defaultState);
+        }
+
+        // Initial check if zip is present
+        if ($('#zipInput').val().length >= 5) {
+            updateShipping($('#zipInput').val());
+        }
+
+        // Zip Input Listener
+        $('#zipInput').on('keyup change', function() {
+            const zip = $(this).val();
+            if (zip.length >= 5) {
+                updateShipping(zip);
+            } else {
+                $('#pincode-status').html('');
+                resetShipping();
+            }
+        });
+
+        function updateShipping(pincode) {
+            $('#pincode-status').html('<span class="text-muted">Checking shipping...</span>');
+            $.ajax({
+                url: '<%base_url("shop/cart/get_shipping_charge")%>',
+                type: 'POST',
+                data: { pincode: pincode },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        const charge = parseFloat(response.shipping_charge);
+                        $('#checkout-shipping-text').text('<%$config.currency_symbol%>' + charge.toFixed(2));
+                        $('#pincode-status').html(`<span class="text-success">✔ Serviceable! Est: ${response.estimated_days}</span>`);
+                        
+                        const subtotal = parseFloat('<%$total%>');
+                        const total = subtotal + charge;
+                        $('#checkout-total, #btn-total').text(total.toFixed(2));
+                        $('#placeOrderBtn').prop('disabled', false);
+                    } else {
+                        $('#pincode-status').html(`<span class="text-danger">✖ ${response.message}</span>`);
+                        resetShipping();
+                        $('#placeOrderBtn').prop('disabled', true);
+                    }
+                },
+                error: function() {
+                    $('#pincode-status').html('<span class="text-danger">Error checking shipping</span>');
+                }
+            });
+        }
+
+        function resetShipping() {
+            $('#checkout-shipping-text').text('<%$config.currency_symbol%>0.00');
+            $('#checkout-total, #btn-total').text(parseFloat('<%$total%>').toFixed(2));
         }
         
         // Toggle Address View
@@ -229,6 +300,11 @@
                 }
             },
             submitHandler: function(form) {
+                // Add validation for shipping serviceable before place order
+                if ($('#placeOrderBtn').is(':disabled')) {
+                    toaster('error', 'Please select a serviceable pincode.');
+                    return false;
+                }
                 var btn = $('#placeOrderBtn');
                 var originalText = btn.html();
                 
@@ -310,5 +386,117 @@
                 return false; // Prevent normal form submission
             }
         });
+
+        // Coupon Logic
+        $('#applyCouponBtn').on('click', function() {
+            if ($('#appliedCouponId').val()) {
+                toaster('warning', 'A coupon is already applied. Remove it first to apply another one.');
+                return;
+            }
+
+            const code = $('#couponCode').val();
+            if (!code) {
+                toaster('error', 'Please enter coupon code.');
+                return;
+            }
+
+            const btn = $(this);
+            btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span>');
+
+            $.ajax({
+                url: '<%base_url("shop/cart/apply-coupon")%>',
+                type: 'POST',
+                data: { coupon_code: code },
+                dataType: 'json',
+                success: function(response) {
+                    btn.prop('disabled', false).html('Apply');
+                    if (response.success) {
+                        $('#appliedCouponId').val(response.coupon_id);
+                        $('#discountAmountInput').val(response.discount_amount);
+                        $('#discountValueDisplay').text(parseFloat(response.discount_amount).toFixed(2));
+                        $('#discountBlock').attr('style', 'display: flex !important');
+                        $('#couponMsg').html(`<span class="text-success small">${response.message}</span>`);
+                        
+                        // UI Adjustments
+                        $('#couponCode').prop('readonly', true);
+                        $('#applyCouponBtn').hide();
+                        $('#removeCouponBtn').show();
+                        
+                        recalculateFinalTotal();
+                    } else {
+                        $('#couponMsg').html(`<span class="text-danger small">${response.message}</span>`);
+                        resetCoupon();
+                    }
+                },
+                error: function() {
+                    btn.prop('disabled', false).html('Apply');
+                    toaster('error', 'Error applying coupon.');
+                }
+            });
+        });
+
+        $('#removeCouponBtn').on('click', function() {
+            resetCoupon();
+            $('#couponCode').val('').prop('readonly', false);
+            $('#couponMsg').empty();
+            $(this).hide();
+            $('#applyCouponBtn').show();
+            toaster('info', 'Coupon removed.');
+        });
+
+        function resetCoupon() {
+            $('#appliedCouponId').val('');
+            $('#discountAmountInput').val('0');
+            $('#discountBlock').attr('style', 'display: none !important');
+            recalculateFinalTotal();
+        }
+
+        function recalculateFinalTotal() {
+            const subtotal = parseFloat('<%$total%>');
+            const discount = parseFloat($('#discountAmountInput').val() || 0);
+            const shipping = parseFloat($('#checkout-shipping-text').text().replace(/[^0-9.]/g, '') || 0);
+            
+            const netTotal = subtotal - discount + shipping;
+            $('#checkout-total, #btn-total').text(netTotal.toFixed(2));
+        }
+
+        // Wrap existing updateShipping to use recalculate
+        const originalUpdateShipping = updateShipping;
+        updateShipping = function(pincode) {
+             $('#pincode-status').html('<span class="text-muted">Checking shipping...</span>');
+             $.ajax({
+                url: '<%base_url("shop/cart/get_shipping_charge")%>',
+                type: 'POST',
+                data: { pincode: pincode },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        const charge = parseFloat(response.shipping_charge);
+                        if (charge === 0) {
+                            $('#checkout-shipping-text').text('Free').addClass('text-success');
+                            $('#pincode-status').html(`<span class="text-success">✔ Free Shipping applied! Est: ${response.estimated_days}</span>`);
+                        } else {
+                            $('#checkout-shipping-text').text('<%$config.currency_symbol%>' + charge.toFixed(2)).removeClass('text-success');
+                            $('#pincode-status').html(`<span class="text-success">✔ Serviceable! Est: ${response.estimated_days}</span>`);
+                        }
+                        
+                        recalculateFinalTotal();
+                        $('#placeOrderBtn').prop('disabled', false);
+                    } else {
+                        $('#pincode-status').html(`<span class="text-danger">✖ ${response.message}</span>`);
+                        resetShipping();
+                        $('#placeOrderBtn').prop('disabled', true);
+                    }
+                },
+                error: function() {
+                    $('#pincode-status').html('<span class="text-danger">Error checking shipping</span>');
+                }
+            });
+        };
+
+        function resetShipping() {
+            $('#checkout-shipping-text').text('<%$config.currency_symbol%>0.00');
+            recalculateFinalTotal();
+        }
     });
 </script>
