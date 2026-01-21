@@ -126,13 +126,14 @@ class Cart extends MY_Controller {
         
         // Prepare Prefill Data
         $prefill = [
-            'first_name' => '', 'last_name' => '', 'email' => '', 
+            'first_name' => '', 'last_name' => '', 'email' => '', 'mobile' => '',
             'address' => '', 'city' => '', 'state' => '', 'zip' => ''
         ];
         $has_details = false;
         
         if ($customer) {
             $prefill['email'] = $customer->email;
+            $prefill['mobile'] = $customer->mobile_no ?? '';
             $names = explode(' ', $customer->customer_name, 2);
             $prefill['first_name'] = $names[0] ?? '';
             $prefill['last_name'] = $names[1] ?? '';
@@ -151,6 +152,7 @@ class Cart extends MY_Controller {
              $prefill['city'] = $addr->city;
              $prefill['state'] = $addr->state;
              $prefill['zip'] = $addr->pincode;
+             $prefill['mobile'] = $addr->mobile_number ?? $prefill['mobile'];
         }
         
         $data['prefill'] = (object)$prefill; // Pass as object for easier smarty access if array access fails or consistent style
@@ -233,7 +235,8 @@ class Cart extends MY_Controller {
             'city' => $this->input->post('city'),
             'state' => $this->input->post('state'),
             'zip' => $pincode,
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+            'mobile' => $this->input->post('mobile')
         ];
 
         $order_data = [

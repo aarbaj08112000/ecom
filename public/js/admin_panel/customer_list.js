@@ -29,22 +29,8 @@ const customerPage = {
                 { data: 'email' },
                 { data: 'gst_no' },
                 { data: 'pan_no' },
-                {
-                    data: 'status',
-                    render: function (data, type, row) {
-                        let badgeClass = 'status-inactive';
-                        if (data === 'Approved' || data === 'Active') badgeClass = 'status-active';
-                        else if (data === 'Rejected') badgeClass = 'status-rejected';
-                        else if (data === 'Pending') badgeClass = 'status-pending';
-                        else if (data === 'Blocked') badgeClass = 'status-blocked';
-
-                        // ID is required for handleStatusChange
-                        return `<div id="status_badge_${row.id}">
-                                    <span class="status-badge ${badgeClass}">${data}</span>
-                                </div>`;
-                    }
-                },
-                { data: 'orders', orderable: false },
+                { data: 'status', orderable: false },
+                { data: 'orders', orderable: false, className: 'text-center' },
                 { data: 'action', orderable: false, className: 'text-center' }
             ],
             order: [[2, 'asc']], // Sort by customer name by default
@@ -92,11 +78,11 @@ const customerPage = {
     },
 
     handleStatusChange: function () {
-        $(document).on("change", ".status-dropdown", function () {
-            const dropdown = $(this);
-            const customerId = dropdown.data("id");
-            const newStatus = dropdown.val();
-            const previousStatus = dropdown.data("previous-status");
+        $(document).on("click", ".status-update-link", function (e) {
+            e.preventDefault();
+            const link = $(this);
+            const customerId = link.data("id");
+            const newStatus = link.data("status");
 
             Swal.fire({
                 title: "Are you sure?",
@@ -121,30 +107,19 @@ const customerPage = {
                         success: function (response) {
                             if (response.success == 1) {
                                 toaster("success", `Status updated to ${newStatus} successfully.`);
-                                dropdown.data("previous-status", newStatus);
-
-                                // Update Status Badge dynamically
-                                const badgeContainer = $(`#status_badge_${customerId}`);
-                                let badgeClass = 'status-inactive';
-                                if (newStatus === 'Approved' || newStatus === 'Active') badgeClass = 'status-active';
-                                else if (newStatus === 'Rejected') badgeClass = 'status-rejected';
-                                else if (newStatus === 'Pending') badgeClass = 'status-pending';
-                                else if (newStatus === 'Blocked') badgeClass = 'status-blocked';
-
-                                badgeContainer.html(`<span class="status-badge ${badgeClass}">${newStatus}</span>`);
+                                // Automatically reload the page as requested
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
                             } else {
                                 toaster("error", response.msg);
-                                dropdown.val(previousStatus);
                             }
                         },
                         error: function (xhr, status, error) {
                             console.error("AJAX Error:", status, error, xhr.responseText);
                             toaster("error", "Something went wrong. Please check console.");
-                            dropdown.val(previousStatus);
                         }
                     });
-                } else {
-                    dropdown.val(previousStatus);
                 }
             });
         });

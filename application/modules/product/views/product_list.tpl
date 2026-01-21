@@ -48,8 +48,8 @@
       </div>
      
       <div class="w-100">
-            <input type="text" name="reason" placeholder="Filter Search" class="form-control serarch-filter-input m-3 me-0" id="serarch-filter-input" fdprocessedid="bxkoib">
-        </div>
+          <input type="text" name="reason" placeholder="Search by name, description, category..." class="form-control serarch-filter-input mt-3 mb-3" id="serarch-filter-input">
+      </div>
 
       <!-- Main content -->
       <div class="card p-0 mt-4 w-100">
@@ -61,7 +61,8 @@
             <tr>
                   <th width="80">Image</th>
                   <th>Product Name</th>
-                  <th>Description</th>
+                   <th>Category</th>
+                   <th>Description</th>
                   <th>Stock</th>
                   <th>Unit</th>
                   <th>Price</th>

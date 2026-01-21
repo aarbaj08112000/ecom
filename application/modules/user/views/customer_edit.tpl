@@ -15,7 +15,7 @@
         </nav>
 
         <div class="dt-top-btn d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-            <a href="<%base_url('customer_details/')%><%$customer['id']%>" class="btn btn-info me-2" title="View Details">
+            <a href="<%base_url('customer_details/')%><%$customer['id']|@base64_encode|urlencode%>" class="btn btn-info me-2" title="View Details">
                 <i class="ti ti-eye me-1"></i> View Details
             </a>
             <a href="<%base_url('customer_list')%>" class="btn btn-seconday" title="Back To Customer Listing">
@@ -77,10 +77,8 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select name="status" class="form-select">
-                                            <option value="Approved" <%if $customer['status'] == 'Approved'%>selected<%/if%>>Approved</option>
-                                            <option value="Rejected" <%if $customer['status'] == 'Rejected'%>selected<%/if%>>Rejected</option>
-                                            <option value="Pending" <%if $customer['status'] == 'Pending'%>selected<%/if%>>Pending</option>
-                                            <option value="Blocked" <%if $customer['status'] == 'Blocked'%>selected<%/if%>>Blocked</option>
+                                            <option value="Active" <%if $customer['status'] == 'Active' || $customer['status'] == 'Approved'%>selected<%/if%>>Active</option>
+                                            <option value="Inactive" <%if $customer['status'] == 'Inactive' || $customer['status'] == 'Rejected' || $customer['status'] == 'Pending' || $customer['status'] == 'Blocked'%>selected<%/if%>>Inactive</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">

@@ -21,17 +21,16 @@ class Wishlist extends MY_Controller {
      * AJAX handler for Wishlist DataTable
      */
     public function wishlist_list_ajax() {
-        $params = [
-            'draw' => intval($this->input->post('draw')),
-            'start' => intval($this->input->post('start')),
-            'length' => intval($this->input->post('length')),
-            'search' => $this->input->post('search')['value'],
-            'order_column' => $this->input->post('columns')[$this->input->post('order')[0]['column']]['data'],
-            'order_dir' => $this->input->post('order')[0]['dir']
-        ];
+        $draw = $this->input->post('draw');
+        $start = $this->input->post('start');
+        $length = $this->input->post('length') ?? 10;
+        $search = $this->input->post('search')['value'] ?? '';
+        $order_idx = $this->input->post('order')[0]['column'] ?? 5; // Default to added_date if possible
+        $order_dir = $this->input->post('order')[0]['dir'] ?? 'desc';
+        $column_data = $this->input->post('columns')[$order_idx]['data'] ?? 'added_date';
         
         $order_column_mapping = [
-            'image_path' => base_url().'public/images/products/'."p.id"."/"."p.image",
+            'image_path' => 'p.id',
             'product_name' => 'p.name',
             'user_name' => 'u.customer_name',
             'user_email' => 'u.email',
@@ -40,18 +39,18 @@ class Wishlist extends MY_Controller {
             'status' => 'w.status'
         ];
         
-        $params['order_column'] = $order_column_mapping[$params['order_column']] ?? 'w.added_date';
+        $order_column = $order_column_mapping[$column_data] ?? 'w.added_date';
 
         $wishlists = $this->Wishlist_model->get_wishlist_datatable(
-            $params['start'], 
-            $params['length'], 
-            $params['search'], 
-            $params['order_column'], 
-            $params['order_dir']
+            $start, 
+            $length, 
+            $search, 
+            $order_column, 
+            $order_dir
         );
         
         $total_records = $this->Wishlist_model->get_wishlist_count();
-        $filtered_records = $this->Wishlist_model->get_wishlist_filtered_count($params['search']);
+        $filtered_records = $this->Wishlist_model->get_wishlist_filtered_count($search);
 
         $data = [];
         foreach ($wishlists as $row) {
@@ -70,7 +69,7 @@ class Wishlist extends MY_Controller {
         }
 
         echo json_encode([
-            "draw" => $params['draw'],
+            "draw" => intval($draw),
             "recordsTotal" => $total_records,
             "recordsFiltered" => $filtered_records,
             "data" => $data

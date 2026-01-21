@@ -46,7 +46,7 @@
                     <th>GST No.</th>
                     <th>PAN No.</th>
                     <th>Status</th>
-                    <th>Total Order</th>
+                    <th class="text-center">Total Order</th>
                     <th class="text-center">Action</th>
                  </tr>
               </thead>

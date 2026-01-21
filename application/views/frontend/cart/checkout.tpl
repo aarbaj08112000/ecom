@@ -38,9 +38,13 @@
                                  <label class="form-label small fw-bold text-muted">Last Name</label>
                                  <input type="text" name="last_name" class="form-control bg-light border-0 py-2" value="<%$prefill->last_name%>" required>
                              </div>
-                              <div class="col-12">
+                              <div class="col-md-6">
                                  <label class="form-label small fw-bold text-muted">Email Address</label>
                                  <input type="email" name="email" class="form-control bg-light border-0 py-2" value="<%$prefill->email%>" required>
+                             </div>
+                             <div class="col-md-6">
+                                 <label class="form-label small fw-bold text-muted">Mobile Number</label>
+                                 <input type="text" name="mobile" class="form-control bg-light border-0 py-2" value="<%$prefill->mobile%>" required>
                              </div>
                               <div class="col-12">
                                  <label class="form-label small fw-bold text-muted">Address</label>

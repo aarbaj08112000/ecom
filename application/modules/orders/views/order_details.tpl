@@ -51,7 +51,7 @@
       </a>
 
       <!-- View Invoice -->
-      <a href="<%base_url('invoice_view')%>?id=<%$order.id%>" class="btn btn-primary">
+      <a href="<%base_url('invoice_view')%>?id=<%$order.order_id|@base64_encode|urlencode%>" class="btn btn-primary">
         <i class="ti ti-file-invoice"></i> View Invoice
       </a>
     </div>
@@ -159,9 +159,38 @@
       </div>
 
 
-      <!-- PAYMENT SUMMARY -->
-      <div class="section-card mb-5">
+      <!-- TRANSACTION DETAILS (NEW PAYMENT SUMMARY) -->
+      <div class="section-card">
         <div class="section-title">Payment Summary</div>
+        <%if $payment %>
+            <div class="row mb-2">
+              <div class="col-md-4"><strong>Payment Mode:</strong> <%$payment.payment_method|replace:'_':' '|ucfirst%></div>
+              <div class="col-md-4"><strong>Payment Status:</strong> 
+                <%assign var="p_status" value=$payment.payment_status|lower%>
+                <span class="badge bg-label-<%if $p_status eq 'completed' or $p_status eq 'paid'%>success<%elseif $p_status eq 'failed'%>danger<%else%>warning<%/if%>">
+                    <%$payment.payment_status|ucfirst%>
+                </span>
+              </div>
+              <div class="col-md-4"><strong>Paid Date:</strong> <%$payment.paid_date|date_format:"%d %b %Y, %I:%M %p"|default:'N/A'%></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4"><strong>Transaction ID:</strong> <%$payment.transaction_id|default:($payment.gateway_transaction_id|default:'N/A')%></div>
+              <div class="col-md-4"><strong>Paid Amount:</strong> <span class="text-success fw-bold">₹<%$payment.amount|number_format:2%></span></div>
+              <div class="col-md-4"><strong>Gateway:</strong> <%$payment.payment_gateway|default:'N/A'%></div>
+            </div>
+        <%else %>
+            <div class="row">
+                <div class="col-12 text-muted">
+                    <i class="ti ti-info-circle me-1"></i> No detailed transaction record found. Defaulting to Order payment method: <strong><%$order.payment_method|replace:'_':' '|ucfirst%></strong>
+                </div>
+            </div>
+        <%/if %>
+      </div>
+
+      <!-- ORDER TOTALS -->
+      <div class="section-card mb-5">
+        <div class="section-title">Order Pricing Summary</div>
 
         <div class="row mb-1">
           <div class="col-md-4"><strong>Subtotal:</strong> ₹<%$order.total_amount|number_format:2%></div>

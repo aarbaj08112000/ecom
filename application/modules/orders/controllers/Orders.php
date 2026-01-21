@@ -44,7 +44,7 @@ class Orders extends MY_Controller {
 				'added_date' => date('d M Y, h:i A', strtotime($order['added_date'])),
 				'action' => '
 					<div class="d-flex gap-2">
-						<a href="' . base_url('orders/order_details?id=' . $order['order_id']) . '" class="" title="View Details">
+						<a href="' . base_url('orders/order_details?id=' . urlencode(base64_encode($order['order_id']))) . '" class="" title="View Details">
 							<i class="ti ti-eye"></i>
 						</a>
 						<a href="javascript:void(0)" class=" update-status" data-id="' . $order['order_id'] . '" data-status="' . $order['order_status'] . '" title="Update Status">
@@ -67,6 +67,8 @@ class Orders extends MY_Controller {
 		if (!$order_id) {
 			redirect('orders');
 		}
+
+		$order_id = base64_decode($order_id);
 
 		$order = $this->Orders_model->get_order_by_id($order_id);
 		if (!$order) {

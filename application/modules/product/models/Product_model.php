@@ -127,9 +127,11 @@ class Product_model extends CI_Model {
      * @return array Products data
      */
     public function get_products_datatable($params){
-        $this->db->select('p.id, p.name, p.detail, p.price, p.discount_percentage, p.is_gst_applicable, p.gst_percentage, p.stock_quantity, p.status, pi.image_path as cover_image');
+        $this->db->select('p.id, p.name, p.detail, p.price, p.discount_percentage, p.is_gst_applicable, p.gst_percentage, p.stock_quantity, p.status, pi.image_path as cover_image, c.category_name, b.brand_name');
         $this->db->from('products as p');
         $this->db->join('product_images as pi', 'pi.product_id = p.id AND pi.is_cover = "1"', 'left');
+        $this->db->join('categories as c', 'c.category_id = p.category_id', 'left');
+        $this->db->join('brands as b', 'b.brand_id = p.brand_id', 'left');
         $this->db->where('p.is_delete', '0');
         
         // Search
@@ -137,6 +139,8 @@ class Product_model extends CI_Model {
             $this->db->group_start();
             $this->db->like('p.name', $params['search']);
             $this->db->or_like('p.detail', $params['search']);
+            $this->db->or_like('c.category_name', $params['search']);
+            $this->db->or_like('b.brand_name', $params['search']);
             $this->db->group_end();
         }
         
@@ -163,12 +167,16 @@ class Product_model extends CI_Model {
      */
     public function get_products_count($search = ''){
         $this->db->from('products as p');
+        $this->db->join('categories as c', 'c.category_id = p.category_id', 'left');
+        $this->db->join('brands as b', 'b.brand_id = p.brand_id', 'left');
         $this->db->where('p.is_delete', '0');
         
         if (!empty($search)) {
             $this->db->group_start();
             $this->db->like('p.name', $search);
             $this->db->or_like('p.detail', $search);
+            $this->db->or_like('c.category_name', $search);
+            $this->db->or_like('b.brand_name', $search);
             $this->db->group_end();
         }
         

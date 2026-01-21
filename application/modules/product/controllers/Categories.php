@@ -14,8 +14,58 @@ class Categories extends MY_Controller {
 	public function categories()
 	{ 
 		$data['categories'] = $this->Categories_model->get_categories();
-		// pr($data);
+		$data['base_url'] = base_url();
 		$this->smarty->loadView('categories.tpl', $data,'Yes','Yes');
+	}
+
+	public function categories_ajax()
+	{
+		// DataTables parameters
+		$draw = $this->input->post('draw');
+		$start = $this->input->post('start');
+		$length = $this->input->post('length');
+		$search_value = $this->input->post('search')['value'] ?? '';
+		$order_column_index = $this->input->post('order')[0]['column'] ?? 0;
+		$order_dir = $this->input->post('order')[0]['dir'] ?? 'desc';
+		
+		// Column mapping (0=name, 1=parent, 2=status, 3=action)
+		$columns = ['c.category_name', 'p.category_name', 'c.status'];
+		$order_column = $columns[$order_column_index] ?? 'c.category_id';
+		
+		// Prepare parameters
+		$params = [
+			'start' => $start,
+			'length' => $length,
+			'search' => $search_value,
+			'order_column' => $order_column,
+			'order_dir' => $order_dir
+		];
+		
+		// Get data
+		$categories = $this->Categories_model->get_categories_datatable($params);
+		$total_records = $this->Categories_model->get_categories_count();
+		$filtered_records = $this->Categories_model->get_categories_count($search_value);
+		
+		// Prepare response
+		$data = [];
+		foreach ($categories as $cat) {
+			$data[] = [
+				'id' => $cat['category_id'],
+				'category_name' => $cat['category_name'],
+				'parent_name' => $cat['parent_name'] ?: '--',
+				'parent_category_id' => $cat['parent_category_id'],
+				'status' => $cat['status']
+			];
+		}
+		
+		$response = [
+			'draw' => intval($draw),
+			'recordsTotal' => $total_records,
+			'recordsFiltered' => $filtered_records,
+			'data' => $data
+		];
+		
+		echo json_encode($response);
 	}
 	
 

@@ -71,10 +71,13 @@
             <div class="col-lg-3 col-6">
                 <h6 class="fw-bold mb-3">Newsletter</h6>
                 <p class="text-white-50 small">Subscribe for crafting tips and exclusive deals.</p>
-                <div class="input-group">
-                    <input type="text" class="form-control rounded-start-pill border-0 form-control-sm" placeholder="Email address">
-                    <button class="btn btn-primary rounded-end-pill px-3 btn-sm">Join</button>
-                </div>
+                <form id="newsletterForm">
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control rounded-start-pill border-0 form-control-sm" placeholder="Email address" required>
+                        <button type="submit" class="btn btn-primary rounded-end-pill px-3 btn-sm">Join</button>
+                    </div>
+                </form>
+                <div id="newsletter-msg" class="small mt-2"></div>
             </div>
         </div>
         
@@ -101,6 +104,38 @@
         duration: 800,
         once: true,
         offset: 100
+    });
+
+    $('#newsletterForm').on('submit', function(e) {
+        e.preventDefault();
+        const $form = $(this);
+        const $btn = $form.find('button');
+        const $msg = $('#newsletter-msg');
+        const email = $form.find('input[name="email"]').val();
+
+        $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span>');
+        $msg.hide().removeClass('text-success text-danger');
+
+        $.ajax({
+            url: '<%base_url("shop/subscribe-newsletter")%>',
+            type: 'POST',
+            data: { email: email },
+            dataType: 'json',
+            success: function(response) {
+                $btn.prop('disabled', false).text('Join');
+                $msg.text(response.message).show();
+                if (response.success) {
+                    $msg.addClass('text-success');
+                    $form[0].reset();
+                } else {
+                    $msg.addClass('text-danger');
+                }
+            },
+            error: function() {
+                $btn.prop('disabled', false).text('Join');
+                $msg.text('Something went wrong. Please try again.').addClass('text-danger').show();
+            }
+        });
     });
 </script>
 <!-- Quick View Modal -->

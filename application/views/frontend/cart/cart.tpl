@@ -53,7 +53,7 @@
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4">Order Summary</h5>
                         
-                        <div class="mb-4">
+                        <div id="shipping-estimate-section" class="mb-4" <%if $total >= $config.free_shipping_threshold%>style="display: none;"<%/if%>>
                             <label class="form-label small fw-bold text-muted">Estimate Shipping</label>
                             <div class="input-group">
                                 <input type="text" id="pincode-check" class="form-control form-control-sm border-0 bg-light" placeholder="Enter Pincode" maxlength="6">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted">Shipping</span>
-                            <span id="shipping-charge-text" class="fw-bold"><%$config.currency_symbol%>0.00</span>
+                            <span id="shipping-charge-text" class="fw-bold <%if $total >= $config.free_shipping_threshold%>text-success<%/if%>"><%if $total >= $config.free_shipping_threshold%>Free<%else%><%$config.currency_symbol%>0.00<%/if%></span>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                              <span class="text-muted">Tax</span>
@@ -174,11 +174,22 @@ function refreshCartTotals() {
     });
     $('#cart-subtotal').text(subtotal.toFixed(2));
     
-    // If pincode was already checked, re-check to update total and possibly shipping discount
-    if ($('#pincode-check').val().length >= 5) {
-        checkShipping();
-    } else {
+    // Check threshold for hiding/showing shipping section
+    const threshold = parseFloat('<%$config.free_shipping_threshold%>') || 0;
+    if (threshold > 0 && subtotal >= threshold) {
+        $('#shipping-estimate-section').hide();
+        $('#shipping-charge-text').text('Free').addClass('text-success');
+        $('#shipping-msg').empty();
         $('#cart-total').text(subtotal.toFixed(2));
+    } else {
+        $('#shipping-estimate-section').show();
+        // If pincode was already checked, re-check to update total
+        if ($('#pincode-check').val().length >= 5) {
+            checkShipping();
+        } else {
+            $('#shipping-charge-text').text('<%$config.currency_symbol%>' + '0.00').removeClass('text-success');
+            $('#cart-total').text(subtotal.toFixed(2));
+        }
     }
 }
 

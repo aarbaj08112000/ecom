@@ -42,7 +42,7 @@ class Transactions extends MY_Controller {
 				'paid_date' => $t['added_date'] ? date('d M Y, h:i A', strtotime($t['added_date'])) : 'Pending',
 				'payment_status' => $t['payment_status'],
 				'action' => '
-					<a href="' . base_url('orders/order_details?id=' . $t['order_id']) . '" class="text-center" title="View Order">
+					<a href="' . base_url('orders/order_details?id=' . urlencode(base64_encode($t['order_id']))) . '" class="text-center" title="View Order">
 						<i class="ti ti-eye"></i>
 					</a>'
 			];

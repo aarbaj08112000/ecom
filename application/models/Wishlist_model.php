@@ -98,8 +98,8 @@ class Wishlist_model extends CI_Model {
         if (!empty($search_value)) {
             $this->db->group_start();
             $this->db->like('p.name', $search_value);
-            $this->db->or_like('u.user_name', $search_value);
-            $this->db->or_like('u.user_email', $search_value);
+            $this->db->or_like('u.customer_name', $search_value);
+            $this->db->or_like('u.email', $search_value);
             $this->db->group_end();
         }
 

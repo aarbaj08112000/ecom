@@ -18,8 +18,9 @@ class Customer extends MY_Controller {
 		$this->smarty->loadView('customer_list.tpl', $data,'Yes','Yes');
 	}
 	
-	public function customer_details($id = 0)
+	public function customer_details($id_encoded = 0)
 	{
+		$id = (is_numeric($id_encoded)) ? $id_encoded : base64_decode(urldecode($id_encoded));
 		$data['base_url'] = base_url();
 		$data['customer'] = $this->Customer_model->getCustomerById($id);
 		$data['addresses'] = $this->Customer_model->getCustomerAddresses($id);
@@ -62,8 +63,9 @@ class Customer extends MY_Controller {
         }
     }
 
-    public function customer_edit($id = 0)
+    public function customer_edit($id_encoded = 0)
     {
+        $id = (is_numeric($id_encoded)) ? $id_encoded : base64_decode(urldecode($id_encoded));
         $data['base_url'] = base_url();
         $data['customer'] = $this->Customer_model->getCustomerById($id);
         $data['addresses'] = $this->Customer_model->getCustomerAddresses($id);
@@ -180,28 +182,40 @@ class Customer extends MY_Controller {
                 $image_html = '<img src="https://ui-avatars.com/api/?name='.$avatar_name.'&background=random&color=fff" class="rounded-circle" width="40" height="40">';
             }
 
-            // Action Logic
+            // Status Logic (Static Badge Display)
+            $badge_class = ($val['status'] == 'Active' || $val['status'] == 'Approved') ? 'status-active' : 'status-inactive';
+            $status_label = ($val['status'] == 'Active' || $val['status'] == 'Approved') ? 'Active' : 'Inactive';
+            $status_html = '<span class="status-badge '.$badge_class.'">'.$status_label.'</span>';
+
+            // Action Logic (Dots Menu with Conditional Status Update Toggle)
+            $is_active = ($val['status'] == 'Active' || $val['status'] == 'Approved');
+            $status_toggle_html = $is_active ? 
+                '<a class="dropdown-item d-flex align-items-center py-2 status-update-link" href="javascript:void(0);" data-id="'.$val['id'].'" data-status="Inactive">
+                    <i class="ti ti-circle-x me-2 text-warning" style="font-size: 1.2rem;"></i> <span>Set Inactive</span>
+                </a>' : 
+                '<a class="dropdown-item d-flex align-items-center py-2 status-update-link" href="javascript:void(0);" data-id="'.$val['id'].'" data-status="Active">
+                    <i class="ti ti-circle-check me-2 text-success" style="font-size: 1.2rem;"></i> <span>Set Active</span>
+                </a>';
+
             $action_html = '
-                <div class="d-flex align-items-center justify-content-center gap-3">
-                    <a href="'.$base_url.'customer_details/'.$val['id'].'" class="text-info" title="View">
-                        <i class="ti ti-eye"></i>
-                    </a>
-                    <a href="'.$base_url.'customer_edit/'.$val['id'].'" class="text-primary" title="Edit">
-                        <i class="ti ti-edit"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="text-danger delete-customer" data-id="'.$val['id'].'" title="Delete">
-                        <i class="ti ti-trash"></i>
-                    </a>
-                    <div class="ms-1">
-                        <select class="form-select form-select-sm status-dropdown" 
-                                data-id="'.$val['id'].'" 
-                                data-previous-status="'.$val['status'].'"
-                                style="width: 110px; font-size: 0.75rem;">
-                            <option value="Approved" '.($val['status'] == 'Approved' || $val['status'] == 'Active' ? 'selected' : '').'>Approved</option>
-                            <option value="Rejected" '.($val['status'] == 'Rejected' ? 'selected' : '').'>Rejected</option>
-                            <option value="Pending" '.($val['status'] == 'Pending' ? 'selected' : '').'>Pending</option>
-                            <option value="Blocked" '.($val['status'] == 'Blocked' ? 'selected' : '').'>Blocked</option>
-                        </select>
+                <div class="dropdown text-center">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="ti ti-dots-vertical" style="color: #ff3e1d; font-size: 1.5rem;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow-sm border-0" style="min-width: 150px;">
+                        <a class="dropdown-item d-flex align-items-center py-2" href="'.$base_url.'customer_details/'.urlencode(base64_encode($val['id'])).'">
+                            <i class="ti ti-eye me-2 text-info" style="font-size: 1.2rem;"></i> <span>View Details</span>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center py-2" href="'.$base_url.'customer_edit/'.urlencode(base64_encode($val['id'])).'">
+                            <i class="ti ti-pencil me-2 text-primary" style="font-size: 1.2rem;"></i> <span>Edit Profile</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Update Status</h6>
+                        '.$status_toggle_html.'
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item d-flex align-items-center py-2 delete-customer" href="javascript:void(0);" data-id="'.$val['id'].'">
+                            <i class="ti ti-trash me-2 text-danger" style="font-size: 1.2rem;"></i> <span>Delete</span>
+                        </a>
                     </div>
                 </div>';
 
@@ -213,8 +227,8 @@ class Customer extends MY_Controller {
                 'email' => $val['email'],
                 'gst_no' => $val['gst_no'],
                 'pan_no' => $val['pan_no'],
-                'status' => $val['status'],
-                'orders' => '--',
+                'status' => $status_html,
+                'orders' => $val['total_order_count'],
                 'action' => $action_html
             ];
         }

@@ -51,7 +51,7 @@
         </div>
       </nav>
       <div class="dt-top-btn d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-         <a href="<%base_url('customer_edit/')%><%$customer['id']%>" class="btn btn-primary" title="Edit Profile">
+         <a href="<%base_url('customer_edit/')%><%$customer['id']|@base64_encode|urlencode%>" class="btn btn-primary" title="Edit Profile">
             <i class="ti ti-edit me-1"></i> Edit Profile
          </a>
          <a href="<%base_url('customer_list')%>"  class="btn btn-seconday" title="Back To Customer Listing">
@@ -206,7 +206,7 @@
                         <td><small class="text-muted"><%$rev['created_at']|date_format:"%d %b %Y, %H:%M"%></small></td>
                     </tr>
                     <%/foreach%>
-                <%/else%>
+                <%else%>
                     <tr>
                         <td colspan="4" class="text-center text-muted py-4">
                             <i class="ti ti-message-off fs-1 d-block mb-2"></i>

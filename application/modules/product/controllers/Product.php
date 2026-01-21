@@ -29,8 +29,8 @@ class Product extends MY_Controller {
 		$order_column_index = $this->input->post('order')[0]['column'] ?? 0;
 		$order_dir = $this->input->post('order')[0]['dir'] ?? 'desc';
 		
-		// Column mapping (0=image, 1=name, 2=detail, 3=stock, 4=unit, 5=price, 6=status, 7=action)
-		$columns = ['p.id', 'p.name', 'p.detail', 'p.stock_quantity', 'p.price', 'p.status'];
+		// Column mapping (0=image, 1=name, 2=category, 3=detail, 4=stock, 5=unit, 6=price, 7=status, 8=action)
+		$columns = ['p.id', 'p.name', 'c.category_name', 'p.detail', 'p.stock_quantity', 'p.price', 'p.price', 'p.status'];
 		$order_column = $columns[$order_column_index] ?? 'p.id';
 		
 		// Prepare parameters
@@ -68,6 +68,7 @@ class Product extends MY_Controller {
 				'id' => $product['id'],
 				'image' => $image_path,
 				'name' => $product['name'],
+				'category' => $product['category_name'] ?: 'N/A',
 				'detail' => $product['detail'],
 				'stock_quantity' => $product['stock_quantity'],
 				'price' => number_format($final_price, 2),

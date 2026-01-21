@@ -20,6 +20,14 @@ class User_model extends CI_Model {
         $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
         return $ret_data;
     }
+    public function getUserDataById($id){
+        $this->db->select('u.*');
+        $this->db->from('userinfo as u');
+        $this->db->where('id', $id);
+        $result_obj = $this->db->get();
+        $ret_data = is_object($result_obj) ? $result_obj->result_array() : [];
+        return $ret_data;
+    }
     public function insertUser($insert_date = array()){
         $this->db->insert("userinfo", $insert_date);
         $insert_id = $this->db->insert_id();

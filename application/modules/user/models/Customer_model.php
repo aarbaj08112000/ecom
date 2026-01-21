@@ -92,16 +92,16 @@ class Customer_model extends CI_Model {
 
     public function getCustomerPaged($start, $length, $search, $order_col, $order_dir)
     {
-        $this->db->select('*');
-        $this->db->from('customer_master');
-        $this->db->where('is_delete', '0');
+        $this->db->select('c.*, (SELECT COUNT(order_id) FROM orders WHERE user_id = c.id) as total_order_count');
+        $this->db->from('customer_master as c');
+        $this->db->where('c.is_delete', '0');
 
         if (!empty($search)) {
             $this->db->group_start();
-            $this->db->like('customer_name', $search);
-            $this->db->or_like('customer_code', $search);
-            $this->db->or_like('email', $search);
-            $this->db->or_like('mobile_no', $search);
+            $this->db->like('c.customer_name', $search);
+            $this->db->or_like('c.customer_code', $search);
+            $this->db->or_like('c.email', $search);
+            $this->db->or_like('c.mobile_no', $search);
             $this->db->group_end();
         }
 

@@ -16,7 +16,7 @@ $(document).ready(function () {
             url: cleanBaseUrl + 'product/product_list_ajax',
             type: 'POST'
         },
-        dom: 'Bfrtilp', // Added 'l' for length menu and moved 'i'
+        dom: 'Brtilp', // Removed 'f' as we use a custom live search input
         buttons: [
             {
                 extend: 'csv',
@@ -24,7 +24,7 @@ $(document).ready(function () {
                 title: 'Product List',
                 titleAttr: 'Download CSV',
                 exportOptions: {
-                    columns: [1, 2, 3, 5, 6]
+                    columns: [1, 2, 3, 4, 6, 7]
                 }
             },
             {
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 titleAttr: 'Download PDF',
                 orientation: 'landscape',
                 exportOptions: {
-                    columns: [1, 2, 3, 5, 6]
+                    columns: [1, 2, 3, 4, 6, 7]
                 },
                 customize: function (doc) {
                     // Match categories PDF customization if needed, or keep simple
@@ -53,6 +53,7 @@ $(document).ready(function () {
                 }
             },
             { data: 'name' },
+            { data: 'category' },
             {
                 data: 'detail',
                 render: function (data) {
@@ -115,6 +116,11 @@ $(document).ready(function () {
                 });
             }, 100);
         }
+    });
+
+    // Live Search Filter
+    $('#serarch-filter-input').on('keyup input', function () {
+        table.search(this.value).draw();
     });
 
     // Remove old button hiding/custom handlers as we are integrating into standard dom

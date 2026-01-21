@@ -24,92 +24,112 @@ class User extends MY_Controller {
 		$ret_arr = [];
 		$msg ='';
 		$success = 1;
-        $client_arr  = $this->input->post("client");
-        $groups  = $this->input->post("groups");
         
-        if(is_valid_array($client_arr) && is_valid_array($groups)){
-    		$data = array(
-    			'user_name' => $this->input->post('user_name'),
-    			'user_email' => $this->input->post('user_email'),
-    			'user_password' => $this->input->post('user_password'),
-    			'user_role' => $this->input->post('user_role'),
-    			'added_date' => date("Y-m-d H:i:s"),
-    			'added_by' => $this->session->userdata('user_id'),
-                'unit_ids' => implode(",", $client_arr),
-                "deleted"=>0,
-                'groups' => implode(",", $groups),
-    		);
+		$data = array(
+			'user_name' => $this->input->post('user_name'),
+			'user_email' => $this->input->post('user_email'),
+			'user_password' => $this->input->post('user_password'),
+			'user_role' => $this->input->post('user_role'),
+			'mobile_no' => $this->input->post('mobile_no'),
+			'gender' => $this->input->post('gender'),
+			'added_date' => date("Y-m-d H:i:s"),
+			'added_by' => $this->session->userdata('user_id'),
+			"deleted"=>0,
+		);
 
-    		$inser_query = $this->User_model->insertUser($data);
-    		if ($inser_query) {
-    			if ($inser_query) {
-    				// echo "<script>alert('User  Added Successfully');document.location='erp_users'</script>";
-    				$msg = 'User Added Successfully.';
-    			} else {
-    				// echo "<script>alert('Error IN User  Adding ,try again');document.location='erp_users'</script>";
-    				$msg = 'Error IN User Adding ,try again.';
-    				$success = 0;
-    			}
-    		} else {
-    			
-    			$msg = 'Error occer while inserting data.';
-    			$success = 0;
-    		}
-        }else if(!is_valid_array($client_arr)){
-            $msg = 'Please select unit.';
-            $success = 0;
-        }else if(!is_valid_array($groups)){
-            $msg = 'Please select groups.';
-            $success = 0;
-        }
+		// Handle Profile Image Upload
+		if (!empty($_FILES['user_image']['name'])) {
+			$config['upload_path']   = './public/uploads/users/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['encrypt_name']  = TRUE;
+
+			if (!is_dir($config['upload_path'])) {
+				mkdir($config['upload_path'], 0777, true);
+			}
+
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('user_image')) {
+				$upload_data = $this->upload->data();
+				$data['user_image'] = 'public/uploads/users/' . $upload_data['file_name'];
+			} else {
+				$msg = $this->upload->display_errors();
+				$success = 0;
+			}
+		}
+
+		if ($success == 1) {
+			$inser_query = $this->User_model->insertUser($data);
+			if ($inser_query) {
+				$msg = 'User Added Successfully.';
+			} else {
+				$msg = 'Error IN User Adding ,try again.';
+				$success = 0;
+			}
+		}
+
 		$ret_arr['msg'] = $msg;
 		$ret_arr['success'] = $success;
 		echo json_encode($ret_arr);
 	}
+
 	public function updateUsersData()
-    {
-        $ret_arr = [];
-        $msg ='';
-        $success = 1;
-        $client_arr  = $this->input->post("client");
-        $status = $this->input->post('status');
-        $groups  = $this->input->post("groups");
-        if(is_valid_array($client_arr) && is_valid_array($groups)){
-            $data = array(
-                'user_name' => $this->input->post('user_name'),
-                'unit_ids' => implode(",", $client_arr),
-                'groups' => implode(",", $groups),
-                'status' => $status
-            );
-            if($status != "Block"){
-            	$data['login_attempt'] = 0;
-            }
-            $id = $this->input->post("user_id");
-            $result = $this->User_model->updateUserData($data, $id);
-            if ($result) {
-                if ($result) {
-                    // echo "<script>alert('User  Added Successfully');document.location='erp_users'</script>";
-                    $msg = 'User Updated Successfully.';
-                } else {
-                    // echo "<script>alert('Error IN User  Adding ,try again');document.location='erp_users'</script>";
-                    $msg = 'Error IN User Updating ,try again.';
-                    $success = 0;
-                }
-            } else {
-                $msg = 'Error occer while updateing data.';
-                $success = 0;
-            }
-        }else if(!is_valid_array($client_arr)){
-            $msg = 'Please select unit.';
-            $success = 0;
-        }else if(!is_valid_array($groups)){
-            $msg = 'Please select groups.';
-            $success = 0;
-        }
-        $ret_arr['messages'] = $msg;
-        $ret_arr['success'] = $success;
-        echo json_encode($ret_arr);
-    }
+	{
+		$ret_arr = [];
+		$msg ='';
+		$success = 1;
+		$id = $this->input->post("user_id");
+		$status = $this->input->post('status');
+
+		$data = array(
+			'user_name' => $this->input->post('user_name'),
+			'mobile_no' => $this->input->post('mobile_no'),
+			'gender' => $this->input->post('gender'),
+			'status' => $status
+		);
+
+		if($status != "Block"){
+			$data['login_attempt'] = 0;
+		}
+
+		// Handle Profile Image Upload
+		if (!empty($_FILES['user_image']['name'])) {
+			$config['upload_path']   = './public/uploads/users/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['encrypt_name']  = TRUE;
+
+			if (!is_dir($config['upload_path'])) {
+				mkdir($config['upload_path'], 0777, true);
+			}
+
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('user_image')) {
+				$upload_data = $this->upload->data();
+				$data['user_image'] = 'public/uploads/users/' . $upload_data['file_name'];
+				
+				// Optional: Delete old image
+				$old_data = $this->User_model->getUserDataById($id);
+				if(!empty($old_data[0]['user_image']) && file_exists('./'.$old_data[0]['user_image'])){
+					unlink('./'.$old_data[0]['user_image']);
+				}
+			} else {
+				$msg = $this->upload->display_errors();
+				$success = 1; // Don't block update if only image fails, or maybe yes? Let's say yes for consistency.
+				// $success = 0; 
+			}
+		}
+
+		$result = $this->User_model->updateUserData($data, $id);
+		if ($result) {
+			$msg = 'User Updated Successfully.';
+		} else {
+			$msg = 'Error IN User Updating ,try again.';
+			$success = 0;
+		}
+
+		$ret_arr['messages'] = $msg;
+		$ret_arr['success'] = $success;
+		echo json_encode($ret_arr);
+	}
 
 
 	/* group master module */

@@ -42,7 +42,7 @@ class Refunds extends MY_Controller {
 				'refund_status' => $r['refund_status'],
 				'action' => '
 					<div class="d-flex gap-2 justify-content-center">
-						<a href="' . base_url('orders/order_details?id=' . $r['order_id']) . '" class="btn btn-sm btn-icon btn-label-primary" title="View Order">
+						<a href="' . base_url('orders/order_details?id=' . urlencode(base64_encode($r['order_id']))) . '" class="btn btn-sm btn-icon btn-label-primary" title="View Order">
 							<i class="ti ti-eye"></i>
 						</a>
 						<button type="button" class="btn btn-sm btn-icon btn-label-success approve-refund" data-id="' . $r['id'] . '" title="Approve">

@@ -125,4 +125,28 @@ class Home extends MY_Controller {
             ]);
         }
     }
+    /**
+     * AJAX endpoint to handle newsletter subscription
+     */
+    public function subscribe_newsletter() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $email = $this->input->post('email');
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => 0, 'message' => 'Please enter a valid email address.']);
+            return;
+        }
+
+        $this->load->model('Newsletter_model');
+        $result = $this->Newsletter_model->subscribe($email);
+
+        if ($result['success']) {
+            echo json_encode(['success' => 1, 'message' => $result['message']]);
+        } else {
+            echo json_encode(['success' => 0, 'message' => $result['message']]);
+        }
+    }
 }

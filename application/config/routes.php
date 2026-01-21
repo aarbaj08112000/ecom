@@ -35,6 +35,7 @@ $route['shop/submit-contact'] = 'frontend/Home/submit_contact';
 $route['shop/wishlist'] = 'frontend/Wishlist/index';
 $route['shop/wishlist/add'] = 'frontend/Wishlist/add';
 $route['shop/wishlist/remove'] = 'frontend/Wishlist/remove';
+$route['shop/subscribe-newsletter'] = 'frontend/Home/subscribe_newsletter';
 
 // Support Routes
 $route['shop/track-order'] = 'frontend/Support/track_order';
@@ -75,11 +76,11 @@ $route['product_dashboard'] = 'user/dashboard/product_dashboard';
 
 $route['customer_list'] = 'user/customer/customer_list';
 $route['customer_details'] = 'user/customer/customer_details';
-$route['customer_details/(:num)'] = 'user/customer/customer_details/$1';
+$route['customer_details/(:any)'] = 'user/customer/customer_details/$1';
 $route['update_customer_status'] = 'user/customer/update_customer_status';
 $route['update_customer_profile'] = 'user/customer/update_customer_profile';
 $route['customer_edit'] = 'user/customer/customer_edit';
-$route['customer_edit/(:num)'] = 'user/customer/customer_edit/$1';
+$route['customer_edit/(:any)'] = 'user/customer/customer_edit/$1';
 $route['update_full_customer'] = 'user/customer/update_full_customer';
 $route['delete_customer'] = 'user/customer/delete_customer';
 $route['customer_list_ajax'] = 'user/customer/customer_list_ajax';
@@ -98,6 +99,7 @@ $route['save_product_data'] = 'product/product/save_product_data';
 $route['product_details'] = 'product/product/product_details';
 //categories
 $route['categories'] = 'product/categories/categories';
+$route['categories_ajax'] = 'product/categories/categories_ajax';
 $route['add_categories'] = 'product/categories/add_categories';
 $route['update_categories'] = 'product/categories/update_categories';
 $route['delete_category'] = 'product/categories/delete_category';
