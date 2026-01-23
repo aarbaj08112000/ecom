@@ -107,14 +107,24 @@
   .delay-3 { animation-delay: 0.3s; }
 </style>
 
-<div class="container-fluid py-4">
+<div class="container-fluid container-xxl flex-grow-1 container-p-y">
+   
+
     
     <!-- Header -->
     <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-5 animate-up">
-        <div>
-            <h2 class="fw-bold mb-1">Traffic Analytics</h2>
-            <p class="text-muted mb-0">Monitor your website traffic and visitor behavior</p>
-        </div>
+        <nav aria-label="breadcrumb">
+        <div class="sub-header-left pull-left breadcrumb">
+            <h1>
+            Reports & Analytics
+            <a hijacked="yes" href="dashboard" class="backlisting-link" title="Back to Dashboard" >
+                <i class="ti ti-chevrons-right" ></i>
+                <em >Traffic Analytics</em></a>
+            </h1>
+            <br>
+            <span >Traffic Analytics</span>
+            </div>
+        </nav>
         <div class="d-flex gap-3 mt-3 mt-md-0">
             <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 rounded-pill" onclick="location.reload()">
                 <i class="ti ti-refresh"></i> Refresh
@@ -255,4 +265,7 @@
     </div>
 </div>
 
+<script>
+    var cleanBaseUrl = <%($base_url)|@json_encode%>;
+</script>
 <script src="<%$base_url%>public/js/admin_panel/traffic_analytics.js"></script>

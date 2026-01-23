@@ -83,12 +83,19 @@
 }
 
 /* 4. Side Menu Arrow Behavior */
-/* Collapsed state (Default): Down Arrow */
+/* Collapsed state (Default): Up Arrow */
 .layout-wrapper .menu-vertical .menu-item .menu-toggle::after {
+    transform: translateY(-50%) rotate(-45deg) !important;
+}
+
+/* Expanded state (.open): Down Arrow */
+.layout-wrapper .menu-vertical .menu-item.open>.menu-toggle::after {
     transform: translateY(-50%) rotate(135deg) !important;
 }
 
-/* Expanded state (.open): Up Arrow */
-.layout-wrapper .menu-vertical .menu-item.open>.menu-toggle::after {
-    transform: translateY(-50%) rotate(-45deg) !important;
+/* 5. Star Icon Color */
+.layout-wrapper .ti-star-filled,
+.layout-wrapper .ti-star {
+    color: #ffab00 !important;
+    /* Gold/Amber */
 }

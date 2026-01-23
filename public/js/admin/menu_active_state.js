@@ -49,18 +49,23 @@ $(document).ready(function () {
         }
     });
 
-    // Handle menu toggle clicks to maintain state
+    // Handle menu toggle clicks with accordion behavior
     $('.menu-toggle').on('click', function (e) {
         var $parentItem = $(this).closest('.menu-item');
         var $subMenu = $parentItem.find('.menu-sub').first();
 
-        // Toggle the submenu
-        if ($subMenu.hasClass('show')) {
-            $subMenu.removeClass('show');
-            $parentItem.removeClass('open');
-        } else {
-            $subMenu.addClass('show');
+        // If we are opening a menu, close all other open menus first
+        if (!$parentItem.hasClass('open')) {
+            $('.menu-item.open').not($parentItem).each(function () {
+                $(this).removeClass('open');
+                $(this).find('.menu-sub').removeClass('show').slideUp();
+            });
             $parentItem.addClass('open');
+            $subMenu.addClass('show').slideDown();
+        } else {
+            // If clicking the already open menu, close it
+            $parentItem.removeClass('open');
+            $subMenu.removeClass('show').slideUp();
         }
     });
 
