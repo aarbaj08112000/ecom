@@ -25,7 +25,7 @@
 
       <style>
         body {
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             overflow-x: hidden;
             font-family: 'Public Sans', sans-serif;
             padding-top: 0 !important; /* Explicitly remove top padding */
@@ -34,7 +34,7 @@
             min-height: 100vh;
         }
         .login-brand-col {
-            background: linear-gradient(135deg, #ff3e1d 0%, #ff6b4a 100%);
+            background: linear-gradient(135deg, #7367f0 0%, #a49cf4 100%);
             position: relative;
             display: flex;
             align-items: center;
@@ -42,25 +42,27 @@
             color: white;
             overflow: hidden;
         }
-        /* Refined Wavy Divider */
+        /* Consolidated Curve Divider Styles */
         .wave-divider {
             position: absolute;
             top: 0;
             left: -1px;
             bottom: 0;
-            width: 120px;
-            z-index: 2;
+            width: 200px; /* Wide enough for a smooth curve */
+            z-index: 5;
             pointer-events: none;
         }
         .wave-divider svg {
             width: 100%;
             height: 100%;
             display: block;
-            fill: #ffffff;
+        }
+        .wave-divider svg path {
+             fill: #f8f9fa; /* Seamless blend with form background */
         }
         
         .login-form-col {
-            background: #ffffff;
+            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,62 +75,69 @@
             padding: 3rem;
             position: relative;
             z-index: 20;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Modern soft shadow */
         }
         
         /* Premium Pill Inputs */
         .input-group-pill {
-            border-radius: 50px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #d9dee3;
             transition: all 0.3s ease;
         }
         .input-group-pill:focus-within {
-            box-shadow: 0 5px 20px rgba(255, 62, 29, 0.15);
-            border-color: #ff3e1d;
+            box-shadow: 0 0.25rem 1rem rgba(115, 103, 240, 0.1);
+            border-color: #7367f0;
             background: #ffffff;
         }
         .input-group-pill .form-control {
             border: none;
             box-shadow: none;
             background: transparent;
-            font-size: 0.95rem;
-            padding: 12px 15px;
-            font-weight: 500;
+            font-size: 1rem;
+            padding: 10px 15px;
+            font-weight: 400;
+            color: #566a7f;
         }
         .input-group-pill .input-group-text {
             background: transparent;
             border: none;
-            color: #ff3e1d;
+            color: #7367f0;
         }
 
         /* Gradient Button */
         .btn-pill {
-            border-radius: 50px;
-            padding: 12px 2rem;
+            border-radius: 8px;
+            padding: 10px 2rem;
             letter-spacing: 0.5px;
-            background: linear-gradient(90deg, #ff3e1d, #ff6b4a);
+            background: #7367f0 !important;
             border: none;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            box-shadow: 0 0.125rem 0.25rem rgba(115, 103, 240, 0.4);
+            color: #fff !important;
         }
         .btn-pill:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 62, 29, 0.4);
-            background: linear-gradient(90deg, #ff2000, #ff5530);
+            transform: translateY(-1px);
+            box-shadow: 0 0.5rem 1rem rgba(115, 103, 240, 0.4);
+            background: #685dd8 !important;
+            color: #fff !important;
         }
 
         .sc-image-wrapper {
             width: 350px;
             height: 350px;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
@@ -137,22 +146,12 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 50%;
-            /* Fix white background corners if image isn't transparent */
             background-color: white; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .login-brand-col {
-            /* Deeper gradient for contrast */
-            background: linear-gradient(135deg, #ff3e1d 0%, #ff5733 100%);
-        }
-        
-        .wave-divider {
-            width: 150px; /* Wider curve */
-            z-index: 5;
-        }
-        .wave-divider svg path {
-             fill: #ffffff; /* Seamless blend with white form col */
+            background: linear-gradient(135deg, #7367f0 0%, #696cff 100%);
         }
 
         .floating-anim {
@@ -165,10 +164,10 @@
         }
 
         .error-msg {
-            color: #ea5455;
+            color: #ff3e1d;
             font-size: 0.85rem;
             margin-top: 5px;
-            margin-left: 15px;
+            margin-left: 5px;
             font-weight: 500;
         }
         
@@ -177,8 +176,8 @@
             display: inline-block;
         }
         .hover-scale:hover {
-            transform: scale(1.05);
-            color: #ff3e1d !important;
+            transform: scale(1.02);
+            color: #7367f0 !important;
         }
         
         /* Loader Styles */
@@ -197,7 +196,7 @@
         }
         .loader-div {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #ff3e1d;
+            border-top: 4px solid #7367f0;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -220,11 +219,11 @@
           <div class="row g-0 login-split-screen">
               
               <!-- Left Form Column -->
-              <div class="col-lg-6 login-form-col">
+              <div class="col-lg-5 login-form-col">
                   <div class="login-card animate__animated animate__fadeInLeft">
                       
                       <div class="text-center mb-5">
-                          <h2 class="fw-bold mb-2 text-dark" style="color: #ff3e1d !important;">Hello!</h2>
+                          <h2 class="fw-bold mb-2 text-dark" style="color: #7367f0 !important;">Hello!</h2>
                           <p class="text-muted fs-5">Sign in to your account</p>
                       </div>
 
@@ -250,12 +249,12 @@
 
                             <div class="mb-4 d-flex justify-content-between align-items-center px-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me" value="Yes" style="border-color: #ff3e1d;">
+                                    <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me" value="Yes" style="border-color: #7367f0;">
                                     <label class="form-check-label text-muted small" for="remember_me">
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="javascript:void(0)" onclick="toggleForms('forgot')" class="small text-primary text-decoration-none fw-bold" style="color: #ff3e1d !important;">Forgot Password?</a>
+                                <a href="javascript:void(0)" onclick="toggleForms('forgot')" class="small text-primary text-decoration-none fw-bold" style="color: #7367f0 !important;">Forgot Password?</a>
                             </div>
 
                             <button type="submit" id="loginBtn" class="btn btn-primary btn-login btn-pill w-100 shadow text-white fw-bold">
@@ -267,7 +266,7 @@
                       <!-- Forgot Password Form (Hidden initially) -->
                       <div id="forgot_div" style="display: none;">
                           <div class="mb-4 text-center">
-                              <h3 class="fw-bold mb-2" style="color: #ff3e1d;">Reset Password</h3>
+                              <h3 class="fw-bold mb-2" style="color: #7367f0;">Reset Password</h3>
                               <p class="text-muted small mb-4">Enter your username/email to receive reset instructions.</p>
                           </div>
 
@@ -291,19 +290,19 @@
                       </div>
 
                       <div class="mt-5 text-center text-muted small opacity-50">
-                          &copy; <%$smarty.now|date_format:"%Y"%> <%$config['company_name']%>
+                          &copy; 2026 Copyright Code crafter infotech
                       </div>
 
                   </div>
               </div>
 
               <!-- Right Brand Column -->
-              <div class="col-lg-6 d-none d-lg-flex login-brand-col">
+              <div class="col-lg-7 d-none d-lg-flex login-brand-col">
                   <!-- Circular Curve Divider -->
                   <div class="wave-divider">
                      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                         <!-- Big smooth convex curve -->
-                         <path d="M0,0 C50,0 70,50 0,100 Z" fill="#ffffff"/>
+                         <!-- Concave white shape creates a convex purple bulge from the right -->
+                         <path d="M100,0 C20,0 20,100 100,100 L0,100 L0,0 Z" fill="#f8f9fa"/>
                      </svg>
                   </div>
                   
