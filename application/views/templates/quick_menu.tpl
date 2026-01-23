@@ -1,18 +1,29 @@
 <div id="menu_overlay" class="menu_overlay home-page-boxes <%if $sitemap%>open site-map-contain<%/if%>">
     <style>
         .quick-menu-overlay {
-            background-color: #f8fafb;
+            background-color: rgba(248, 250, 251, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #5d596c;
             font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            animation: quickMenuFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        @keyframes quickMenuFadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         .quick-menu-header {
-            background: #fff;
-            padding: 1.5rem 2.5rem;
-            border-bottom: 1px solid #dbdade;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 1.25rem 2.5rem;
+            border-bottom: 1px solid rgba(219, 218, 222, 0.5);
             position: sticky;
             top: 0;
             z-index: 10;
         }
+
         .quick-menu-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -21,84 +32,115 @@
             display: flex;
             align-items: center;
         }
+
         .quick-menu-title i {
             font-size: 1.75rem;
             margin-right: 0.75rem;
-            color: #7367f0;
+            color: var(--admin-primary);
         }
+
         .quick-menu-section-card {
-            border: 1px solid #dbdade;
-            border-radius: 0.5rem;
+            border: 1px solid rgba(219, 218, 222, 0.8);
+            border-radius: 0.75rem;
             background: #fff;
             height: 100%;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 2px 4px rgba(165, 163, 174, 0.1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(165, 163, 174, 0.1);
+            overflow: hidden;
         }
+
         .quick-menu-section-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0.5rem 1rem rgba(165, 163, 174, 0.15);
-            border-color: #7367f0;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(165, 163, 174, 0.2);
+            border-color: var(--admin-primary);
         }
+
         .quick-menu-section-header {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #dbdade;
+            padding: 0.875rem 1.25rem;
+            border-bottom: 1px solid rgba(219, 218, 222, 0.6);
             display: flex;
             align-items: center;
-            background: rgba(115, 103, 240, 0.05);
-            border-top-left-radius: 0.5rem;
-            border-top-right-radius: 0.5rem;
+            background: linear-gradient(135deg, var(--admin-primary-light) 0%, rgba(var(--admin-primary-rgb), 0.02) 100%);
         }
+
         .quick-menu-section-header h5 {
             margin: 0;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #444050;
+            letter-spacing: 0.2px;
         }
+
         .quick-menu-section-header i {
             font-size: 1.25rem;
-            margin-right: 0.5rem;
-            color: #7367f0;
+            margin-right: 0.625rem;
+            color: var(--admin-primary);
         }
+
         .quick-menu-list {
             list-style: none;
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
             margin: 0;
         }
+
         .quick-menu-link {
             display: flex;
             align-items: center;
             padding: 0.5rem 1.25rem;
             color: #5d596c;
             text-decoration: none;
-            transition: all 0.2s;
-            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
         }
+
         .quick-menu-link:hover {
-            background-color: rgba(115, 103, 240, 0.08);
-            color: #7367f0;
-            padding-left: 1.5rem;
+            background-color: var(--admin-primary-light);
+            color: var(--admin-primary);
+            border-left-color: var(--admin-primary);
+            padding-left: 1.375rem;
         }
+
         .quick-menu-link i {
             font-size: 1.125rem;
             margin-right: 0.75rem;
             width: 20px;
             text-align: center;
         }
+
+        .btn-quick-dashboard {
+            background: linear-gradient(270deg, var(--admin-primary) 0%, var(--admin-primary-dark) 100%) !important;
+            border: none !important;
+            border-radius: 50px !important;
+            padding: 0.6rem 1.75rem !important;
+            box-shadow: 0 4px 12px rgba(var(--admin-primary-rgb), 0.3) !important;
+            transition: all 0.2s !important;
+        }
+
+        .btn-quick-dashboard:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 6px 15px rgba(var(--admin-primary-rgb), 0.4) !important;
+        }
+
         .close-quick-menu {
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
+            border-radius: 10px;
+            transition: all 0.2s;
             color: #a1acb8;
-        }
-        .close-quick-menu:hover {
             background: rgba(161, 172, 184, 0.1);
-            color: #5d596c;
         }
+
+        .close-quick-menu:hover {
+            background: #ea5455;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
         .quick-menu-grid {
             padding: 2.5rem;
         }
@@ -112,7 +154,7 @@
                     Admin Quick Menu
                 </h3>
                 <div class="d-flex align-items-center">
-                    <a href="dashboard" class="btn btn-primary ">
+                    <a href="dashboard" class="btn btn-primary btn-quick-dashboard">
                         <i class="ti ti-home me-1"></i> Dashboard
                     </a>
                     <div class="close-quick-menu quick-menu-bar hide ms-3">
@@ -246,6 +288,7 @@
                             </div>
                             <ul class="quick-menu-list">
                                 <li><a href="user_list" class="quick-menu-link"><i class="ti ti-user-shield"></i> User Management</a></li>
+                                <li><a href="role_management" class="quick-menu-link"><i class="ti ti-shield-lock"></i> Role Management</a></li>
                                 <li><a href="group_master" class="quick-menu-link"><i class="ti ti-lock-access"></i> Roles & Groups</a></li>
                                 <li><a href="general_settings" class="quick-menu-link"><i class="ti ti-settings-cog"></i> General Settings</a></li>
                                 <li><a href="change_password" class="quick-menu-link"><i class="ti ti-key"></i> Reset Password</a></li>

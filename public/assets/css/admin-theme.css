@@ -1,8 +1,8 @@
 :root {
     /* Admin/Login Red & Green Theme */
-    --primary: #ff3e1d;
-    --primary-gradient: linear-gradient(135deg, #ff3e1d, #d93418);
-    --secondary: #089c40;
+    --primary: var(--admin-primary, #ff3e1d);
+    --primary-gradient: linear-gradient(135deg, var(--admin-primary, #ff3e1d), var(--admin-primary-dark, #d93418));
+    --secondary: var(--admin-secondary-solid, #089c40);
     --accent-lavender: #f1f1f1;
     --accent-beige: #ffffff;
     --accent-brown: #333333;
@@ -10,25 +10,25 @@
     --dark: #2c2c2c;
     --light: #f5f5f9;
 
-    --soft-shadow: 0 10px 30px -10px rgba(255, 62, 29, 0.25);
+    --soft-shadow: 0 10px 30px -10px rgba(var(--admin-primary-rgb), 0.25);
     --glass-bg: rgba(255, 255, 255, 0.95);
-    --glass-border: rgba(255, 62, 29, 0.1);
+    --glass-border: rgba(var(--admin-primary-rgb), 0.1);
 
     --font-heading: 'Public Sans', sans-serif;
     --font-body: 'Public Sans', sans-serif;
 
     /* Bootstrap Overrides for Admin */
-    --bs-primary: #ff3e1d;
-    --bs-primary-rgb: 255, 62, 29;
-    --bs-link-color: #ff3e1d;
-    --bs-link-hover-color: #d93418;
-    --bs-btn-primary-bg: #ff3e1d;
-    --bs-btn-primary-border-color: #ff3e1d;
-    --bs-btn-primary-hover-bg: #d93418;
-    --bs-btn-primary-hover-border-color: #d93418;
+    --bs-primary: var(--admin-primary, #ff3e1d);
+    --bs-primary-rgb: var(--admin-primary-rgb, 255, 62, 29);
+    --bs-link-color: var(--admin-primary, #ff3e1d);
+    --bs-link-hover-color: var(--admin-primary-dark, #d93418);
+    --bs-btn-primary-bg: var(--admin-primary, #ff3e1d);
+    --bs-btn-primary-border-color: var(--admin-primary, #ff3e1d);
+    --bs-btn-primary-hover-bg: var(--admin-primary-dark, #d93418);
+    --bs-btn-primary-hover-border-color: var(--admin-primary-dark, #d93418);
 
-    --bs-btn-focus-shadow-rgb: 255, 62, 29;
-    --bs-focus-ring-color: rgba(255, 62, 29, 0.25);
+    --bs-btn-focus-shadow-rgb: var(--admin-primary-rgb, 255, 62, 29);
+    --bs-focus-ring-color: rgba(var(--admin-primary-rgb), 0.25);
 }
 
 /* Global Fixes for Admin/Login */
@@ -38,8 +38,8 @@
 }
 
 .btn-primary:hover {
-    background: #d93418 !important;
-    border-color: #d93418 !important;
+    background: var(--admin-primary-dark, #d93418) !important;
+    border-color: var(--admin-primary-dark, #d93418) !important;
 }
 
 .text-primary {
@@ -48,4 +48,47 @@
 
 .bg-primary {
     background-color: var(--primary) !important;
+}
+
+/* UI Improvements: Zoom, Submenu active color, Action icons */
+
+/* 1. Admin Panel Zoom Effect (Desktop only) */
+@media (min-width: 1200px) {
+    .layout-wrapper {
+        zoom: 0.9;
+    }
+}
+
+/* 2. Active Submenu Text Color Fix */
+/* Ensures active submenu items are readable with primary color text */
+.layout-wrapper .menu-sub .menu-item.active>.menu-link div,
+.layout-wrapper .menu-sub .menu-item.active>.menu-link i {
+    color: var(--admin-primary) !important;
+}
+
+/* 3. Standardized Action Icon Colors */
+.layout-wrapper .ti-eye {
+    color: #17a2b8 !important;
+    /* View: Info/Teal */
+}
+
+.layout-wrapper .ti-edit {
+    color: #7367f0 !important;
+    /* Edit: Primary */
+}
+
+.layout-wrapper .ti-trash {
+    color: #dc3545 !important;
+    /* Delete: Danger/Red */
+}
+
+/* 4. Side Menu Arrow Behavior */
+/* Collapsed state (Default): Down Arrow */
+.layout-wrapper .menu-vertical .menu-item .menu-toggle::after {
+    transform: translateY(-50%) rotate(135deg) !important;
+}
+
+/* Expanded state (.open): Up Arrow */
+.layout-wrapper .menu-vertical .menu-item.open>.menu-toggle::after {
+    transform: translateY(-50%) rotate(-45deg) !important;
 }

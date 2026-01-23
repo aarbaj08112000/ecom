@@ -192,3 +192,185 @@ input:checked {
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
 }
+
+/* User Grid Card Styles */
+.user-grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.status-radius.active {
+  background-color: #4CAF50;
+}
+
+.status-radius.inactive {
+  background-color: #9E9E9E;
+}
+
+/* Grid Container Spacing */
+.grid-block-container {
+  padding: 0 !important;
+}
+
+.grid-block-container .row {
+  margin: 0 -12px;
+}
+
+.grid-block-container .row>[class*='col-'] {
+  padding: 0 12px;
+}
+
+/* DataTables Refined Pagination & Fixed Height */
+.role-management-page .bottom-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border-top: 1px solid #e1e1e1;
+}
+
+.role-management-page .right-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.role-management-page .dataTables_info {
+  color: #5d596c;
+  font-size: 0.9rem;
+}
+
+.role-management-page .dataTables_paginate {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+}
+
+.role-management-page .dataTables_paginate .paginate_button {
+  padding: 6px 14px !important;
+  margin: 0 4px !important;
+  border-radius: 8px !important;
+  border: 1px solid #dbdade !important;
+  cursor: pointer;
+  background: #ffffff !important;
+  color: #5d596c !important;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.role-management-page .dataTables_paginate .paginate_button:hover {
+  background: rgba(115, 103, 240, 0.08) !important;
+  color: #7367f0 !important;
+  border-color: #7367f0 !important;
+}
+
+.role-management-page .dataTables_paginate .paginate_button.current {
+  background: #7367f0 !important;
+  color: #ffffff !important;
+  border-color: #7367f0 !important;
+}
+
+.role-management-page .dataTables_paginate .paginate_button.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.role-management-page .dataTables_length {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5d596c;
+}
+
+.role-management-page .dataTables_length select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #dbdade;
+  background-color: #fff;
+  color: #5d596c;
+}
+
+.dataTables_scrollBody {
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.dataTables_scrollHead {
+  border-bottom: 2px solid #e1e1e1;
+}
+
+/* Hide default info if requested by user image (which only shows pagination and show entries) */
+/* Global Select2 Custom Styling */
+.select2-container--default .select2-selection--single {
+  height: 42px !important;
+  border: 1px solid #dbdade !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--open .select2-selection--single {
+  border-color: #7367f0 !important;
+  outline: none !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: normal !important;
+  padding-left: 12px !important;
+  padding-right: 30px !important;
+  color: #5d596c !important;
+  font-size: 0.9375rem !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 40px !important;
+  width: 30px !important;
+}
+
+.select2-dropdown {
+  z-index: 9999 !important;
+  border: 1px solid #dbdade !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0.5rem 1.25rem rgba(161, 172, 184, 0.4) !important;
+  margin-top: 5px !important;
+  overflow: hidden !important;
+}
+
+.select2-results__option {
+  padding: 10px 15px !important;
+  font-size: 0.9375rem !important;
+  color: #5d596c !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #7367f0 !important;
+  color: #ffffff !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: rgba(115, 103, 240, 0.1) !important;
+  color: #7367f0 !important;
+}
+
+/* Fix for Select2 width and overflow */
+.select2-container {
+  width: 100% !important;
+}
+
+/* Search box styling inside dropdown */
+.select2-search--dropdown {
+  padding: 8px !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+  border: 1px solid #dbdade !important;
+  border-radius: 4px !important;
+  padding: 6px 12px !important;
+  outline: none !important;
+}
+
+.select2-search--dropdown .select2-search__field:focus {
+  border-color: #7367f0 !important;
+}

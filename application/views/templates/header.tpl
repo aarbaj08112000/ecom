@@ -46,6 +46,8 @@
       <link rel="stylesheet" href="<%$base_url%>public/assets/vendor/libs/apex-charts/apex-charts.css" />
       <link rel="stylesheet" href="<%$base_url%>public/css/common.css" />
       <link rel="stylesheet" href="<%$base_url%>public/assets/css/admin-theme.css" />
+      <!-- Admin Global Color Configuration -->
+      <link rel="stylesheet" href="<%$base_url%>public/assets/css/admin-theme-colors.css" />
       <!-- Page CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
       <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> -->
@@ -123,7 +125,7 @@
          <div class="menu-inner-shadow"></div>
          <ul class="menu-inner py-1">
             <!-- Dashboard -->
-             <li class="menu-item active">
+             <li class="menu-item">
                <a href="dashboard" class="menu-link">
                    <!-- <i class="menu-icon tf-icons bx bx-home-circle"></i> -->
                   <i class=" menu-icon ti ti-home"></i>
@@ -131,7 +133,7 @@
                </a>
             </li>
             <!-- Layouts -->
-            <li class="menu-item">
+            <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'product_list' || $smarty.server.REQUEST_URI|strstr:'categories' || $smarty.server.REQUEST_URI|strstr:'brands' || $smarty.server.REQUEST_URI|strstr:'attributes' || $smarty.server.REQUEST_URI|strstr:'reviews'%>active open<%/if%>">
                <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class=" menu-icon ti ti-shopping-cart"></i>
                   <div data-i18n="Layouts">Product</div>
@@ -171,12 +173,12 @@
             </li> 
             
             
-            <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-           
-               <i class="menu-icon ti ti-truck-delivery"></i>
-               <div data-i18n="Layouts">Orders</div>
-            </a>
+            <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'/orders'%>active open<%/if%>">
+             <a href="javascript:void(0);" class="menu-link menu-toggle">
+            
+                <i class="menu-icon ti ti-truck-delivery"></i>
+                <div data-i18n="Layouts">Orders</div>
+             </a>
             <ul class="menu-sub">
                <li class="menu-item">
                   <a href="orders" class="menu-link">
@@ -188,7 +190,7 @@
          </li> 
           
 
-         <li class="menu-item">
+         <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'customer_list' || $smarty.server.REQUEST_URI|strstr:'customer_reviews' || $smarty.server.REQUEST_URI|strstr:'wishlist_list'%>active open<%/if%>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                
                <i class="menu-icon ti ti-users"></i>
@@ -214,7 +216,7 @@
             </ul>
          </li> 
 
-         <li class="menu-item">
+         <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'coupons' || $smarty.server.REQUEST_URI|strstr:'email_marketing'%>active open<%/if%>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                <i class="menu-icon ti ti-ad-circle"></i>
                <div data-i18n="Layouts">Marketing & Promotions</div>
@@ -234,7 +236,7 @@
             </ul>
          </li> 
 
-         <li class="menu-item">
+         <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'transactions' || $smarty.server.REQUEST_URI|strstr:'refunds'%>active open<%/if%>">
          <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon ti ti-receipt-rupee"></i>
             <div data-i18n="Layouts">Payments</div>
@@ -254,7 +256,7 @@
          </ul>
       </li> 
 
-      <li class="menu-item">
+      <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'shipping_methods' || $smarty.server.REQUEST_URI|strstr:'delivery_partners' || $smarty.server.REQUEST_URI|strstr:'order_tracking'%>active open<%/if%>">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
          <i class="menu-icon ti ti-building-store"></i>
          <div data-i18n="Layouts">Shipping & Delivery</div>
@@ -281,7 +283,7 @@
       </ul>
    </li> 
 
-   <li class="menu-item">
+   <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'banner' || $smarty.server.REQUEST_URI|strstr:'gallery' || $smarty.server.REQUEST_URI|strstr:'blog' || $smarty.server.REQUEST_URI|strstr:'faq' || $smarty.server.REQUEST_URI|strstr:'testimonials' || $smarty.server.REQUEST_URI|strstr:'contact_us'%>active open<%/if%>">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
          <i class="menu-icon ti ti-message-plus"></i>
          <div data-i18n="Layouts">Content Management</div>
@@ -327,7 +329,7 @@
    </li> 
 
    
-   <li class="menu-item">
+   <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'sales_report' || $smarty.server.REQUEST_URI|strstr:'product_performance_report' || $smarty.server.REQUEST_URI|strstr:'low_stock_report' || $smarty.server.REQUEST_URI|strstr:'traffic_analytics'%>active open<%/if%>">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
          <i class="menu-icon ti ti-report"></i>
          <div data-i18n="Layouts">Reports & Analytics</div>
@@ -364,7 +366,7 @@
       </ul>
    </li> 
             
-            <li class="menu-item ">
+            <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'user_list' || $smarty.server.REQUEST_URI|strstr:'role_management'%>active open<%/if%>">
                <a href="javascript:void(0);" class="menu-link menu-toggle">
                
                <i class="menu-icon ti ti-users-plus"></i>
@@ -377,14 +379,14 @@
                      </a>
                   </li>
                   <li class="menu-item">
-                     <a href="<%$base_url%>group_master" class="menu-link" >
-                        <i class="menu-icon tf-icons bx bx-group"></i><div data-i18n="Basic">Group Master</div>
+                     <a href="<%$base_url%>role_management" class="menu-link" >
+                        <i class="menu-icon ti ti-shield-lock"></i><div data-i18n="Basic">Role Management</div>
                      </a>
                   </li>
                </ul>
             </li>
             
-            <li class="menu-item">
+            <li class="menu-item <%if $smarty.server.REQUEST_URI|strstr:'general_settings'%>active open<%/if%>">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
          <i class="menu-icon ti ti-settings"></i>
          <div data-i18n="Layouts">Settings</div>
@@ -509,10 +511,9 @@
                            <a href="<%$base_url%>user_list" class="dropdown-item">User</a>
                         </li>
                         <li>
-                           <a href="<%$base_url%>group_master" class="dropdown-item">Group Master</a>
+                           <a href="<%$base_url%>role_management" class="dropdown-item">Role Management</a>
                         </li>
-                        
-                     </ul>
+                      </ul>
                   </li>
                   <!-- <li class="nav-item">
                      <a href="http://localhost/extra_work/erp_converted/logout" class="nav-link">Logout</a>

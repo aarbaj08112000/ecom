@@ -63,8 +63,8 @@ $route['inprogress_page'] = 'user/login/inprogress_page';
 /* admin */
 $route['sitemap'] = 'user/login/site_map';
 $route['user_list'] = 'user/user/user_list';
-$route['group_master'] = 'user/user/groupMaster';
-$route['group_menu'] = 'user/user/groupMenu';
+$route['role_management'] = 'user/role/role_management';
+$route['roles_ajax'] = 'user/role/roles_ajax';
 
 // dashboard
 

@@ -1,0 +1,165 @@
+/* Role Management Permission Table Styles */
+.permission-table {
+    font-size: 14px;
+}
+
+.permission-table thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+.permission-table tbody td {
+    vertical-align: middle;
+    padding: 10px 8px;
+}
+
+.permission-table .table-secondary {
+    background-color: #e9ecef !important;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.permission-table .form-check-input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.permission-table .form-check-input:indeterminate {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.permission-table .form-check {
+    margin: 0;
+    padding: 0;
+}
+
+.permission-table .form-check-label {
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Modal Scrollable Body */
+.modal-dialog-scrollable .modal-body {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+
+/* Permission Row Hover Effect */
+.permission-table tbody tr[data-module]:hover {
+    background-color: #f8f9fa;
+}
+
+/* Module Header Row */
+.permission-table tbody tr:has(td[colspan="7"]) {
+    background-color: #e9ecef;
+}
+
+/* Responsive Table */
+@media (max-width: 1200px) {
+    .permission-table {
+        font-size: 12px;
+    }
+    
+    .permission-table thead th,
+    .permission-table tbody td {
+        padding: 8px 4px;
+    }
+    
+    .permission-table .form-check-input {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Badge Styles for Status */
+.badge {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Action Icons */
+.ti-edit {
+    color: #696cff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ti-edit:hover {
+    color: #5f61e6;
+    transform: scale(1.1);
+}
+
+/* Form Group Spacing */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Required Field Indicator */
+.text-danger {
+    color: #ff3e1d !important;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.modal-title {
+    font-weight: 600;
+    color: #566a7f;
+}
+
+/* Table Striped Enhancement */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Checkbox Alignment */
+.text-center .form-check-input {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Permission Table Border */
+.permission-table {
+    border: 1px solid #d9dee3;
+}
+
+.permission-table th,
+.permission-table td {
+    border: 1px solid #d9dee3;
+}
+
+/* Module Icon Spacing */
+.permission-table .table-secondary i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Select All Header Styling */
+.permission-table thead .form-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Indeterminate Checkbox Custom Style */
+input[type="checkbox"]:indeterminate {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+}

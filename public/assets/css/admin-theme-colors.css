@@ -1,0 +1,207 @@
+/* 
+ * ============================================
+ * Admin Panel Global Theme System (PRO)
+ * ============================================
+ * 
+ * Centralized theme control for the entire Admin Panel.
+ * All styles are scoped to .layout-wrapper.
+ */
+
+.layout-wrapper {
+    /* ========== Theme Palette ========== */
+
+    /* Primary (User: #7367f0) */
+    --admin-primary: #7367f0;
+    --admin-primary-rgb: 115, 103, 240;
+    --admin-primary-light: rgba(115, 103, 240, 0.08);
+    --admin-primary-medium: rgba(115, 103, 240, 0.12);
+    --admin-primary-dark: #5f51d8;
+    --admin-primary-darker: #4a3fb8;
+
+    /* Secondary (User: rgba(105, 108, 255, 0.16)) */
+    --admin-secondary: rgba(105, 108, 255, 0.16);
+    --admin-secondary-solid: #696cff;
+
+    /* Success */
+    --admin-success: #28c76f;
+    --admin-success-light: rgba(40, 199, 111, 0.12);
+
+    /* Danger */
+    --admin-danger: #ea5455;
+    --admin-danger-light: rgba(234, 84, 85, 0.12);
+
+    /* Warning */
+    --admin-warning: #ff9f43;
+    --admin-warning-light: rgba(255, 159, 67, 0.12);
+
+    /* Info */
+    --admin-info: #00cfe8;
+    --admin-info-light: rgba(0, 207, 232, 0.12);
+
+    /* UI Logic Variables */
+    --admin-menu-active-bg: var(--admin-primary-light);
+    --admin-menu-active-color: var(--admin-primary);
+    --admin-btn-primary-bg: var(--admin-primary);
+    --admin-btn-primary-hover: var(--admin-primary-dark);
+    --admin-border-radius: 0.375rem;
+    --admin-focus-shadow: 0 0 0 0.25rem rgba(115, 103, 240, 0.25);
+}
+
+/* ========== Global Element Overrides ========== */
+
+/* Buttons */
+.layout-wrapper .btn-primary {
+    background-color: var(--admin-primary) !important;
+    border-color: var(--admin-primary) !important;
+    color: #fff !important;
+}
+
+.layout-wrapper .btn-primary:hover {
+    background-color: var(--admin-primary-dark) !important;
+    border-color: var(--admin-primary-dark) !important;
+}
+
+.layout-wrapper .btn-outline-primary {
+    color: var(--admin-primary) !important;
+    border-color: var(--admin-primary) !important;
+}
+
+.layout-wrapper .btn-outline-primary:hover {
+    background-color: var(--admin-primary) !important;
+    color: #fff !important;
+}
+
+/* Links & Text */
+.layout-wrapper a {
+    /* color: var(--admin-primary); */
+}
+
+.layout-wrapper a:hover {
+    color: var(--admin-primary-dark);
+}
+
+.layout-wrapper .text-primary {
+    color: var(--admin-primary) !important;
+}
+
+/* Tabs & Navs */
+.layout-wrapper .nav-tabs .nav-link.active {
+    border-bottom: 3px solid var(--admin-primary) !important;
+    color: var(--admin-primary) !important;
+}
+
+.layout-wrapper .nav-pills .nav-link.active {
+    background-color: var(--admin-primary) !important;
+    color: #fff !important;
+}
+
+/* Tables & DataTables */
+.layout-wrapper .table thead,
+.layout-wrapper table.dataTable thead th {
+    background-color: var(--admin-primary-light) !important;
+    color: var(--admin-primary) !important;
+}
+
+.layout-wrapper .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: var(--admin-primary) !important;
+    color: #fff !important;
+    border-color: var(--admin-primary) !important;
+}
+
+.layout-wrapper .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--admin-primary-light) !important;
+    color: var(--admin-primary) !important;
+}
+
+/* Modals & Alerts */
+.layout-wrapper .modal-header {
+    border-bottom: 2px solid var(--admin-primary-light);
+}
+
+.layout-wrapper .alert-primary {
+    background-color: var(--admin-primary-light);
+    border-color: var(--admin-primary);
+    color: var(--admin-primary);
+}
+
+/* Badges */
+.layout-wrapper .badge.bg-primary {
+    background-color: var(--admin-primary) !important;
+}
+
+.layout-wrapper .badge.bg-label-primary {
+    background-color: var(--admin-primary-light) !important;
+    color: var(--admin-primary) !important;
+}
+
+/* Menu (Sidebar) */
+.layout-wrapper .menu-item.active>.menu-link {
+    background: linear-gradient(72.47deg, var(--admin-primary) 22.16%, rgba(var(--admin-primary-rgb), 0.7) 76.47%) !important;
+    color: #fff !important;
+    box-shadow: 0px 2px 6px 0px rgba(var(--admin-primary-rgb), 0.48) !important;
+    border-radius: 0.375rem;
+}
+
+.layout-wrapper .menu-item.active>.menu-link i,
+.layout-wrapper .menu-item.active>.menu-link div {
+    color: #fff !important;
+}
+
+.layout-wrapper .menu-item.active.open>.menu-link {
+    background: var(--admin-primary) !important;
+}
+
+.layout-wrapper .menu-link:hover {
+    background-color: var(--admin-primary-light) !important;
+    color: var(--admin-primary) !important;
+}
+
+/* Vertical indicator for sub-menu items */
+.layout-wrapper .menu-sub .menu-item.active>.menu-link {
+    background: var(--admin-primary-light) !important;
+    color: var(--admin-primary) !important;
+    box-shadow: none !important;
+    font-weight: 600;
+}
+
+.layout-wrapper .menu-sub .menu-item.active>.menu-link:before {
+    background-color: var(--admin-primary) !important;
+    box-shadow: 0 0 0 2px rgba(var(--admin-primary-rgb), 0.2);
+}
+
+/* Form Elements */
+.layout-wrapper .form-control:focus,
+.layout-wrapper .form-select:focus {
+    border-color: var(--admin-primary);
+    box-shadow: var(--admin-focus-shadow);
+}
+
+.layout-wrapper .form-check-input:checked {
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
+}
+
+/* Icons */
+.layout-wrapper .ti,
+.layout-wrapper .bx {
+    /* Use variables for primary colored icons */
+}
+
+.layout-wrapper .menu-icon.ti,
+.layout-wrapper .menu-icon.bx {
+    /* color: inherit; handled by menu state */
+}
+
+/* Progress Bars */
+.layout-wrapper .progress-bar {
+    background-color: var(--admin-primary);
+}
+
+/* Layout Scrollbar (Custom) */
+.layout-wrapper ::-webkit-scrollbar-thumb {
+    background: var(--admin-primary-medium);
+}
+
+.layout-wrapper ::-webkit-scrollbar-thumb:hover {
+    background: var(--admin-primary);
+}

@@ -8,6 +8,26 @@
 <%/if%>
 <link rel="stylesheet" href="<%$base_url%>public/assets/css/demo.css" />
 <style>
+/* Active menu state styling */
+.menu-item.active > .menu-link {
+    background-color: var(--admin-primary-light);
+    color: var(--admin-primary) !important;
+}
+
+.menu-item.active.open > .menu-link {
+    background-color: var(--admin-primary-light);
+    color: var(--admin-primary) !important;
+}
+
+.menu-item.open > .menu-sub {
+    display: block;
+}
+
+.menu-sub .menu-item.active > .menu-link {
+    background-color: var(--admin-primary-medium);
+    color: var(--admin-primary) !important;
+    font-weight: 500;
+}
 </style>
 <script type="text/javascript">
 	/*
@@ -76,6 +96,7 @@ $(document).ready(function(){
            
 	});
 </script>
+ <script src="<%$base_url%>public/js/admin/menu_active_state.js"></script>
  <script src="public/js/toaster/custom_toaster.js"></script>
 <!-- <script src="<%$base_url%>public/assets/vendor/libs/popper/popper.js"></script> -->
 <script src="<%$base_url%>public/assets/js/main.js"></script>
